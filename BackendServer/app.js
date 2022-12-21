@@ -5,6 +5,5 @@ const index = require('./routes/index');
 app.use(express.json());
 
 app.use('/api', index);
-app.use();
 
 module.exports = app;
