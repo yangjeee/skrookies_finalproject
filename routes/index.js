@@ -6,7 +6,7 @@ const mainRouter = require("./Main")
 const transactionsRouter = require("../routes/Transactions")
 // 안에 있는 js를 할당
 const balanceRouter = require("../routes/Balance");
-const beneficiaryRouter = require("../routes/Beneficiary");
+// const beneficiaryRouter = require("../routes/Beneficiary");
 const userRouter = require("../routes/User");
 
 // 1 : /balance 주소, 2: 할당
@@ -16,5 +16,6 @@ router.use("/main", mainRouter);
 // router.use("/health", healthRouter);
 // router.use("/beneficiary", beneficiaryRouter);
 router.use("/user", userRouter);
+
 
 module.exports = router;
