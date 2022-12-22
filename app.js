@@ -10,6 +10,7 @@ var usersRouter = require('./routes/users');
 var app = express();
 
 // view engine setup
+//Express에 views라는 키안에 값을 우리가 만든 views폴더 경로를 줌
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
