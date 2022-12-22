@@ -13,24 +13,23 @@ router.post('/', function(req, res, next) {
 
     console.log("endata : ",enData)
 
+    // axios({
+    //     method: "post",
+    //     url: "http://15.152.81.150:3000/api/user/register",
+    //     data: enData
+    // }).then((data)=>{
+    //     console.log("data : ", decryptRequest(data.data))
+    // })
+    //로그인
     axios({
         method: "post",
-        url: "http://15.152.81.150:3000/api/user/register",
+        url: "http://15.152.81.150:3000/api/user/login",
         data: enData
     }).then((data)=>{
         // console.log(decryptRequest(data))
+        //여기서 토큰이 바디에 나옴
         console.log("data : ", decryptRequest(data.data))
     })
-    //로그인
-    // axios({
-    //     method: "post",
-    //     url: "http://15.152.81.150:3000/api/user/login",
-    //     data: enData
-    // }).then((data)=>{
-    //     // console.log(decryptRequest(data))
-    //     //여기서 토큰이 바디에 나옴
-    //     console.log("data : ", decryptRequest(data.data))
-    // })
     //balance view
     // axios({
     //     method: "post",

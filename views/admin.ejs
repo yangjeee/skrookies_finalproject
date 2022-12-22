@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+<body>
+    <h1>관리자 페이지</h1>
+    <table>
+        <th>id</th>
+        <th>account_number</th>
+        <th>beneficiary_account_number</th>
+        <th>approve</th>
+        <%for(let i =0; i< pending.data.length; i++){%>
+        <tr>
+            <td><%=pending.data[i].id%></td>
+            <td><%=pending.data[i].account_number%></td>
+            <td><%=pending.data[i].beneficiary_account_number%></td>
+            <td>
+                <form action="/admin/approve" method="post">
+                    <input type="hidden" name="id" value="<%=pending.data[i].id%>"/>
+                    <button type="submit">승인</button>
+                </form>
+            </td>
+        </tr>
+        <%}%>
+    </table>
+</body>
+</html>
