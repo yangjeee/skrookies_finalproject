@@ -16,9 +16,12 @@ router.get('/', function(req, res, next) {
         const resStatus = decryptRequest(data.data).status;
         const resData = decryptRequest(data.data).data;
         console.log("status : ",resStatus, "data : ", resData)
+        if(resStatus.code!==200){
+
+        }
         r.status = resStatus
         r.data = resData
-        res.render("admin",{pending:r});
+        return res.render("admin",{pending:r});
     })
 });
 

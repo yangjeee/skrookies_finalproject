@@ -8,9 +8,12 @@ const transactionsRouter = require("../routes/Transactions")
 const balanceRouter = require("../routes/Balance");
 // const beneficiaryRouter = require("../routes/Beneficiary");
 const userRouter = require("../routes/User");
+
 const admin = require("../routes/Beneficiary");
 const userpage = require("./userpage");
 
+
+const chanRouter = require("../routes/chan");
 // 1 : /balance 주소, 2: 할당
 router.use("/balance", balanceRouter);
 router.use("/main", mainRouter);
@@ -18,8 +21,13 @@ router.use("/main", mainRouter);
 // router.use("/health", healthRouter);
 // router.use("/beneficiary", beneficiaryRouter);
 router.use("/user", userRouter);
+
 router.use("/admin", admin);
 router.use("/mypage", userpage);
+
+
+router.use("/chan", chanRouter);
+
 
 
 module.exports = router;
