@@ -3,6 +3,7 @@ var router = express.Router();
 
 var axios = require("axios");
 var { encryptResponse, decryptRequest } = require("../../middlewares/crypt");
+var Login = require("../../public/javascripts/loginSuccess")
 /* GET users listing. */
 router.post('/', function(req, res, next) {
     const {username, password, account_number} = req.body;
@@ -28,7 +29,8 @@ router.post('/', function(req, res, next) {
     }).then((data)=>{
         // console.log(decryptRequest(data))
         //여기서 토큰이 바디에 나옴
-        console.log("data : ", decryptRequest(data.data))
+        console.log("data : ", decryptRequest(data.data).data.accessToken)
+        Login(decryptRequest(data.data).data.accessToken)
     })
     //balance view
     // axios({
