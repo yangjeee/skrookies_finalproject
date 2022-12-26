@@ -5,32 +5,33 @@ var axios = require("axios");
 var { encryptResponse, decryptRequest } = require("../../middlewares/crypt");
 /* GET users listing. */
 router.post('/', function(req, res, next) {
-    const {username, password, account_number} = req.body;
-    console.log(username, password, account_number)
-    baseData=`{"username": "${username}", "password": "${password}", "account_number": "${account_number}"}`
+    const {username, password} = req.body;
+    console.log(username, password)
+    baseData=`{"username": "${username}", "password": "${password}"}`
     console.log("basedata : ",baseData)
     const enData = encryptResponse(baseData);
 
     console.log("endata : ",enData)
-
+    //회원가입
     axios({
         method: "post",
         url: "http://15.152.81.150:3000/api/user/register",
-        data: enData
+        data:enData
     }).then((data)=>{
         // console.log(decryptRequest(data))
         console.log("data : ", decryptRequest(data.data))
+        
     })
     //로그인
-    // axios({
-    //     method: "post",
-    //     url: "http://15.152.81.150:3000/api/user/login",
-    //     data: enData
-    // }).then((data)=>{
-    //     // console.log(decryptRequest(data))
-    //     //여기서 토큰이 바디에 나옴
-    //     console.log("data : ", decryptRequest(data.data))
-    // })
+    axios({
+        method: "post",
+        url: "http://15.152.81.150:3000/api/user/login",
+        data: enData
+    }).then((data)=>{
+        // console.log(decryptRequest(data))
+        //여기서 토큰이 바디에 나옴
+        console.log("data : ", decryptRequest(data.data))
+    })
     //balance view
     // axios({
     //     method: "post",
