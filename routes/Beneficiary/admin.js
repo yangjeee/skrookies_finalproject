@@ -12,12 +12,16 @@ router.get('/', function(req, res, next) {
         headers: {"authorization": "1 eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaXNfYWRtaW4iOnRydWUsImlhdCI6MTY3MTY5MDMxMX0.WQIQFj59NVlp0aRhVv8puWGeeH-1ACn3U9sWjnaDKiQ"}
     }).then((data)=>{
         const r = new Response();
+        console.log(data);
         const resStatus = decryptRequest(data.data).status;
         const resData = decryptRequest(data.data).data;
         console.log("status : ",resStatus, "data : ", resData)
+        if(resStatus.code!==200){
+
+        }
         r.status = resStatus
         r.data = resData
-        res.render("admin",{pending:r});
+        return res.render("admin",{pending:r});
     })
 });
 

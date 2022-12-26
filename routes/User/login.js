@@ -3,17 +3,15 @@ var router = express.Router();
 
 var axios = require("axios");
 var { encryptResponse, decryptRequest } = require("../../middlewares/crypt");
-var Login = require("../../public/javascripts/loginSuccess")
 /* GET users listing. */
 router.post('/', function(req, res, next) {
-    const {username, password} = req.body;
-    console.log(username, password)
-    baseData=`{"username": "${username}", "password": "${password}"}`
+    const {username, password, account_number} = req.body;
+    console.log(username, password, account_number)
+    baseData=`{"username": "${username}", "password": "${password}", "account_number": "${account_number}"}`
     console.log("basedata : ",baseData)
     const enData = encryptResponse(baseData);
 
     console.log("endata : ",enData)
-
 
     // axios({
     //     method: "post",
@@ -22,7 +20,6 @@ router.post('/', function(req, res, next) {
     // }).then((data)=>{
     //     console.log("data : ", decryptRequest(data.data))
     // })
-
     //로그인
     axios({
         method: "post",
@@ -31,10 +28,7 @@ router.post('/', function(req, res, next) {
     }).then((data)=>{
         // console.log(decryptRequest(data))
         //여기서 토큰이 바디에 나옴
-
-        console.log("data : ", decryptRequest(data.data).data.accessToken)
-        Login(decryptRequest(data.data).data.accessToken)
-
+        console.log("data : ", decryptRequest(data.data))
     })
     //balance view
     // axios({
