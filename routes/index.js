@@ -17,7 +17,9 @@ const chanRouter = require("../routes/chan");
 // 1 : /balance 주소, 2: 할당
 router.use("/balance", balanceRouter);
 router.use("/main", mainRouter);
-// router.use("/transactions", transactionsRouter)
+
+// 김태진 : 입출금 페이지
+router.use("/transactions", transactionsRouter)
 // router.use("/health", healthRouter);
 // router.use("/beneficiary", beneficiaryRouter);
 router.use("/user", userRouter);
