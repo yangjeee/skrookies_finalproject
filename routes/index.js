@@ -27,6 +27,10 @@ router.use("/user", chanRouter);
 router.use("/admin", admin);
 router.use("/mypage", userpage);
 
+router.get("/",(req, res)=>{
+    res.redirect("/mypage")
+})
+
 
 router.use("/chan", userRouter);
 

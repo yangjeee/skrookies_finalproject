@@ -12,7 +12,6 @@ router.post('/', function(req, res, next) {
     const enData = encryptResponse(baseData);
 
     console.log("endata : ",enData)
-
     // axios({
     //     method: "post",
     //     url: "http://15.152.81.150:3000/api/user/register",
