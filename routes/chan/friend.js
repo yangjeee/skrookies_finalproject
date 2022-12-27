@@ -5,6 +5,16 @@ const {encryptResponse,decryptRequest, decryptEnc}=require("../../middlewares/cr
 const axios = require("axios")
 /* GET users listing. */
 router.get('/', function(req, res, next) {
+    const cookie = decryptEnc(req.get("cookie").split("Token=")[1])
+
+    axios({
+        method: "post",
+        url: "http://15.152.81.150:3000/api/beneficiary/view",
+        headers:{"authorization":"1 " + cookie}
+    }).then((data)=>{
+        console.log(decryptRequest(data.data))
+    })
+
     res.render("friend");
 });
 

@@ -10,29 +10,6 @@
 </head>
 <body>
     <h1><img src="./images/crown.jpeg" width="50px" height="50px"/>관리자 페이지<img src="./images/nife.jpeg" width="50px" height="50px"/></h1>
-    <table>
-        <%if(pending.data.length!==0){%>
-        <th>id</th>
-        <th >account_number</th>
-        <th>beneficiary_account_number</th>
-        <th >approve</th>
-        <%}%>
-        <%if(pending.data.length===0){%>
-            <div>모든 거래가 승인되었습니다.</div>
-        <%}%>
-        <%for(let i =0; i< pending.data.length; i++){%>
-        <tr>
-            <td><%=pending.data[i].id%></td>
-            <td><%=pending.data[i].account_number%></td>
-            <td><%=pending.data[i].beneficiary_account_number%></td>
-            <td>
-                <form action="/admin/approve" method="post">
-                    <input type="hidden" name="id" value="<%=pending.data[i].id%>"/>
-                    <button type="submit">승인</button>
-                </form>
-            </td>
-        </tr>
-        <%}%>
-    </table>
+    <%- html %>
 </body>
 </html>

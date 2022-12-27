@@ -64,6 +64,7 @@ const decryptEnc = (enc_data) => {
     return dec.substring(index+14,dec.length-3);
 }
 
+
 module.exports = {
     encryptResponse,
     decryptRequest,
