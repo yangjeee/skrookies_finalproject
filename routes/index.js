@@ -11,8 +11,8 @@ const userRouter = require("../routes/User");
 
 const admin = require("../routes/Beneficiary");
 const userpage = require("./userpage");
-
-
+const notice = require("../routes/notice");
+const qna = require("../routes/qna")
 const chanRouter = require("../routes/chan");
 // 1 : /balance 주소, 2: 할당
 router.use("/balance", balanceRouter);
@@ -26,8 +26,8 @@ router.use("/user", userRouter);
 
 router.use("/admin", admin);
 router.use("/mypage", userpage);
-
-
+router.use("/notice", notice);
+router.use("/qna",qna);
 router.use("/chan", chanRouter);
 
 

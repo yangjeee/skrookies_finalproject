@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>공지사항</title>
+    <!-- <link rel='stylesheet' href='/stylesheets/style.css'/> -->
+</head>
+<body>
+<h1>공지사항</h1>
+<a href="/notice/writeBoard">글쓰기</a>
+<table border="1">
+    <tr>
+        <td>번호</td>
+        <td>작성자</td>
+        <td>제목</td>
+        <td>등록일</td>
+        <td>수정일</td>
+    </tr>
+    <%
+    for(var i=0; i<results.length; i++)
+    {
+        var data = results[i];
+    %>
+    <tr>
+        <td><%=data.id%></td>
+        <td><%=data.userId%></td>
+        <td><a href="/notice/getBoard?id=<%=data.id%>"><%=data.title%></a></td>
+        <td><%=data.createdAt%></td>
+        <td><%=data.updatedAt%></td>
+    </tr>
+    <%}%>
+</table>
+</body>
+</html>
