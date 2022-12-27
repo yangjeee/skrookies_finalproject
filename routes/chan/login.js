@@ -12,7 +12,7 @@ router.get('/', function(req, res, next) {
 });
 
 
-router.post('/', function(req, res, next) {
+router.post('/post', function(req, res, next) {
     const {username, password} = req.body;
     const baseData=`{"username": "${username}", "password": "${password}"}`
     const enData = encryptResponse(baseData);
@@ -24,10 +24,9 @@ router.post('/', function(req, res, next) {
     }).then((data)=>{
         console.log(data.data.enc_data)
         console.log("data : ", decryptRequest(data.data))
-        res.render("loginSuccess",{data:data.data.enc_data})
-    })
 
-    // res.render("login");
+        res.render("afterlogin",{data:data.data.enc_data})
+    })
 });
 
 module.exports = router;
