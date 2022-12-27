@@ -5,6 +5,7 @@ var { encryptResponse, decryptRequest, decryptEnc} = require("../../middlewares/
 
 router.get('/', function(req, res, next) {
     const cookie = decryptEnc(req.get("cookie").split("Token=")[1])
+
     axios({
         method: "post",
         url: "http://15.152.81.150:3000/api/beneficiary/view", // URL 수정 해야 됨
