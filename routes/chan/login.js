@@ -1,22 +1,16 @@
 var express = require('express');
 var router = express.Router();
-const {encryptResponse,decryptRequest} = require('../../middlewares/crypt')
 const axios = require("axios")
-// const myStorage = window.localStorage;
-
+const {encryptResponse, decryptRequest} = require("../../middlewares/crypt")
 /* GET users listing. */
 router.get('/', function(req, res, next) {
-
     res.render("login");
 });
 
 
-router.post('/post', function(req, res, next) {
-    console.log("login.js : ",req.body)
+router.post('/', function(req, res, next) {
     const {username, password} = req.body;
-    console.log(username, password)
-    baseData=`{"username": "${username}", "password": "${password}"}`
-    console.log("basedata : ",baseData)
+    const baseData=`{"username": "${username}", "password": "${password}"}`
     const enData = encryptResponse(baseData);
     
     axios({
@@ -28,7 +22,10 @@ router.post('/post', function(req, res, next) {
     
         // myStorage.setItem("accessToken", data.data.accessToken);
         console.log("data : ", decryptRequest(data.data))
-
+        document.addEventListener("DOMContentLoaded",function () {
+            console.log(localStorage)
+        })
+        // cookie.default.set("token", decryptRequest(data.data).data.accessToken)
     })
     res.render("login");
 });
