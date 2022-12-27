@@ -3,7 +3,6 @@ var router = express.Router();
 
 var axios = require("axios");
 var { encryptResponse, decryptRequest } = require("../../middlewares/crypt");
-var Login = require("../../public/javascripts/loginSuccess")
 /* GET users listing. */
 router.post('/', function(req, res, next) {
     const {username, password} = req.body;

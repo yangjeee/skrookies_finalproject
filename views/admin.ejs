@@ -2,15 +2,24 @@
 <html>
 <head>
     <title></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel="stylesheet" href="/stylesheets/admin.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
-<body>
-    <h1>관리자 페이지</h1>
+<body class="w3-black">
+    <h1><img src="./images/crown.jpeg" width="50px" height="50px"/>관리자 페이지<img src="./images/nife.jpeg" width="50px" height="50px"/></h1>
     <table>
+        <%if(pending.data.length!==0){%>
         <th>id</th>
-        <th>account_number</th>
+        <th >account_number</th>
         <th>beneficiary_account_number</th>
-        <th>approve</th>
+        <th >approve</th>
+        <%}%>
+        <%if(pending.data.length===0){%>
+            <div>모든 거래가 승인되었습니다.</div>
+        <%}%>
         <%for(let i =0; i< pending.data.length; i++){%>
         <tr>
             <td><%=pending.data[i].id%></td>
