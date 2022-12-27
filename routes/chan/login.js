@@ -1,7 +1,9 @@
 var express = require('express');
 var router = express.Router();
+const Response = require("../Response")
 const {encryptResponse,decryptRequest} = require('../../middlewares/crypt')
-const axios = require("axios")
+const axios = require("axios");
+const { SUCCESS } = require('../../middlewares/statusCodes');
 // const myStorage = window.localStorage;
 
 /* GET users listing. */
@@ -24,12 +26,12 @@ router.post('/post', function(req, res, next) {
         url: "http://15.152.81.150:3000/api/user/login",
         data:enData
     }).then((data)=>{
-        // console.log(decryptRequest(data))
     
-        // myStorage.setItem("accessToken", data.data.accessToken);
         console.log("data : ", decryptRequest(data.data))
 
     })
+
     res.render("login");
 });
+
 module.exports = router;
