@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <table border="1" width=500>
+        <tr>
+            <th colspan="2">
+                QnA 쓰기
+            </th>
+        </tr>
+        <tr>
+            <td width=50>
+               <h5>QnA 작성</h5>
+            </td>
+            <form action="/qna/writeBoard/write" method="post" enctype="multipart/form-data">
+            <td >
+                <input type="text" name="title" placeholder="제목을 입력하세요."
+                maxlength=20
+                style="width:100%">
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" height=400>
+                <textarea placeholder="내용을 입력하세요." name = "contents" style="width: 100%; height: 100%"></textarea>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" align=right>
+                <input type="file" name="imgimg">
+                <input type="submit" value="글쓰기">
+            </form>
+
+            <form action="/qna/viewboard" method="get">
+                <input type="submit" value="목록으로">
+            </form>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>
