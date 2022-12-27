@@ -8,10 +8,11 @@
 </head>
 <body>
     <h1>친구추가</h1>
-    <input type="text" id="text_add"/>
-    <input type="button" id="btn_add" onclick="action_add()" value="추가"/>
-    <h1>친구삭제</h1> 
-    <input type="text" id="text_delete"/>
-    <input type="button" id="btn_delete" onclick="action_delete()" value="삭제"/>
+    <form action="/chan/friend/post" method="post">
+    <input type="text" id="text_add" name="account_number"/>
+    <button type="submit">추가</button>
+    <button type="submit">삭제</button>
+    </form>
+
 </body>
 </html>
