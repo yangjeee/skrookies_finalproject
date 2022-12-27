@@ -1,15 +1,14 @@
 var express = require('express');
 var router = express.Router();
 var axios = require("axios");
-var { encryptResponse, decryptRequest } = require("../../middlewares/crypt");
+var { encryptResponse, decryptRequest, decryptEnc} = require("../../middlewares/crypt");
 
 router.get('/', function(req, res, next) {
-    let token = req.get('authorization'); // 입력값 헤더의 토큰만 받음
-
+    const cookie = decryptEnc(req.get("cookie").split("Token=")[1])
     axios({
         method: "post",
-        url: "http://localhost:3000/api/transactions/view", // URL 수정 해야 됨
-        headers: {"authorization": token}
+        url: "http://15.152.81.150:3000/api/transactions/view", // URL 수정 해야 됨
+        headers: {"authorization": "1 " + cookie}
         // data: enData
         // 데이터 안씀
     }).then((data)=>{

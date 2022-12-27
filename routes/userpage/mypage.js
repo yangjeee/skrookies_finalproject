@@ -1,30 +1,31 @@
 var express = require('express');
 var router = express.Router();
 const axios = require("axios");
-const Response = require("../Response")
-const {decryptRequest, encryptResponse} = require("../../middlewares/crypt")
-//'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaXNfYWRtaW4iOnRydWUsImlhdCI6MTY3MTY5MDMxMX0.WQIQFj59NVlp0aRhVv8puWGeeH-1ACn3U9sWjnaDKiQ'
+const Response = require("../../middlewares/Response")
+const {decryptRequest, encryptResponse, decryptEnc} = require("../../middlewares/crypt")
+
 /* GET users listing. */
-router.get('/', function(req, res, next) {
+router.get('/', function (req, res, next) {
+    const cookie = decryptEnc(req.get("cookie").split("Token=")[1])
     axios({
         method: "post",
         url: "http://15.152.81.150:3000/api/User/profile",
-        headers: {"authorization": "1 eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjEyMyIsImlzX2FkbWluIjpmYWxzZSwiaWF0IjoxNjcxNzExMjI1fQ.fZU4LMH8k19afOQUHiT6WXXbFINZyydgLI0cNIhZOxA"}
-    }).then((data)=>{
-        
+        headers: {"authorization": "1 " + cookie}
+    }).then((data) => {
+
         // console.log(data.data);
         const r = new Response();
         const resStatus = decryptRequest(data.data).status;
         const resData = decryptRequest(data.data).data;
         console.log(resData);
         console.log("------------------");
-        console.log("status : ",resStatus, "data : ", resData);
+        console.log("status : ", resStatus, "data : ", resData);
         console.log("------------------");
         console.log(r);
         r.status = resStatus
         r.data = resData
         console.log(r);
-        res.render("mypage",{pending:r});
+        res.render("mypage", {pending: r});
         // res.render("admin",{pending:r});
     })
 });
