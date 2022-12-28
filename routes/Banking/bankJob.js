@@ -8,7 +8,7 @@ router.get("/",async (req, res) => {
 
 
     profile(cookie).then(data=>{
-        res.render("Banking/trade_sand.ejs",{pending:data})
+        res.render("Banking/trade_send.ejs",{pending:data})
     })
 })
 
