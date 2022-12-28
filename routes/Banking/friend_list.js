@@ -38,7 +38,7 @@ router.get('/', function(req, res, next) {
                                     <form id="${a.beneficiary_account_number}" action="/bank/friend_list/delete" method="post">
                                     <input type="hidden" name="beneficiary_account_number" value="${a.beneficiary_account_number}"/>
                                     <input type="hidden" name="account_number" value="${pending.data.account_number}"/> 
-                                    <a onclick="document.getElementById('${a.beneficiary_account_number}').submit();" class="btn btn-primary btn-user btn-block">
+                                    <a onclick="document.getElementById('${a.beneficiary_account_number}').submit();" class="btn btn-google btn-user btn-block">
                                     삭제
                                     </a>
                                     </form>
