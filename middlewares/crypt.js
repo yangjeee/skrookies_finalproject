@@ -56,7 +56,16 @@ const decryptRequest = function(req, res, next) {
   return req.body
 };
 
+const decryptEnc = (enc_data) => {
+  let input = Buffer.from(enc_data, 'base64').toString();
+  let dec = operate(input);
+  const index = dec.indexOf("accessToken")
+
+  return dec.substring(index+14,dec.length-3);
+}
+
 module.exports =  {
     encryptResponse,
-    decryptRequest
+    decryptRequest,
+    decryptEnc
 }
