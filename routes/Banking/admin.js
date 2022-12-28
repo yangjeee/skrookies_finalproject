@@ -1,0 +1,80 @@
+var express = require('express');
+var router = express.Router();
+const axios = require("axios");
+const Response = require("../../middlewares/Response")
+const {decryptRequest, encryptResponse, decryptEnc} = require("../../middlewares/crypt")
+const profile = require("../../middlewares/profile");
+
+/* GET users listing. */
+router.get('/', function (req, res, next) {
+
+    let cookie = "";
+    try {
+        cookie = decryptEnc(req.get("cookie").split("Token=")[1])
+    } catch (e) {
+        return res.redirect("../user/login")
+    }
+
+    profile(cookie).then(pending => {
+        axios({
+            method: "post",
+            url: "http://15.152.81.150:3000/api/beneficiary/pending",
+            headers: {"authorization": "1 " + cookie}
+        }).then((data) => {
+            let html = ""
+            const resStatus = decryptRequest(data.data).status;
+            const resData = decryptRequest(data.data).data;
+            console.log("status : ", resStatus, "data : ", resData)
+
+            if (resStatus.code === 200) {
+                if (resData.length === 0) {
+                    html += "<h2>승인할 목록이 없습니다.</h2>"
+                } else {
+                    html +=
+                        "                        <thead>\n" +
+                        "                        <tr>\n" +
+                        "                            <th>id</th>\n" +
+                        "                            <th>account_number</th>\n" +
+                        "                            <th>beneficiary_account_number</th>\n" +
+                        "                            <th>approve</th>\n" +
+                        "                        </tr>\n" +
+                        "                        </thead>\n"
+                    resData.forEach(x => {
+                        html += `<tbody>
+                            <tr>
+                                <td>${x.id}</td>
+                                <td>${x.account_number}</td>
+                                <td>${x.beneficiary_account_number}</td>
+                                <td><form id="승인" action="/bank/admin/approve" method="post"><input type="hidden" name="id" value="${x.id}"/> <a onclick="document.getElementById('승인').submit();" class="btn btn-primary btn-user btn-block">
+                승인
+            </a></form></td>
+                            </tr>
+                            </tbody>`
+                    })
+                }
+            } else {
+                html += "<h2>관리자가 아닙니다.</h2>"
+            }
+
+            res.render("Banking/admin", {html: html, pending: pending})
+        })
+    })
+});
+
+router.post('/approve', function (req, res, next) {
+    const cookie = decryptEnc(req.get("cookie").split("Token=")[1])
+
+    const id = req.body.id;
+    const baseData = `{"id": "${id}"}`
+    const enData = encryptResponse(baseData);
+    axios({
+        method: "post",
+        url: "http://15.152.81.150:3000/api/beneficiary/approve",
+        headers: {"authorization": "1 " + cookie},
+        data: enData
+    }).then((data) => {
+        return res.redirect("/bank/admin")
+    })
+});
+
+module.exports = router;
