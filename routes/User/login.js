@@ -12,7 +12,6 @@ router.post('/', function(req, res, next) {
     const enData = encryptResponse(baseData);
 
     console.log("endata : ",enData)
-
     // axios({
     //     method: "post",
     //     url: "http://15.152.81.150:3000/api/user/register",
@@ -29,6 +28,8 @@ router.post('/', function(req, res, next) {
         // console.log(decryptRequest(data))
         //여기서 토큰이 바디에 나옴
         console.log("data : ", decryptRequest(data.data))
+
+        res.redirect("./user/login")
     })
     //balance view
     // axios({

@@ -22,13 +22,21 @@ router.use("/main", mainRouter);
 router.use("/transactions", transactionsRouter)
 // router.use("/health", healthRouter);
 // router.use("/beneficiary", beneficiaryRouter);
-router.use("/user", userRouter);
+router.use("/user", chanRouter);
 
 router.use("/admin", admin);
 router.use("/mypage", userpage);
+
 router.use("/notice", notice);
 router.use("/qna",qna);
-router.use("/chan", chanRouter);
+
+router.get("/",(req, res)=>{
+    res.redirect("/mypage")
+})
+
+
+router.use("/chan", userRouter);
+
 
 
 
