@@ -35,10 +35,10 @@ router.get('/', function(req, res, next) {
                                 <td>${a.beneficiary_account_number}</td>
                                 <td>${a.approved}</td>
                                 <td>
-                                    <form id="삭제" action="/bank/friend_list/delete" method="post">
+                                    <form id="${a.beneficiary_account_number}" action="/bank/friend_list/delete" method="post">
                                     <input type="hidden" name="beneficiary_account_number" value="${a.beneficiary_account_number}"/>
                                     <input type="hidden" name="account_number" value="${pending.data.account_number}"/> 
-                                    <a onclick="document.getElementById('삭제').submit();" class="btn btn-primary btn-user btn-block">
+                                    <a onclick="document.getElementById('${a.beneficiary_account_number}').submit();" class="btn btn-primary btn-user btn-block">
                                     삭제
                                     </a>
                                     </form>
@@ -67,7 +67,7 @@ router.post('/delete', function (req, res, next) {
 
     const beneficiary_account_number = req.body.beneficiary_account_number;
     const account_number1 = req.body.account_number;
- 
+     
 
     const baseData = `{"account_number": "${beneficiary_account_number}"}`;
     const enData = encryptResponse(baseData);
