@@ -7,7 +7,7 @@ var admin = require("./admin");
 // var view = require("./view");
 //
 //
-router.use("/", admin);
+router.use("/admin", admin);
 // router.use("/approve", approve);
 // router.use("/pending", pending);
 // router.use("/view", view); // Give options on FE to see pending list as well

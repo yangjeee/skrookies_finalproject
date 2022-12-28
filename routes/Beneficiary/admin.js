@@ -12,7 +12,7 @@ router.get('/', function (req, res, next) {
         cookie = decryptEnc(req.get("cookie").split("Token=")[1])
     }
     catch (e) {
-        return res.redirect("user/login")
+        return res.redirect("../user/login")
     }
 
 
