@@ -22,7 +22,7 @@ router.post('/', function(req, res, next) {
     //로그인
     axios({
         method: "post",
-        url: "http://15.152.81.150:3000/api/user/login",
+        url: "http://localhost:3000/api/user/login",
         data: enData
     }).then((data)=>{
         // console.log(decryptRequest(data))
