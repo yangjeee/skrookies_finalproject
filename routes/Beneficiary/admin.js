@@ -6,7 +6,15 @@ const {decryptRequest, encryptResponse, decryptEnc} = require("../../middlewares
 
 /* GET users listing. */
 router.get('/', function (req, res, next) {
-    const cookie = decryptEnc(req.get("cookie").split("Token=")[1]);
+
+    let cookie = "";
+    try {
+        cookie = decryptEnc(req.get("cookie").split("Token=")[1])
+    }
+    catch (e) {
+        return res.redirect("user/login")
+    }
+
 
     axios({
         method: "post",

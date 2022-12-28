@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+    <% var data = results[0];%>
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <table border="1" width=500>
+        <tr>
+            <th colspan="2">
+                글 가져오기
+            </th>
+        </tr>
+        <tr>
+            <td width=50>
+               <h5>제목</h5>
+            </td>
+          
+            <td >
+                <h3><%=data.title%></h3>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" height=400>
+                <p>
+                    <%=data.content%>
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" align=right>
+               <button type = "button" onclick = "location.href='/qna/deleteBoard?id=<%=data.id%>';">삭제</button>
+               <button type = "button" onclick = "location.href='/qna/editBoard?id=<%=data.id%>';">편집</button>
+                <form action="/qna/viewboard" method="get">
+                <input type="submit" value="목록으로">
+                </form>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>
