@@ -19,7 +19,16 @@ router.get('/', function(req, res, next) {
             let result = decryptRequest(data.data).data;
             //console.log(result);
             //console.log(pending.data.account_number);
-            var html_data = "<tr><th>친구계좌</th><th>승인여부</th><th>승인여부</th></tr>";
+            var html_data = `<thead>
+                                <tr>
+                                <th>친구계좌</th>
+                                <th>승인여부</th>
+                                <th>삭제</th>
+                            </tr>
+                            </thead>
+                            
+                            <tbody>
+                            `;
             
             result.forEach(function(a){
                 html_data += `<tr>
@@ -36,6 +45,8 @@ router.get('/', function(req, res, next) {
                                 </td>
                             </tr>`;
             })
+
+            html_data += `</tbody>`;
 
             return res.render("Banking/friend", {html : html_data, pending:pending});
         }).catch(function(error){
