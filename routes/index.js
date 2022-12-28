@@ -15,7 +15,6 @@ const userRouter = require("../routes/User");
 
 router.use("/balance", balanceRouter);
 router.use("/", mainRouter);
-
 router.use("/transactions", transactionsRouter)
 router.use("/beneficiary", beneficiaryRouter);
 router.use("/user", userRouter);
