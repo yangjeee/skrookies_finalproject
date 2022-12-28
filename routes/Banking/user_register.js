@@ -29,7 +29,7 @@ router.post('/', function(req, res, next) {
     }).then((data)=>{
         console.log(decryptRequest(data.data));
     });
-    return res.redirect("/");
+    return res.redirect("/bank/friend_list");
 })
 
 

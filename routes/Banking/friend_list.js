@@ -23,7 +23,7 @@ router.get('/', function(req, res, next) {
                                 <tr>
                                 <th>친구계좌</th>
                                 <th>승인여부</th>
-                                <th>삭제</th>
+                                <th width="20%">삭제</th>
                             </tr>
                             </thead>
                             
