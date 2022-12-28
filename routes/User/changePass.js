@@ -1,13 +1,29 @@
 var express = require('express');
 const axios = require("axios");
 const {decryptRequest, decryptEnc, encryptResponse} = require("../../middlewares/crypt");
+const Response = require("../../middlewares/Response");
 var router = express.Router();
 
 router.get("/", (req, res) => {
     if (!req.cookies.Token) {
         res.redirect("/")
     } else {
-        res.render("changePass")
+        const cookie = decryptEnc(req.cookies.Token);
+        axios({
+            method: "post",
+            url: "http://15.152.81.150:3000/api/User/profile",
+            headers: {"authorization": "1 " + cookie}
+        }).then((data) => {
+            // console.log(data.data);
+            const r = new Response();
+            const resStatus = decryptRequest(data.data).status;
+            const resData = decryptRequest(data.data).data;
+
+            r.status = resStatus
+            r.data = resData
+
+            res.render("temp/changePass", {u_data: r.data.username});
+        });
     }
 })
 
@@ -32,7 +48,7 @@ router.post("/", (req, res) => {
         }
         else{
             console.log(resMessage)
-            res.render("changePass",{message:resMessage})
+            res.render("temp/changePass",{message:resMessage})
         }
     });
 })
