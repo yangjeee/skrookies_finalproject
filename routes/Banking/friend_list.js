@@ -18,17 +18,16 @@ router.get('/', function(req, res, next) {
         }).then((data)=>{
             let result = decryptRequest(data.data).data;
             console.log(result);
-            var html_data = "<table><tr><th>친구계좌</th><th>승인여부";
+            var html_data = "<tr><th>친구계좌</th><th>승인여부";
             
             result.forEach(function(a){
                 html_data += "<tr><td>"+a.beneficiary_account_number+"</td><td>"+a.approved+"</td></tr>";
             })
-    
-            html_data += "</table>";
+
             return res.render("Banking/friend", {html : html_data, pending:pending});
         }).catch(function(error){
             var html_data = "<tr>아싸시군요</tr>";
-            return res.render("Banking/friend", {html : html_data});
+            return res.render("Banking/friend", {html : html_data, pending:pending});
         });
 
     })
