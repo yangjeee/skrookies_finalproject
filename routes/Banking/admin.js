@@ -45,7 +45,7 @@ router.get('/', function (req, res, next) {
                                 <td>${x.id}</td>
                                 <td>${x.account_number}</td>
                                 <td>${x.beneficiary_account_number}</td>
-                                <td><form id="승인" action="/bank/admin/approve" method="post"><input type="hidden" name="id" value="${x.id}"/> <a onclick="document.getElementById('승인').submit();" class="btn btn-primary btn-user btn-block">
+                                <td><form id="${x.id}" action="/bank/admin/approve" method="post"><input type="hidden" name="id" value="${x.id}"/> <a onclick="document.getElementById('${x.id}').submit();" class="btn btn-primary btn-user btn-block">
                 승인
             </a></form></td>
                             </tr>
