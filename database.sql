@@ -39,6 +39,19 @@ create table boards
     PRIMARY KEY (id)
 ) engine = innodb;
 
+create table qna
+(
+    id        int not null auto_increment,
+    userId    varchar(30),
+    title     VARCHAR(255),
+    content   VARCHAR(255),
+    filepath   VARCHAR(255),
+    createdAt DATETIME,
+    updatedAt DATETIME,
+    PRIMARY KEY (id)
+) engine = innodb;
+
+
 INSERT INTO `users`
 values (default, "user1", "password1", 111111, default, default);
 INSERT INTO `users`
