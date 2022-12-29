@@ -1,42 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
+    <%- include("../common/header") %>
 <head>
     <meta charset="UTF-8">
     <title>Document</title>
 </head>
 <body>
-    <table border="1" width=500>
-        <tr>
-            <th colspan="2">
-                공지사항 쓰기
-            </th>
-        </tr>
-        <tr>
-            <td width=50>
-               <h5>공지사항 작성</h5>
-            </td>
-            <form action="/notice/writeBoard/write" method="post">
-            <td >
-                <input type="text" name="title" placeholder="제목을 입력하세요."
-                maxlength=20
-                style="width:100%">
-            </td>
-        </tr>
-        <tr>
-            <td colspan="2" height=400>
-                <textarea placeholder="내용을 입력하세요." name = "contents" style="width: 100%; height: 100%"></textarea>
-            </td>
-        </tr>
-        <tr>
-            <td colspan="2" align=right>
-                <input type="submit" value="글쓰기">
-            </form>
-            
-            <form action="/notice/viewboard" method="get">
-                <input type="submit" value="목록으로">
-            </form>
-            </td>
-        </tr>
-    </table>
+    <div class="col-lg-7 mt-5 mt-lg-0 d-flex align-items-stretch" margin ="auto">
+        <form action="/notice/writeBoard/write" method="post" role="form" class="php-email-form">
+      
+          <div class="form-group">
+            <label for="name">제목</label>
+            <input type="text" class="form-control" name="title" id="subject" required>
+          </div>
+          <div class="form-group">
+            <label for="name">본문</label>
+            <textarea class="form-control" name="contents" rows="10" required></textarea>
+          </div>
+        
+          <div class="text-center"><button type="submit">공지사항 등록</button></div>
+        </form>
+      </div>
 </body>
+<%- include("../common/footer") %>
 </html>

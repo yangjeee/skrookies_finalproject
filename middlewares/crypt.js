@@ -6,23 +6,23 @@ const SECRET = 'amazing';
 const SECRET_LENGTH = SECRET.length;
 
 const operate = (input) => {
-    let result = "";
-    for (let i in input) {
-        result += String.fromCharCode(input.charCodeAt(i) ^ SECRET.charCodeAt(i % SECRET_LENGTH));
-    }
-    return result;
+  let result = "";
+  for (let i in input) {
+    result += String.fromCharCode(input.charCodeAt(i)^SECRET.charCodeAt(i%SECRET_LENGTH));
+  }
+  return result;
 }
 
 const decrypt = (encodedInput) => {
-    let input = Buffer.from(encodedInput, 'base64').toString();
-    let dec = operate(input);
-    return dec;
+  let input = Buffer.from(encodedInput, 'base64').toString();
+  let dec = operate(input);
+  return dec;
 }
 
 const encrypt = (input) => {
-    let enc = operate(input.toString());
-    let b64 = Buffer.from(enc).toString('base64');
-    return b64;
+  let enc = operate(input.toString());
+  let b64 = Buffer.from(enc).toString('base64');
+  return b64;
 }
 
 /**

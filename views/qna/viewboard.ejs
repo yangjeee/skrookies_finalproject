@@ -1,33 +1,56 @@
 <!DOCTYPE html>
 <html>
+   
 <head>
+    <%- include("../common/header") %>
     <title>QnA</title>
     <!-- <link rel='stylesheet' href='/stylesheets/style.css'/> -->
 </head>
 <body>
-<h1>QnA</h1>
+    <main id="main">      
+  <section id="faq" class="faq section-bg">
+    <div class="container" data-aos="fade-up">
+
+      <div class="section-title">
+        <h2>Questions and Answers</h2>
+        <p>설명과 함께 질문을 등록하시면 답변을 등록해드립니다!</p>
+      </div>
+
+      <div class="faq-list">
+        <ul>
+    
+     <%
+  for(var i=0; i<results.length; i++)
+  {
+      var data = results[i];
+  %>
+    
+          <li data-aos="fade-up" data-aos-delay="100">
+            <i class="bx bx-help-circle icon-help"></i> <a data-bs-toggle="collapse" class="collapse" data-bs-target="#faq-list-1"><a href="/qna/getBoard?id=<%=data.id%>"><%=data.title%></a><i class="bx bx-chevron-down icon-show"></i></a>
+            <div id="faq-list-1" class="collapse show" data-bs-parent=".faq-list">
+              <p><b>
+      글번호:</b>
+               <%=data.id%>
+              </p>
+       <p><b>
+       아이디:</b>
+               <%=data.userId%>
+              </p>
+       <p><b>
+       최종수정시간:</b>
+               <%=data.updatedAt%>
+              </p>
+            </div>
+          </li>
+
+  <%}%>   
+        </ul>
+      </div>
 <a href="/qna/writeBoard">글쓰기</a>
-<table border="1">
-    <tr>
-        <td>번호</td>
-        <td>작성자</td>
-        <td>제목</td>
-        <td>등록일</td>
-        <td>수정일</td>
-    </tr>
-    <%
-    for(var i=0; i<results.length; i++)
-    {
-        var data = results[i];
-    %>
-    <tr>
-        <td><%=data.id%></td>
-        <td><%=data.userId%></td>
-        <td><a href="/qna/getBoard?id=<%=data.id%>"><%=data.title%></a></td>
-        <td><%=data.createdAt%></td>
-        <td><%=data.updatedAt%></td>
-    </tr>
-    <%}%>
-</table>
+    </div>
+  </section><!-- End Frequently Asked Questions Section -->
+      </main><!-- End #main -->
+
 </body>
+<%- include("../common/footer") %>
 </html>
