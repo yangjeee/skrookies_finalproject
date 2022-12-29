@@ -9,7 +9,7 @@ router.get('/', function(req, res, next) {
   tempid = req.query.id;
   tokenauth.authresult(req, function(aResult){
     if(aResult == true){
-    db.query(`SELECT * FROM boards where id=${req.query.id}`, function(error,results){
+    db.query(`SELECT * FROM qna where id=${req.query.id}`, function(error,results){
         if(error){
           throw error;
         }

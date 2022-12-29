@@ -7,7 +7,7 @@ var tokenauth = require('./tokenauth');
 //업로드 경로 설정
 
 const multer = require('multer')
-const upload = multer({ dest: 'public/images' })
+var upload = multer({ dest: 'public/images' })
 
 router.get('/', function(req, res, next) {
   tokenauth.authresult(req, function(aResult){
@@ -22,13 +22,13 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/write', upload.single('imgimg'),function(req, res, next) {
-  console.log(req.file.path);
-  console.log(req.file.filename)
-  const {title, contents} = req.body;
 
+  console.log(req.file)
+  filepath = req.file.path +'/'+ req.file.filename
+  upload = multer({ dest: filepath });
   userId = "test";//will be extracted from token
-
-  db.query(`INSERT INTO boards VALUES (NULL, '${userId}','${title}','${contents}','${seoultime}','${seoultime}')`, function(error,results){
+  const {title, contents} = req.body;
+  db.query(`INSERT INTO qna VALUES (NULL,'${userId}','${title}','${contents}','${filepath}','${seoultime}','${seoultime}')`, function(error,results){
     if(error){
       throw error;
     }
@@ -38,3 +38,4 @@ router.post('/write', upload.single('imgimg'),function(req, res, next) {
 });
 
 module.exports = router;
+
