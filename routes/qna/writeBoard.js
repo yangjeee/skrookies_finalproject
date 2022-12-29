@@ -22,7 +22,8 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/write', upload.single('imgimg'),function(req, res, next) {
-  console.log(req.file);
+  console.log(req.file.path);
+  console.log(req.file.filename)
   const {title, contents} = req.body;
 
   userId = "test";//will be extracted from token
