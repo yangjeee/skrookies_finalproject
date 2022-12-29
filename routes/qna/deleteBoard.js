@@ -6,7 +6,7 @@ var tokenauth = require('./tokenauth');
 router.get('/', function(req, res, next) {
   tokenauth.authresult(req, function(aResult){
     if(aResult == true){
-  db.query(`DELETE FROM boards WHERE id = ${req.query.id}`,function(error,results){
+  db.query(`DELETE FROM qna WHERE id = ${req.query.id}`,function(error,results){
     if(error){
       throw error;
     }

@@ -8,7 +8,7 @@ router.get('/', function(req, res, next) {
 
     if(aResult == true){
 
-  db.query(`SELECT * FROM boards`, function(error,results){
+  db.query(`SELECT * FROM qna`, function(error,results){
     if(error){
       throw error;
     }
