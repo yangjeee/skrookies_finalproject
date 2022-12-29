@@ -23,7 +23,6 @@ router.get('/', function(req, res, next) {
 
 router.post('/write', upload.single('imgimg'),function(req, res, next) {
 
-  console.log(req.file)
   filepath = req.file.destination + "/" + req.file.filename;
   upload = multer({ dest: req.file.destination});
   userId = "test";//will be extracted from token
