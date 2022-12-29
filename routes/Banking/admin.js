@@ -18,7 +18,7 @@ router.get('/', function (req, res, next) {
     profile(cookie).then(pending => {
         axios({
             method: "post",
-            url: "http://15.152.81.150:3000/api/beneficiary/pending",
+            url: api_url+"/api/beneficiary/pending",
             headers: {"authorization": "1 " + cookie}
         }).then((data) => {
             let html = ""

@@ -4,9 +4,9 @@ const profile = async (cookie) => {
     let data2
     await axios({
         method: "post",
-        url: "http://15.152.81.150:3000/api/user/profile",
+        url: api_url + "/api/user/profile",
         headers: {"authorization": "1 " + cookie}
-    }).then(( data )=> {
+    }).then((data) => {
         data2 = decryptRequest(data.data)
     })
     return data2

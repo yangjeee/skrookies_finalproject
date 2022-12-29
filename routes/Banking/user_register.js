@@ -22,7 +22,7 @@ router.post('/', function(req, res, next) {
     
     axios({
         method: "post",
-        url: "http://15.152.81.150:3000/api/Beneficiary/add", // URL 수정 해야 됨
+        url: api_url+"/api/Beneficiary/add", // URL 수정 해야 됨
         headers: {"authorization": "1 " + cookie},
         data: enData
         // 데이터 안씀
