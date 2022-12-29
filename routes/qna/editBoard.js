@@ -22,11 +22,11 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/edit', function(req, res, next) {
-  const {title, contents} = req.body;
- 
+  filepath = req.file.destination + "/" + req.file.filename;
+  upload = multer({ dest: req.file.destination});
   userId = "test";//will be extracted from token
-
-  db.query(`UPDATE boards SET title = '${title}', content = '${contents}', updatedAt = '${seoultime}' WHERE id = ${tempid}`, function(error,results){
+  const {title, contents} = req.body;
+  db.query(`UPDATE boards SET title = '${title}', content = '${contents}', filepath = '${filepath}', updatedAt = '${seoultime}' WHERE id = ${tempid}`, function(error,results){
     if(error){
       throw error;
     }
