@@ -9,9 +9,9 @@ const profile = require("../../middlewares/profile");
 router.get('/', function (req, res, next) {
     let cookie = "";
     try {
-        cookie = decryptEnc(req.get("cookie").split("Token=")[1])
+        cookie = decryptEnc(decryptEnc(req.cookies.Token))
     } catch (e) {
-        return res.redirect("../user/login")
+        return res.redirect("/user/login")
     }
 
     profile(cookie).then(pending => {
@@ -61,7 +61,12 @@ router.get('/', function (req, res, next) {
 });
 
 router.post('/approve', function (req, res, next) {
-    const cookie = decryptEnc(req.get("cookie").split("Token=")[1])
+    let cookie = "";
+    try {
+        cookie = decryptEnc(req.get("cookie").split("Token=")[1])
+    } catch (e) {
+        return res.redirect("/user/login")
+    }
 
     const id = req.body.id;
     const baseData = `{"id": "${id}"}`
