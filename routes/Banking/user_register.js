@@ -10,7 +10,7 @@ const {decryptRequest} = require("../../middlewares/crypt");
 router.get("/",async (req, res) => {
     const cookie = decryptEnc(req.cookies.Token)
     profile(cookie).then(data=>{
-        res.render("Banking/user_register.ejs",{pending:data})
+        res.render("Banking/user_register.ejs",{pending:data,select: "user_register"})
     })
 })
 
@@ -22,14 +22,14 @@ router.post('/', function(req, res, next) {
     
     axios({
         method: "post",
-        url: "http://15.152.81.150:3000/api/Beneficiary/add", // URL 수정 해야 됨
+        url: api_url+"/api/Beneficiary/add", // URL 수정 해야 됨
         headers: {"authorization": "1 " + cookie},
         data: enData
         // 데이터 안씀
     }).then((data)=>{
         console.log(decryptRequest(data.data));
     });
-    return res.redirect("/");
+    return res.redirect("/bank/friend_list");
 })
 
 

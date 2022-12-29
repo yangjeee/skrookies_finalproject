@@ -20,7 +20,7 @@ router.post('/', function(req, res, next) {
     
     axios({
         method: "post",
-        url: "http://15.152.81.150:3000/api/user/login",
+        url: api_url+"/api/user/login",
         data:enData
     }).then((data)=>{
         console.log(data.data.enc_data)
