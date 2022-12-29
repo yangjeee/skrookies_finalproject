@@ -2,8 +2,13 @@ var db = require('../../middlewares/db');
 var express = require('express');
 var router = express.Router();
 var tokenauth = require('./tokenauth');
+var {encryptResponse, decryptRequest, decryptEnc} = require("../../middlewares/crypt");
+const profile = require('../../middlewares/profile');
 
 router.get('/', function(req, res, next) {
+  const cookie = decryptEnc(req.cookies.Token);
+    profile(cookie).then((data)=>{
+      var cookieData = data.data;
   tokenauth.authresult(req, function(aResult){
 
     if(aResult == true){
@@ -12,12 +17,13 @@ router.get('/', function(req, res, next) {
     if(error){
       throw error;
     }
-  res.render('qna/viewboard', {results:results});
+  res.render('temp/qna/viewboard', {results:results, u_data: cookieData.username});
   });
     }else{
-      res.render('qna/alert');
+      res.render('temp/qna/alert');
     }
 });
+    });
 });
 
 module.exports = router;
