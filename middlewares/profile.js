@@ -12,10 +12,10 @@ const profile = async (cookie) => {
     const target = new Date("2023-2-14")
     const start = new Date("2022-12-13")
     const cur = new Date();
-    const resttime = target - cur;
+    const dotime = cur - start;
     const totaltime = target - start;
 
-    const percent = (resttime/totaltime * 100)
+    const percent = (dotime/totaltime * 100)
 
     data2.data.rest = percent.toFixed(3)
 
