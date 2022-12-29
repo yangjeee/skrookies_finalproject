@@ -22,12 +22,11 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/write', upload.single('imgimg'),function(req, res, next) {
-  
-  const {title, contents, filepath} = req.body;
-  // filepath += 
+  console.log(req.file)
+  filepath = req.file.path +'/'+ req.file.filename
   upload = multer({ dest: filepath });
   userId = "test";//will be extracted from token
-
+  const {title, contents} = req.body;
   db.query(`INSERT INTO qna VALUES (NULL,'${userId}','${title}','${contents}','${filepath}','${seoultime}','${seoultime}')`, function(error,results){
     if(error){
       throw error;
@@ -38,3 +37,4 @@ router.post('/write', upload.single('imgimg'),function(req, res, next) {
 });
 
 module.exports = router;
+
