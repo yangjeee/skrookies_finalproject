@@ -4,20 +4,16 @@ const axios = require("axios");
 const Response = require("../../middlewares/Response")
 const {decryptRequest, encryptResponse, decryptEnc} = require("../../middlewares/crypt")
 const profile = require("../../middlewares/profile");
+const checkCookie = require("../../middlewares/checkCookie")
 
 /* GET users listing. */
-router.get('/', function (req, res, next) {
-    let cookie = "";
-    try {
-        cookie = decryptEnc(decryptEnc(req.cookies.Token))
-    } catch (e) {
-        return res.redirect("/user/login")
-    }
+router.get('/', checkCookie, function (req, res, next) {
+    const cookie = req.cookies.Token
 
     profile(cookie).then(pending => {
         axios({
             method: "post",
-            url: api_url+"/api/beneficiary/pending",
+            url: api_url + "/api/beneficiary/pending",
             headers: {"authorization": "1 " + cookie}
         }).then((data) => {
             let html = ""
@@ -60,20 +56,15 @@ router.get('/', function (req, res, next) {
     })
 });
 
-router.post('/approve', function (req, res, next) {
-    let cookie = "";
-    try {
-        cookie = decryptEnc(req.get("cookie").split("Token=")[1])
-    } catch (e) {
-        return res.redirect("/user/login")
-    }
+router.post('/approve', checkCookie, function (req, res, next) {
+    const cookie = req.cookies.Token
 
     const id = req.body.id;
     const baseData = `{"id": "${id}"}`
     const enData = encryptResponse(baseData);
     axios({
         method: "post",
-        url: api_url+"/api/beneficiary/approve",
+        url: api_url + "/api/beneficiary/approve",
         headers: {"authorization": "1 " + cookie},
         data: enData
     }).then((data) => {
