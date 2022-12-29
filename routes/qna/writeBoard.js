@@ -7,40 +7,51 @@ var {encryptResponse, decryptRequest, decryptEnc} = require("../../middlewares/c
 const profile = require('../../middlewares/profile');
 
 const multer = require('multer')
-var upload = multer({ dest: 'public/images' })
+var upload = multer({dest: 'public/images'})
+const checkCookie = require("../../middlewares/checkCookie")
 
-router.get('/', function(req, res, next) {
-  const cookie = decryptEnc(req.cookies.Token);
-    profile(cookie).then((data)=>{
-      var cookieData = data.data;
-  tokenauth.authresult(req, function(aResult){
+router.get('/', checkCookie, function (req, res, next) {
+    const cookie = req.cookies.Token;
+    profile(cookie).then((data) => {
+        var cookieData = data.data;
+        tokenauth.authresult(req, function (aResult) {
 
-    if(aResult == true){
+            if (aResult == true) {
 
-  res.render('temp/qna/writeBoard',{u_data: cookieData.username});
-    }else{
-      res.render('temp/qna/alert');
+                res.render('temp/qna/writeBoard', {u_data: cookieData.username});
+            } else {
+                res.render('temp/qna/alert');
+            }
+        });
+    });
+});
+
+router.post('/write', checkCookie, upload.single('imgimg'), function (req, res, next) {
+    //파일 안넣으면 오류나서 변경함
+    console.log("write : " + req.file.filename)
+    let filepath = "";
+    let destination = ""
+    if (req.file) {
+        filepath = req.file.destination + "/" + req.file.filename;
+    } else {
+        filepath = null;
+        destination = null;
     }
-  });
-});
-});
+    upload = multer({dest: destination});
+    const {title, contents} = req.body;
+    const cookie = req.cookies.Token;
+    profile(cookie).then((data) => {
+        var userId = data.data.username;
 
-router.post('/write', upload.single('imgimg'),function(req, res, next) {
-
-  filepath = req.file.destination + "/" + req.file.filename;
-  upload = multer({ dest: req.file.destination});
-  const {title, contents} = req.body;
-  const cookie = decryptEnc(req.cookies.Token);
-  profile(cookie).then((data)=>{
-    var userId = data.data.username;
-
-  db.query(`INSERT INTO qna VALUES (NULL,'${userId}','${title}','${contents}','${filepath}','${seoultime}','${seoultime}')`, function(error,results){
-    if(error){
-      throw error;
-    }
-  res.redirect('../viewBoard');
-  });
-});
+        db.query(`INSERT INTO qna
+                  VALUES (NULL, '${userId}', '${title}', '${contents}', '${filepath}', '${seoultime}', '${seoultime}
+                          ')`, function (error, results) {
+            if (error) {
+                throw error;
+            }
+            res.redirect('../viewBoard');
+        });
+    });
 });
 
 module.exports = router;

@@ -1,19 +1,24 @@
 const axios = require("axios");
-var { decryptEnc } = require("../../middlewares/crypt");
+var {decryptEnc} = require("../../middlewares/crypt");
 
-exports.authresult = function(req, callback){
-    const cookie = decryptEnc(req.get("cookie").split("Token=")[1])
+exports.authresult = function (req, callback) {
+    let cookie = "";
+    try {
+        cookie = req.cookies.Token
+    } catch (e) {
+        return res.send("<script>alert('로그인을 해주세요'); location.href = \"/user/login\";</script>");
+    }
     axios({
         method: "get",
-        url: "http://15.152.81.150:3000/api/auth/check",
+        url: api_url + "/api/auth/check",
 
-        headers: {"authorization": "1 "+ cookie},
- 
-    }).then((data)=>{
-        if(data.data.status.message == 'Success'){
-        var result = true;
-        }else{
-        var result = false;
+        headers: {"authorization": "1 " + cookie},
+
+    }).then((data) => {
+        if (data.data.status.message == 'Success') {
+            var result = true;
+        } else {
+            var result = false;
         }
         callback(result);
     });

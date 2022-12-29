@@ -2,9 +2,10 @@ var express = require('express');
 var router = express.Router();
 var axios = require("axios");
 var {encryptResponse, decryptRequest, decryptEnc} = require("../../middlewares/crypt");
+const checkCookie = require("../../middlewares/checkCookie")
 
-router.get('/', function (req, res, next) {
-    const cookie = decryptEnc(req.get("cookie").split("Token=")[1])
+router.get('/', checkCookie, function (req, res, next) {
+    const cookie = req.cookies.Token;
     axios({
         method: "post",
         url: api_url + "/api/transactions/view", // URL 수정 해야 됨
