@@ -36,7 +36,7 @@ router.post("/", (req, res) => {
 
     axios({
         method: "post",
-        url: "http://15.152.81.150:3000/api/user/change-password",
+        url: api_url+"/api/user/change-password",
         headers: {"authorization": "1 " + cookie},
         data: encryptResponse(req_data)
     }).then((data)=>{

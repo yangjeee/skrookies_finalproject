@@ -11,7 +11,7 @@ router.get('/', function(req, res, next) {
 
         axios({
             method: "post",
-            url: "http://15.152.81.150:3000/api/beneficiary/view", 
+            url: api_url+"/api/beneficiary/view", 
             headers: {"authorization": "1 " + cookie}
             // data: enData
             // 데이터 안씀
