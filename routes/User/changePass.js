@@ -2,6 +2,7 @@ var express = require('express');
 const axios = require("axios");
 const {decryptRequest, decryptEnc, encryptResponse} = require("../../middlewares/crypt");
 const Response = require("../../middlewares/Response");
+const sha256 = require("js-sha256")
 var router = express.Router();
 
 router.get("/", (req, res) => {
@@ -29,7 +30,9 @@ router.get("/", (req, res) => {
 
 router.post("/", (req, res) => {
     const {password, new_password} = req.body
-    const req_data = `{"password" : ${password},"new_password" : ${new_password}}`
+    const sha256Pass = sha256(password)
+    const sha256Newpass = sha256(new_password)
+    const req_data = `{"password" : ${sha256Pass},"new_password" : ${sha256Newpass}}`
     const cookie = decryptEnc(req.cookies.Token)
     let resStatus = ""
     let resMessage = ""
