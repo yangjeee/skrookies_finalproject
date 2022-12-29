@@ -24,11 +24,11 @@ router.get("/",async (req, res) => {
                 html_data += "<tr><td>"+i.from_account+"</td><td>"+i.to_account+"</td><td>"+i.amount+"</td></tr>";
             })
 
-            return res.render("Banking/trade_list", {pending:data, html : html_data});
+            return res.render("Banking/trade_list", {pending:data, html : html_data,select: "list"});
 
         }).catch(function(error){
             var html_data = "<h2>내용을 불러올 수 없습니다.</h2>";
-            return res.render("Banking/trade_list", {pending:data, html : html_data});
+            return res.render("Banking/trade_list", {pending:data, html : html_data,select: "list"});
         });
 
         // res.render("Banking/trade_list",{pending:data})

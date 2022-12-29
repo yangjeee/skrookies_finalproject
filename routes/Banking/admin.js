@@ -7,7 +7,6 @@ const profile = require("../../middlewares/profile");
 
 /* GET users listing. */
 router.get('/', function (req, res, next) {
-
     let cookie = "";
     try {
         cookie = decryptEnc(req.get("cookie").split("Token=")[1])
@@ -56,7 +55,7 @@ router.get('/', function (req, res, next) {
                 html += "<h2>관리자가 아닙니다.</h2>"
             }
 
-            res.render("Banking/admin", {html: html, pending: pending})
+            res.render("Banking/admin", {html: html, pending: pending, select: "admin"})
         })
     })
 });

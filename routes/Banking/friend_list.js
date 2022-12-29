@@ -48,10 +48,10 @@ router.get('/', function (req, res, next) {
 
             html_data += `</tbody>`;
 
-            return res.render("Banking/friend", {html: html_data, pending: pending});
+            return res.render("Banking/friend", {html: html_data, pending: pending, select: "friend_list"});
         }).catch(function (error) {
             var html_data = "<tr>아싸시군요</tr>";
-            return res.render("Banking/friend", {html: html_data, pending: pending});
+            return res.render("Banking/friend", {html: html_data, pending: pending, select: "friend_list"});
         });
 
     })

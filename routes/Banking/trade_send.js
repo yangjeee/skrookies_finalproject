@@ -8,7 +8,7 @@ router.get("/",async (req, res) => {
     const cookie = decryptEnc(req.cookies.Token);
     profile(cookie).then(data=>{
         
-        res.render("Banking/trade_send",{pending:data});
+        res.render("Banking/trade_send",{pending:data,select: "send"});
     })
 })
 
