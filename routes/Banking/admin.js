@@ -69,7 +69,7 @@ router.post('/approve', function (req, res, next) {
     const enData = encryptResponse(baseData);
     axios({
         method: "post",
-        url: "http://15.152.81.150:3000/api/beneficiary/approve",
+        url: api_url+"/api/beneficiary/approve",
         headers: {"authorization": "1 " + cookie},
         data: enData
     }).then((data) => {

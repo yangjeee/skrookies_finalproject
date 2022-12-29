@@ -1,21 +1,21 @@
 var express = require('express');
 var router = express.Router();
 var axios = require("axios");
-var { encryptResponse, decryptRequest, decryptEnc} = require("../../middlewares/crypt");
+var {encryptResponse, decryptRequest, decryptEnc} = require("../../middlewares/crypt");
 const profile = require('../../middlewares/profile');
 
-router.get('/', function(req, res, next) {
+router.get('/', function (req, res, next) {
     const cookie = decryptEnc(req.get("cookie").split("Token=")[1])
-    
-    profile(cookie).then(pending=>{
+
+    profile(cookie).then(pending => {
 
         axios({
             method: "post",
-            url: api_url+"/api/beneficiary/view", 
+            url: api_url + "/api/beneficiary/view",
             headers: {"authorization": "1 " + cookie}
             // data: enData
             // 데이터 안씀
-        }).then((data)=>{
+        }).then((data) => {
             let result = decryptRequest(data.data).data;
             //console.log(result);
             //console.log(pending.data.account_number);
@@ -29,8 +29,8 @@ router.get('/', function(req, res, next) {
                             
                             <tbody>
                             `;
-            
-            result.forEach(function(a){
+
+            result.forEach(function (a) {
                 html_data += `<tr>
                                 <td>${a.beneficiary_account_number}</td>
                                 <td>${a.approved}</td>
@@ -48,18 +48,16 @@ router.get('/', function(req, res, next) {
 
             html_data += `</tbody>`;
 
-            return res.render("Banking/friend", {html : html_data, pending:pending});
-        }).catch(function(error){
+            return res.render("Banking/friend", {html: html_data, pending: pending});
+        }).catch(function (error) {
             var html_data = "<tr>아싸시군요</tr>";
-            return res.render("Banking/friend", {html : html_data, pending:pending});
+            return res.render("Banking/friend", {html: html_data, pending: pending});
         });
 
     })
 
-   
+
 })
-
-
 
 
 router.post('/delete', function (req, res, next) {
@@ -67,13 +65,13 @@ router.post('/delete', function (req, res, next) {
 
     const beneficiary_account_number = req.body.beneficiary_account_number;
     const account_number1 = req.body.account_number;
-     
+
 
     const baseData = `{"account_number": "${beneficiary_account_number}"}`;
     const enData = encryptResponse(baseData);
     axios({
         method: "post",
-        url: "http://15.152.81.150:3000/api/beneficiary/delete",
+        url: api_url + "/api/beneficiary/delete",
         headers: {"authorization": "1 " + cookie},
         account_number: account_number1,
         data: enData
