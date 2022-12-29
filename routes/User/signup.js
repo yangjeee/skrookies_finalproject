@@ -6,10 +6,10 @@ const axios = require("axios")
 /* GET users listing. */
 router.get('/', function(req, res, next) {
     console.log("login.js : ",req.body)
-    res.render("signup");
+    res.render("temp/signup");
 });
 
-router.post('/post', function(req, res, next) {
+router.post('/', function(req, res, next) {
     console.log("login.js : ",req.body)
     const {username, password} = req.body;
     console.log(username, password)
@@ -19,14 +19,21 @@ router.post('/post', function(req, res, next) {
     
     axios({
         method: "post",
-        url: "http://15.152.81.150:3000/api/user/register",
+        url: api_url+"/api/user/register",
         data:enData
     }).then((data)=>{
         // console.log(decryptRequest(data))
-        console.log("data : ", decryptRequest(data.data))
-        
+        // console.log("data : ", decryptRequest(data.data))
+        let result = decryptRequest(data.data);
+        console.log(result);
+        if (result.status.code == 200) {
+            return res.send("<script>alert('SUCCESS');location.href = \"/user/login\";</script>");
+            
+        } else {   
+            return res.send("<script>alert('FAIL');location.href = \"/user/signup\";</script>");
+            
+        }
     })
-    res.render("signup");
 });
 
 

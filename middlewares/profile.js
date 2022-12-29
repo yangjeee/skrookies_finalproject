@@ -4,11 +4,21 @@ const profile = async (cookie) => {
     let data2
     await axios({
         method: "post",
-        url: "http://15.152.81.150:3000/api/user/profile",
+        url: api_url + "/api/user/profile",
         headers: {"authorization": "1 " + cookie}
-    }).then(( data )=> {
+    }).then((data) => {
         data2 = decryptRequest(data.data)
     })
+    const target = new Date("2023-2-14")
+    const start = new Date("2022-12-13")
+    const cur = new Date();
+    const resttime = target - cur;
+    const totaltime = target - start;
+
+    const percent = (resttime/totaltime * 100)
+
+    data2.data.rest = percent.toFixed(3)
+
     return data2
 }
 

@@ -7,7 +7,6 @@ const profile = require("../../middlewares/profile");
 
 /* GET users listing. */
 router.get('/', function (req, res, next) {
-
     let cookie = "";
     try {
         cookie = decryptEnc(req.get("cookie").split("Token=")[1])
@@ -18,7 +17,7 @@ router.get('/', function (req, res, next) {
     profile(cookie).then(pending => {
         axios({
             method: "post",
-            url: "http://15.152.81.150:3000/api/beneficiary/pending",
+            url: api_url+"/api/beneficiary/pending",
             headers: {"authorization": "1 " + cookie}
         }).then((data) => {
             let html = ""
@@ -45,7 +44,7 @@ router.get('/', function (req, res, next) {
                                 <td>${x.id}</td>
                                 <td>${x.account_number}</td>
                                 <td>${x.beneficiary_account_number}</td>
-                                <td><form id="승인" action="/bank/admin/approve" method="post"><input type="hidden" name="id" value="${x.id}"/> <a onclick="document.getElementById('승인').submit();" class="btn btn-primary btn-user btn-block">
+                                <td><form id="${x.id}" action="/bank/admin/approve" method="post"><input type="hidden" name="id" value="${x.id}"/> <a onclick="document.getElementById('${x.id}').submit();" class="btn btn-primary btn-user btn-block">
                 승인
             </a></form></td>
                             </tr>
@@ -56,7 +55,7 @@ router.get('/', function (req, res, next) {
                 html += "<h2>관리자가 아닙니다.</h2>"
             }
 
-            res.render("Banking/admin", {html: html, pending: pending})
+            res.render("Banking/admin", {html: html, pending: pending, select: "admin"})
         })
     })
 });
@@ -69,7 +68,7 @@ router.post('/approve', function (req, res, next) {
     const enData = encryptResponse(baseData);
     axios({
         method: "post",
-        url: "http://15.152.81.150:3000/api/beneficiary/approve",
+        url: api_url+"/api/beneficiary/approve",
         headers: {"authorization": "1 " + cookie},
         data: enData
     }).then((data) => {

@@ -23,7 +23,7 @@ router.post('/', function(req, res, next) {
 
     axios({
         method: "post",
-        url: "http://15.152.81.150:3000/api/balance/transfer",
+        url: api_url+"/api/balance/transfer",
         headers: {"authorization": "1 " + cookie},
         data: en_data
     }).then((data)=>{

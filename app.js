@@ -8,6 +8,9 @@ var indexRouter = require('./routes/index');
 
 var app = express();
 
+let api_url = "http://3.36.86.243:3000";
+global.api_url = api_url;
+
 // view engine setup
 //Express에 views라는 키안에 값을 우리가 만든 views폴더 경로를 줌
 app.set('views', path.join(__dirname, 'views'));
