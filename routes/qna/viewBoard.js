@@ -12,7 +12,6 @@ router.get('/', function(req, res, next) {
     if(error){
       throw error;
     }
-
   res.render('qna/viewboard', {results:results});
   });
     }else{
