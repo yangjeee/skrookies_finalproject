@@ -50,6 +50,7 @@ create table qna
     updatedAt DATETIME,
     PRIMARY KEY (id)
 ) engine = innodb;
+<<<<<<< HEAD
 
 
 INSERT INTO `users`
@@ -62,19 +63,8 @@ INSERT INTO `users`
 values (default, "user4", "password4", 444444, default, default);
 INSERT INTO `users`
 values (default, "admin", "admin", 999999, default, true);
+=======
+>>>>>>> main
 
-INSERT INTO `transactions`
-values (default, 111111, 222222, 100);
-INSERT INTO `transactions`
-values (default, 222222, 111111, 200);
-INSERT INTO `transactions`
-values (default, 111111, 333333, 100);
-INSERT INTO `transactions`
-values (default, 111111, 444444, 100);
-
-INSERT INTO `beneficiaries`
-values (default, 111111, 222222, true);
-INSERT INTO `beneficiaries`
-values (default, 111111, 333333, true);
-INSERT INTO `beneficiaries`
-values (default, 111111, 444444, true);
+INSERT INTO `users`
+values (default, "admin", "8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918", 999999, default, true);

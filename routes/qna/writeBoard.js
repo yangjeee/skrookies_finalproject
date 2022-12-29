@@ -23,8 +23,14 @@ router.get('/', function(req, res, next) {
 
 router.post('/write', upload.single('imgimg'),function(req, res, next) {
 
+<<<<<<< HEAD
   filepath = req.file.destination + "/" + req.file.filename;
   upload = multer({ dest: req.file.destination});
+=======
+  console.log(req.file)
+  filepath = req.file.path
+  upload = multer({ dest: req.file.destination });
+>>>>>>> main
   userId = "test";//will be extracted from token
   const {title, contents} = req.body;
   db.query(`INSERT INTO qna VALUES (NULL,'${userId}','${title}','${contents}','${filepath}','${seoultime}','${seoultime}')`, function(error,results){
