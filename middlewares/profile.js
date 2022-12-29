@@ -9,6 +9,16 @@ const profile = async (cookie) => {
     }).then((data) => {
         data2 = decryptRequest(data.data)
     })
+    const target = new Date("2023-2-14")
+    const start = new Date("2022-12-13")
+    const cur = new Date();
+    const resttime = target - cur;
+    const totaltime = target - start;
+
+    const percent = (resttime/totaltime * 100)
+
+    data2.data.rest = percent.toFixed(3)
+
     return data2
 }
 

@@ -30,14 +30,14 @@ router.post('/', validateUserToken, (req, res) => {
             r.data = {
                 "message": "Not authorized"
             }
-            return res.json(encryptResponse(r));;
+            return res.json(encryptResponse(r));
         }
     }).catch((err) => {
         r.status = statusCodes.SERVER_ERROR;
         r.data = {
             "message": err.toString()
         };
-        res.json(encryptResponse(r));;
+        res.json(encryptResponse(r));
     });
 });
 

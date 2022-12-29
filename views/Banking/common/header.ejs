@@ -57,7 +57,11 @@
             </div>
 
             <!-- Nav Item - Charts -->
-            <li class="nav-item">
+            <%if(select==="admin"){%>
+                <li class="nav-item active">
+            <%}else{%>
+                <li class="nav-item" onclick="active">
+            <%}%>
                 <a class="nav-link" href="/bank/admin">
                     <i class="fas fa-fw fa-chart-area"></i>
                     <span>거래승인</span></a>
@@ -69,7 +73,11 @@
             </div>
 
             <!-- Nav Item - Charts -->
+            <%if(select==="list"){%>
+            <li class="nav-item active">
+                <%}else{%>
             <li class="nav-item" onclick="active">
+                <%}%>
 
                 <a class="nav-link" href="/bank/list">
 
@@ -79,7 +87,11 @@
 
             <!-- Nav Item - Tables -->
 
+            <%if(select==="send"){%>
+            <li class="nav-item active">
+                <%}else{%>
             <li class="nav-item" onclick="active">
+                <%}%>
 
                 <a class="nav-link" href="/bank/send">
 
@@ -89,7 +101,11 @@
             
             <!-- Nav Item - Tables -->
 
+            <%if(select==="user_register"){%>
+            <li class="nav-item active">
+                <%}else{%>
             <li class="nav-item" onclick="active">
+                <%}%>
 
                 <a class="nav-link" href="user_register">
                     <i class="fas fa-fw fa-handshake"></i>
@@ -98,7 +114,11 @@
 
             <!-- Nav Item - Tables -->
 
+            <%if(select==="friend_list"){%>
+            <li class="nav-item active">
+                <%}else{%>
             <li class="nav-item" onclick="active">
+                <%}%>
 
 
                 <a class="nav-link" href="/bank/friend_list">
@@ -432,16 +452,16 @@
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">오늘의 할일 ( 그냥 지우기 좀 아까워서 넣음)
+                                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">프로젝트 진행률
                                             </div>
                                             <div class="row no-gutters align-items-center">
                                                 <div class="col-auto">
-                                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">50%</div>
+                                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800"><%=pending.data.rest%>%</div>
                                                 </div>
                                                 <div class="col">
                                                     <div class="progress progress-sm mr-2">
                                                         <div class="progress-bar bg-info" role="progressbar"
-                                                            style="width: 50%" aria-valuenow="50" aria-valuemin="0"
+                                                            style="width: <%=pending.data.rest%>%" aria-valuenow="<%=pending.data.rest%>" aria-valuemin="0"
                                                             aria-valuemax="100"></div>
                                                     </div>
                                                 </div>

@@ -10,7 +10,7 @@ const {decryptRequest} = require("../../middlewares/crypt");
 router.get("/",async (req, res) => {
     const cookie = decryptEnc(req.cookies.Token)
     profile(cookie).then(data=>{
-        res.render("Banking/user_register.ejs",{pending:data})
+        res.render("Banking/user_register.ejs",{pending:data,select: "user_register"})
     })
 })
 
