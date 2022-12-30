@@ -5,10 +5,20 @@ var router = express.Router();
 var tokenauth = require('./tokenauth');
 var {encryptResponse, decryptRequest, decryptEnc} = require("../../middlewares/crypt");
 const profile = require('../../middlewares/profile');
-
 const multer = require('multer')
-var upload = multer({dest: 'public/images'})
 const checkCookie = require("../../middlewares/checkCookie")
+const path = require('path');
+
+const upload = multer({
+  storage: multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, 'public/images');
+    },
+    filename: function (req, file, cb) {
+      cb(null, new Date().valueOf() + path.extname(file.originalname));
+    }
+  }),
+});
 
 router.get('/', checkCookie, function (req, res, next) {
     const cookie = req.cookies.Token;
@@ -30,15 +40,16 @@ router.post('/write', checkCookie, upload.single('imgimg'), function (req, res, 
     //파일 안넣으면 오류나서 변경함
     console.log("write : " + req.file.filename)
     let filepath = "";
-    let destination = ""
+    let destination = req.file.destination;
     if (req.file) {
-        filepath = req.file.destination + "/" + req.file.filename;
+        filepath = destination.replace('public/', '') + "/" + req.file.filename;
     } else {
         filepath = null;
         destination = null;
     }
-    upload = multer({dest: destination});
+   
     const {title, contents} = req.body;
+
     const cookie = req.cookies.Token;
     profile(cookie).then((data) => {
         var userId = data.data.username;

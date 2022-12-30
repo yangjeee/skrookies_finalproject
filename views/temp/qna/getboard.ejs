@@ -7,7 +7,7 @@
     <title>Document</title>
 </head>
 <main id="main">
-
+  <div id = "identified">
     <!-- ======= Breadcrumbs ======= -->
     <section id="breadcrumbs" class="breadcrumbs">
       <div class="container">
@@ -32,7 +32,7 @@
               <div class="swiper-wrapper align-items-center">
 
                 <div class="swiper-slide">
-                  <img src="<%=data.filepath%>" alt="">
+                  <img src="/<%=data.filepath%>" alt="">
                 </div>
 
               </div>
@@ -56,11 +56,12 @@
              <%= data.content %>
               </p>
             </div>
+            <a href="/qna/editBoard?id=<%=data.id%>" class="btn-learn-more">수정하기</a>
+            <a href="/qna/deleteBoard?id=<%=data.id%>" class="btn-learn-more">삭제하기</a>
           </div>
-
         </div>
-
       </div>
+    </div>
     </section><!-- End Portfolio Details Section -->
   </main><!-- End #main -->
 </body>

@@ -5,10 +5,19 @@ var router = express.Router();
 var tokenauth = require('./tokenauth');
 var {encryptResponse, decryptRequest, decryptEnc} = require("../../middlewares/crypt");
 const profile = require('../../middlewares/profile');
-
 const multer = require('multer')
-var upload = multer({dest: 'public/images'})
 const checkCookie = require("../../middlewares/checkCookie")
+const path = require('path');
+const upload = multer({
+  storage: multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, 'public/images');
+    },
+    filename: function (req, file, cb) {
+      cb(null, new Date().valueOf() + path.extname(file.originalname));
+    }
+  }),
+});
 
 router.get('/', checkCookie, function (req, res, next) {
     const cookie = req.cookies.Token;
@@ -36,10 +45,17 @@ router.get('/', checkCookie, function (req, res, next) {
 });
 
 router.post('/edit', checkCookie, upload.single('imgimg'), function (req, res, next) {
-    filepath = req.file.destination + "/" + req.file.filename;
-    upload = multer({dest: req.file.destination});
-    userId = "test";//will be extracted from token
+
+    let filepath = "";
+    let destination = req.file.destination;
+    if (req.file) {
+        filepath = destination.replace('public/', '') + "/" + req.file.filename;
+    } else {
+        filepath = null;
+        destination = null;
+    }
     const {title, contents, pid} = req.body;
+
     db.query(`UPDATE qna
               SET title     = '${title}',
                   content   = '${contents}',

@@ -23,7 +23,6 @@ router.get('/', checkCookie, function (req, res, next) {
 });
 
 router.post('/write', checkCookie, function (req, res, next) {
-    console.log(req.body)
     const cookie = req.cookies.Token;
     const {title, contents} = req.body;
     profile(cookie).then((data) => {

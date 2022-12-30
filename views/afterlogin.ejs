@@ -9,11 +9,17 @@
 <body>
     <script>
 		// 쿠키를 이용한 방법
+    <% if(locals.data) { %>
     var en_data = "<%= data %>";
     document.cookie = "Token="+en_data+";path=/; max-age=3600";
+    location.href="/" ;
+    <%}else{ %>
+      alert("로그인에 실패하였습니다.");  
+      location.href="/user/login" ;
+    <%}%>
     </script>
     <script type="text/javascript">
-    location.href="/" ;
+    
     </script>
 </body>
 </html>
