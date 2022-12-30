@@ -4,6 +4,7 @@
     <%- include("../common/header") %>
 
 <body>
+   <div id = "identified">
     <div postion = "absolute" top = "50px">
     <title>Notice Board</title>
     <main id="main">      
@@ -37,16 +38,18 @@
               </p>
             </div>
           </li>
-
-  <%}%>   
+          <%}%>   
+          
         </ul>
+        <a href="/notice/writeBoard" id ="forsubmit">글쓰기</a>
       </div>
-<a href="/notice/writeBoard">글쓰기</a>
     </div>
+    
   </section><!-- End Frequently Asked Questions Section -->
       </main><!-- End #main -->
 
 </body>
+</div>
 </div>
 <%- include("../common/footer") %>
 </html>

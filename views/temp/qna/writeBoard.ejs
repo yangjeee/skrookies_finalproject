@@ -1,43 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
+    <%- include("../common/header") %>
 <head>
     <meta charset="UTF-8">
     <title>Document</title>
 </head>
 <body>
-    <table border="1" width=500>
-        <tr>
-            <th colspan="2">
-                QnA 쓰기
-            </th>
-        </tr>
-        <tr>
-            <td width=50>
-               <h5>QnA 작성</h5>
-            </td>
-            <form action="/qna/writeBoard/write" method="post" enctype="multipart/form-data">
-            <td >
-                <input type="text" name="title" placeholder="제목을 입력하세요."
-                maxlength=20
-                style="width:100%">
-            </td>
-        </tr>
-        <tr>
-            <td colspan="2" height=400>
-                <textarea placeholder="내용을 입력하세요." name = "contents" style="width: 100%; height: 100%"></textarea>
-            </td>
-        </tr>
-        <tr>
-            <td colspan="2" align=right>
-                <input type="file" name="imgimg">
-                <input type="submit" value="글쓰기">
-            </form>
+  <div id = "identified">
+  <section id="contact" class="contact">
+    <div class="container" data-aos="fade-up">
 
-            <form action="/qna/viewboard" method="get">
-                <input type="submit" value="목록으로">
-            </form>
-            </td>
-        </tr>
-    </table>
+      <div class="section-title">
+        <h2>질문작성</h2>
+        <p>질문을 작성하면 관리자가 답합니다.</p>
+      </div>
+
+      <div class="row">
+
+        <div class="mt-5 mt-lg-0 d-flex align-items-stretch">
+          <form action="/notice/qna/writeBoard" method="post" role="form" class="php-email-form" enctype="multipart/form-data">
+            <div class="row">
+              <div class="form-group">
+                <label for="name">제목 입력</label>
+                <input type="text" name="title" class="form-control" id="title" required>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="name">본문</label>
+              <textarea class="form-control" name="contents" rows="10" required></textarea>
+            </div>
+            <input type="file" name="imgimg">
+            <div class="text-center"><button type="submit">등록</button></div>
+          </form>
+      
+        </div>
+      </div>
+      <div class="text-center"> <form action="/qna/viewBoard" method="get" class="php-email-form2"><button type="submit">목록으로</button></form></div>
+    </div>
+    </div>
+  </section><!-- End Contact Section -->
 </body>
+<%- include("../common/footer") %>
 </html>

@@ -6,21 +6,38 @@
     <title>Document</title>
 </head>
 <body>
-    <div class="col-lg-7 mt-5 mt-lg-0 d-flex align-items-stretch" margin ="auto">
-        <form action="/notice/writeBoard/write" method="post" role="form" class="php-email-form">
-      
-          <div class="form-group">
-            <label for="name">제목</label>
-            <input type="text" class="form-control" name="title" id="subject" required>
-          </div>
-          <div class="form-group">
-            <label for="name">본문</label>
-            <textarea class="form-control" name="contents" rows="10" required></textarea>
-          </div>
-        
-          <div class="text-center"><button type="submit">공지사항 등록</button></div>
-        </form>
+  <div id = "identified">
+  <section id="contact" class="contact">
+    <div class="container" data-aos="fade-up">
+
+      <div class="section-title">
+        <h2>공지쓰기</h2>
+        <p>모든 사용자가 볼 수 있게 공지를 작성하세요.</p>
       </div>
+
+      <div class="row">
+
+        <div class="mt-5 mt-lg-0 d-flex align-items-stretch">
+          <form action="/notice/writeBoard/write" method="post" role="form" class="php-email-form">
+            <div class="row">
+              <div class="form-group">
+                <label for="name">제목 입력</label>
+                <input type="text" name="title" class="form-control" id="title" required>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="name">본문</label>
+              <textarea class="form-control" name="contents" rows="10" required></textarea>
+            </div>
+            <div class="text-center"><button type="submit">등록</button></div>
+          </form>
+      
+        </div>
+      </div>
+      <div class="text-center"> <form action="/notice/viewBoard" method="get" class="php-email-form2"><button type="submit">목록으로</button></form></div>
+    </div>
+    </div>
+  </section><!-- End Contact Section -->
 </body>
 <%- include("../common/footer") %>
 </html>
