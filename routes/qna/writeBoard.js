@@ -38,10 +38,9 @@ router.get('/', checkCookie, function (req, res, next) {
 
 router.post('/write', checkCookie, upload.single('imgimg'), function (req, res, next) {
     //파일 안넣으면 오류나서 변경함
-    console.log("write : " + req.file.filename)
     let filepath = "";
-    let destination = req.file.destination;
     if (req.file) {
+        let destination = req.file.destination;
         filepath = destination.replace('public/', '') + "/" + req.file.filename;
     } else {
         filepath = null;
