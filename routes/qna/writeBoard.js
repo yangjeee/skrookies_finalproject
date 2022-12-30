@@ -42,7 +42,11 @@ router.post('/write', checkCookie, upload.single('imgimg'), function (req, res, 
     let destination = "";
     if (req.file) {
         destination = req.file.destination;
+        if(destination){
         filepath = destination + "/" + req.file.filename;
+        }else{
+            filepath = req.file.filename;
+        }
     } else {
         filepath = null;
         destination = null;
