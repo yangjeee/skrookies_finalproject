@@ -11,11 +11,11 @@ const {decryptRequest, encryptResponse, decryptEnc} = require("../../middlewares
 // });
 
 router.get('/', function (req, res, next) {
-    if(req.cookies.Token){
+    if (req.cookies.Token) {
         const cookie = decryptEnc(req.cookies.Token);
         axios({
             method: "post",
-            url: api_url+"/api/User/profile",
+            url: api_url + "/api/User/profile",
             headers: {"authorization": "1 " + cookie}
         }).then((data) => {
             // console.log(data.data);
@@ -30,11 +30,10 @@ router.get('/', function (req, res, next) {
             r.status = resStatus
             r.data = resData
             console.log(r.data);
-            res.render("temp/index", {u_data: r.data.username});    
+            res.render("temp/index", {u_data: r.data.username});
         });
-    }
-    else{
-        res.render("temp/index", );
+    } else {
+        res.render("temp/index",);
     }
     // res.render("temp/index", {in_data: false});
 });

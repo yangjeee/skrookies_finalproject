@@ -1,42 +1,52 @@
 const axios = require("axios");
-var { decryptEnc } = require("../../middlewares/crypt");
+var {decryptEnc} = require("../../middlewares/crypt");
 
-authresult = function(req, callback){
-    const cookie = decryptEnc(req.get("cookie").split("Token=")[1])
+authresult = function (req, callback) {
+    let cookie = "";
+    try {
+        cookie = req.cookies.Token
+    } catch (e) {
+        return res.send("<script>alert('로그인을 해주세요'); location.href = \"/user/login\";</script>");
+    }
     axios({
         method: "get",
-        url: "http://15.152.81.150:3000/api/auth/check",
-        headers: {"authorization": "1 "+ cookie},
-        
-    }).then((data)=>{
+        url: api_url + "/api/auth/check",
+        headers: {"authorization": "1 " + cookie},
+
+    }).then((data) => {
         // console.log(data);
-        if(data.data.status.message == 'Success'){
-        var result = true;
-        }else{
-        var result = false;
+        if (data.data.status.message == 'Success') {
+            var result = true;
+        } else {
+            var result = false;
         }
         callback(result);
     });
 }
 
-admauthresult = function(req, callback){
-    const cookie = decryptEnc(req.get("cookie").split("Token=")[1])
+admauthresult = function (req, callback) {
+    let cookie = "";
+    try {
+        cookie = req.cookies.Token
+    } catch (e) {
+        return res.send("<script>alert('로그인을 해주세요'); location.href = \"/user/login\";</script>");
+    }
     axios({
         method: "get",
-        url: "http://15.152.81.150:3000/api/auth/admcheck",
-        headers: {"authorization": "1 "+ cookie},
-    
-    }).then((data)=>{
-        if(data.data.status.message === 'Success'){
-        var result = true;
-        }else{
-        var result = false;
+        url: api_url + "/api/auth/admcheck",
+        headers: {"authorization": "1 " + cookie},
+
+    }).then((data) => {
+        if (data.data.status.message === 'Success') {
+            var result = true;
+        } else {
+            var result = false;
         }
         callback(result);
     });
 }
 
-module.exports =  {
+module.exports = {
     authresult,
     admauthresult
 }

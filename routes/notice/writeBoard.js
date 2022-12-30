@@ -4,31 +4,39 @@ var seoultime = require('../../middlewares/seoultime');
 var express = require('express');
 var router = express.Router();
 var tokenauth = require('./tokenauth');
+var {encryptResponse, decryptRequest, decryptEnc} = require("../../middlewares/crypt");
+const profile = require('../../middlewares/profile');
+const checkCookie = require("../../middlewares/checkCookie")
 
-router.get('/', function(req, res, next) {
-  tokenauth.admauthresult(req, function(aResult){
-    if(aResult == true){
-  res.render('notice/writeBoard');
-}else{
-  res.render('notice/alert');
-}
+router.get('/', checkCookie, function (req, res, next) {
+    const cookie = req.cookies.Token;
+    profile(cookie).then((data) => {
+        var cookieData = data.data;
+        tokenauth.admauthresult(req, function (aResult) {
+            if (aResult == true) {
+                res.render('temp/notice/writeBoard', {u_data: cookieData.username});
+            } else {
+                res.render('temp/notice/alert');
+            }
+        });
+    });
 });
-});
 
-router.post('/write', function(req, res, next) {
-  console.log(req.body)
-  const {title, contents} = req.body;
- 
-  userId = "test";
-  //will be extracted from token
-
-  db.query(`INSERT INTO boards VALUES (NULL, '${userId}','${title}','${contents}','${seoultime}','${seoultime}')`, function(error,results){
-    if(error){
-      throw error;
-    }
-  res.redirect('../viewBoard');
-  });
-
+router.post('/write', checkCookie, function (req, res, next) {
+    console.log(req.body)
+    const cookie = req.cookies.Token;
+    const {title, contents} = req.body;
+    profile(cookie).then((data) => {
+        var userId = data.data.username;
+        db.query(`INSERT INTO boards
+                  VALUES (NULL, '${userId}', '${title}', '${contents}', '${seoultime}', '${seoultime}
+                          ')`, function (error, results) {
+            if (error) {
+                throw error;
+            }
+            res.redirect('../viewBoard');
+        });
+    });
 });
 
 module.exports = router;

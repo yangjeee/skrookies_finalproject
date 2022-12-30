@@ -3,9 +3,10 @@ var router = express.Router();
 var axios = require("axios");
 var {encryptResponse, decryptRequest, decryptEnc} = require("../../middlewares/crypt");
 const profile = require('../../middlewares/profile');
+const checkCookie = require("../../middlewares/checkCookie")
 
-router.get('/', function (req, res, next) {
-    const cookie = decryptEnc(req.get("cookie").split("Token=")[1])
+router.get('/', checkCookie, function (req, res, next) {
+    const cookie = req.cookies.Token;
 
     profile(cookie).then(pending => {
 
@@ -60,8 +61,8 @@ router.get('/', function (req, res, next) {
 })
 
 
-router.post('/delete', function (req, res, next) {
-    const cookie = decryptEnc(req.get("cookie").split("Token=")[1])
+router.post('/delete', checkCookie, function (req, res, next) {
+    const cookie = req.cookies.Token;
 
     const beneficiary_account_number = req.body.beneficiary_account_number;
     const account_number1 = req.body.account_number;
