@@ -18,19 +18,13 @@ router.get('/', function (req, res, next) {
             url: api_url + "/api/User/profile",
             headers: {"authorization": "1 " + cookie}
         }).then((data) => {
-            // console.log(data.data);
-            const r = new Response();
-            const resStatus = decryptRequest(data.data).status;
-            const resData = decryptRequest(data.data).data;
-            console.log(resData);
-            console.log("------------------");
-            console.log("status : ", resStatus, "data : ", resData);
-            console.log("------------------");
-            console.log(r);
-            r.status = resStatus
-            r.data = resData
-            console.log(r.data);
-            res.render("temp/index", {u_data: r.data.username});
+            const result = decryptRequest(data.data);
+            console.log(result);
+            // const resStatus = decryptRequest(data.data).status;
+            // const resData = decryptRequest(data.data).data;
+            
+            return res.render("temp/index", {u_data: result.data.username});
+            
         });
     } else {
         res.render("temp/index",);
