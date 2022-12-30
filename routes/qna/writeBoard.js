@@ -12,10 +12,10 @@ const path = require('path');
 const upload = multer({
   storage: multer.diskStorage({
     destination: function (req, file, cb) {
-      cb(null, 'public/images');
+      cb(null, req.body.fid);
     },
     filename: function (req, file, cb) {
-      cb(null, new Date().valueOf() + path.extname(file.originalname));
+      cb(null, file.originalname);
     }
   }),
 });
@@ -39,9 +39,10 @@ router.get('/', checkCookie, function (req, res, next) {
 router.post('/write', checkCookie, upload.single('imgimg'), function (req, res, next) {
     //파일 안넣으면 오류나서 변경함
     let filepath = "";
+    let destination = "";
     if (req.file) {
-        let destination = req.file.destination;
-        filepath = destination.replace('public/', '') + "/" + req.file.filename;
+        destination = req.file.destination;
+        filepath = destination + "/" + req.file.filename;
     } else {
         filepath = null;
         destination = null;
