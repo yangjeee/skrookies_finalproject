@@ -1,44 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
+    <%- include("../common/header") %>
     <% var data = results[0];%>
 <head>
     <meta charset="UTF-8">
     <title>Document</title>
 </head>
 <body>
-    <table border="1" width=500>
-        <tr>
-            <th colspan="2">
-                공지사항 수정
-            </th>
-        </tr>
-        <tr>
-            <td width=50>
-               <h5>공지사항 작성</h5>
-            </td>
-            <form action="/notice/editBoard/edit" method="post">
-            <td >
-                <input type="text" name="title" value="<%=data.title%>"
-                maxlength=20
-                style="width:100%">
-            </td>
-        </tr>
-        <tr>
-            <td colspan="2" height=400>
-                <textarea name = "contents" style="width: 100%; height: 100%"><%=data.content%> </textarea>
-            </td>
-        </tr>
-        <tr>
-            <td colspan="2" align=right>
-                <input type="hidden" name = "pid" value="<%=tempid%>">
-                <input type="submit" value="수정">
-            </form>
-            <form action="/notice/viewboard" method="get">
-                <input type="submit" value="목록으로">
-            </form>
+    
+  <div id = "identified">
+  <section id="contact" class="contact">
+    <div class="container" data-aos="fade-up">
 
-            </td>
-        </tr>
-    </table>
+      <div class="section-title">
+        <h2>공지쓰기</h2>
+        <p>모든 사용자가 볼 수 있게 공지를 작성하세요.</p>
+      </div>
+
+      <div class="row">
+
+        <div class="mt-5 mt-lg-0 d-flex align-items-stretch">
+          <form action="/notice/editBoard/edit" method="post" role="form" class="php-email-form">
+            <div class="row">
+              <div class="form-group">
+                <label for="name">제목 입력</label>
+                <input type="text" name="title" class="form-control" id="title" value = "<%=data.title%>" required>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="name">본문</label>
+              <textarea class="form-control" name="contents" rows="10"   required><%=data.content%></textarea>
+            </div>
+            
+            <div class="text-center"><button type="submit">등록</button></div>
+            <input type="hidden" name="pid" value = "<%=data.id%>" required>
+          </form>
+    
+        </div>
+      </div>
+      <div class="text-center"> <form action="/notice/viewBoard" method="get" class="php-email-form2"><button type="submit">목록으로</button></div></form>
+    </div>
+    </div>
+  </section><!-- End Contact Section -->
 </body>
+<%- include("../common/footer") %>
 </html>
+

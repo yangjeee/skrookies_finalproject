@@ -1,42 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
+    <%- include("../common/header") %>
     <% var data = results[0];%>
 <head>
     <meta charset="UTF-8">
-    <title>Document</title>
 </head>
 <body>
-    <table border="1" width=500>
-        <tr>
-            <th colspan="2">
-                글 가져오기
-            </th>
-        </tr>
-        <tr>
-            <td width=50>
-               <h5>제목</h5>
-            </td>
-          
-            <td >
-                <h3><%=data.title%></h3>
-            </td>
-        </tr>
-        <tr>
-            <td colspan="2" height=400>
-                <p>
-                    <%=data.content%>
-                </p>
-            </td>
-        </tr>
-        <tr>
-            <td colspan="2" align=right>
-               <button type = "button" onclick = "location.href='/notice/deleteBoard?id=<%=data.id%>';">삭제</button>
-               <button type = "button" onclick = "location.href='/notice/editBoard?id=<%=data.id%>';">편집</button>
-                <form action="/notice/viewboard" method="get">
-                <input type="submit" value="목록으로">
-                </form>
-            </td>
-        </tr>
-    </table>
+  <div id = "identified">
+<section id="about" class="about">
+  <div class="container" data-aos="fade-up">
+
+    <div class="section-title">
+      <h2><%=data.title%></h2>
+    </div>
+
+    <div class="row content">
+      <div class="col-lg-6">
+        <p>
+          글 정보
+        </p>
+        <ul>
+          <li><i class="ri-check-double-line"></i>글번호: <%=data.id%> </li>
+          <li><i class="ri-check-double-line"></i>작성일: <%=data.createdAt%></li>
+          <li><i class="ri-check-double-line"></i>수정일: <%=data.updatedAt%></li>
+        </ul>
+      </div>
+      <div class="col-lg-6 pt-4 pt-lg-20">
+        <p>
+          내용: <%=data.content%>
+        </p>
+        <div class="col-lg-6 pt-4 pt-lg-20">
+        <a href="/notice/editBoard?id=<%=data.id%>" class="btn-learn-more">수정하기</a>
+        <a href="/notice/deleteBoard?id=<%=data.id%>" class="btn-learn-more">삭제하기</a>
+      </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+</section><!-- End About Us Section -->
 </body>
+<%- include("../common/footer") %>
 </html>
+
