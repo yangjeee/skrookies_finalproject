@@ -24,6 +24,15 @@
   padding: 40px 0;
 }
 
+#liborder{
+  padding:5px;
+    text-transform: uppercase;
+    display:inline;
+    list-style-type:none;
+    list-style-position: inside;
+    border-right: 1px solid red;
+}
+
 #identified {
   position : relative;
   top: 30px;

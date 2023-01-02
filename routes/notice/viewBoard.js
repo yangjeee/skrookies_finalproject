@@ -19,7 +19,6 @@ router.get('/', checkCookie, function (req, res, next) {
                     if (error) {
                         throw error;
                     }
-                    console.log(results);
                     res.render('temp/notice/viewboard', {u_data: cookieData.username, results: results});
                 });
             } else {
