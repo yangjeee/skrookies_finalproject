@@ -6,7 +6,7 @@ var {encryptResponse, decryptRequest, decryptEnc} = require("../../middlewares/c
 const profile = require('../../middlewares/profile');
 const checkCookie = require("../../middlewares/checkCookie")
 
-router.get('/', checkCookie, function (req, res, next) {
+router.post('/', checkCookie, function (req, res, next) {
     const cookie = req.cookies.Token;
     profile(cookie).then((data) => {
         var cookieData = data.data;
@@ -16,7 +16,7 @@ router.get('/', checkCookie, function (req, res, next) {
 
                 var userid = cookieData.username;
                 db.query(`SELECT *
-                          FROM qna Where userId = '${userid}'`, function (error, results) {
+                          FROM qna Where userId = '${userid}' AND title='${req.body.searchTitle}' `, function (error, results) {
                     if (error) {
                         throw error;
                     }
