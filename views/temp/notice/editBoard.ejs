@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
-    <%- include("../common/header") %>
-    <% var data = results[0];%>
+   
 <head>
     <meta charset="UTF-8">
     <title>Document</title>
 </head>
 <body>
-    
+  <%- include("../common/header") %>
+  <main class="Site-content">
+  <% var data = results[0];%>
   <div id = "identified">
   <section id="contact" class="contact">
     <div class="container" data-aos="fade-up">
@@ -42,7 +43,8 @@
     </div>
     </div>
   </section><!-- End Contact Section -->
+  </main>
+  <%- include("../common/footer") %>
 </body>
-<%- include("../common/footer") %>
 </html>
 
