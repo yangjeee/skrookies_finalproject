@@ -13,23 +13,40 @@ const checkCookie = require("../../middlewares/checkCookie");
 router.get("/", checkCookie, function (req, res, next) {
   const cookie = req.cookies.Token;
   profile(cookie).then((data) => {
+    console.log(data.data.is_admin);
     var cookieData = data.data;
     tokenauth.authresult(req, function (aResult) {
       if (aResult == true) {
-        var userid = cookieData.username;
-        db.query(
-          `SELECT *
-                          FROM qna Where userId = '${userid}'`,
-          function (error, results) {
-            if (error) {
-              throw error;
+        if (data.data.is_admin) {
+          db.query(
+            `SELECT *
+                          FROM qna`,
+            function (error, results) {
+              if (error) {
+                throw error;
+              }
+              res.render("temp/qna/viewboard", {
+                results: results,
+                u_data: cookieData.username,
+              });
             }
-            res.render("temp/qna/viewboard", {
-              results: results,
-              u_data: cookieData.username,
-            });
-          }
-        );
+          );
+        } else {
+          var userid = cookieData.username;
+          db.query(
+            `SELECT *
+                          FROM qna Where userId = '${userid}'`,
+            function (error, results) {
+              if (error) {
+                throw error;
+              }
+              res.render("temp/qna/viewboard", {
+                results: results,
+                u_data: cookieData.username,
+              });
+            }
+          );
+        }
       } else {
         res.render("temp/qna/alert");
       }
