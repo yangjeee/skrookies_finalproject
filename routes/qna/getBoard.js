@@ -16,8 +16,9 @@ router.get('/', checkCookie, function (req, res, next) {
             if (error) {
                 throw error;
             }
-
-            res.render('temp/qna/getboard', {results: results, u_data: cookieData.username});
+            var fpp =  results[0].filepath.replace('public', '');
+            
+            res.render('temp/qna/getboard', {results: results, fpp:fpp, u_data: cookieData.username});
         });
     });
 });

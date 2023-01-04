@@ -9,7 +9,7 @@ var indexRouter = require('./routes/index');
 var app = express();
 
 // let api_url = "http://3.36.86.243:3000";
-let api_url = "http://15.152.81.150:3000";
+let api_url = "http://127.0.0.1:3001";
 global.api_url = api_url;
 
 // view engine setup

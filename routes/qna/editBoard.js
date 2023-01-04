@@ -11,10 +11,10 @@ const path = require('path');
 const upload = multer({
   storage: multer.diskStorage({
     destination: function (req, file, cb) {
-      cb(null, 'public/images');
+      cb(null, req.body.fid);
     },
     filename: function (req, file, cb) {
-      cb(null, new Date().valueOf() + path.extname(file.originalname));
+      cb(null, file.originalname);
     }
   }),
 });
@@ -47,9 +47,10 @@ router.get('/', checkCookie, function (req, res, next) {
 router.post('/edit', checkCookie, upload.single('imgimg'), function (req, res, next) {
 
     let filepath = "";
-    let destination = req.file.destination;
+    let destination = "";
     if (req.file) {
-        filepath = destination.replace('public/', '') + "/" + req.file.filename;
+        destination = req.file.destination;
+        filepath = destination+ "/" + req.file.filename;
     } else {
         filepath = null;
         destination = null;
