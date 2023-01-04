@@ -7,9 +7,9 @@ var mysql = require('mysql2');
 //   dateStrings: "date",
 // });
 var db = mysql.createConnection({
-  host : "15.152.81.150",
-  user:'majun',
-  password:'111111',
+  host : "127.0.0.1",
+  user:'root',
+  password:'1234',
   database:'dvba',
   dateStrings: "date",
 });
