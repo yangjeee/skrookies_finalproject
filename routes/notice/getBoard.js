@@ -10,21 +10,15 @@ router.get('/', checkCookie, function (req, res, next) {
     const cookie = req.cookies.Token;
     profile(cookie).then((data) => {
         var cookieData = data.data;
-
-        tokenauth.authresult(req, function (aResult) {
-            if (aResult == true) {
-                db.query(`SELECT *
-                          FROM boards
-                          WHERE id = ${req.query.id}`, function (error, results) {
-                    if (error) {
-                        throw error;
-                    }
-
-                    res.render('temp/notice/getboard', {u_data: cookieData.username, results: results});
-                });
-            } else {
-                res.render('temp/notice/alert');
+        db.query(`SELECT *
+                  FROM notice
+                  WHERE id = '${req.query.id}'`, function (error, results) {
+            if (error) {
+                throw error;
             }
+            var fpp =  results[0].filepath.replace('public', '');
+            
+            res.render('temp/notice/getboard', {results: results, fpp:fpp, u_data: cookieData.username});
         });
     });
 });

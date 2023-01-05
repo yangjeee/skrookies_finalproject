@@ -1,15 +1,19 @@
 <!DOCTYPE html>
 <html>
+   
+    <%- include("../common/header") %>
+
 <body>
-   <%- include("../common/header") %>     
-    
-  <section id="faq" class="faq section-bg">
    <div id = "identified">
+    <div postion = "absolute" top = "50px">
+    <title>Notice Board</title>
+    <main id="main">      
+  <section id="faq" class="faq section-bg">
     <div class="container" data-aos="fade-up">
 
       <div class="section-title">
-        <h2>Questions and Answers</h2>
-        <p>설명과 함께 질문을 등록하시면 답변을 등록해드립니다!</p>
+        <h2>QnA</h2>
+        <p>QnA가 등록됩니다</p>
       </div>
 
       <div class="faq-list">
@@ -22,15 +26,11 @@
   %>
     
           <li data-aos="fade-up" data-aos-delay="100">
-            <i class="bx bx-help-circle icon-help"></i> <a data-bs-toggle="collapse" class="collapse" data-bs-target="#faq-list-1"><a href="/qna/getBoard?id=<%=data.id%>"><%=data.title%></a><i class="bx bx-chevron-down icon-show"></i></a>
+            <i class="bx bx-message-detail icon-msg"></i> <a data-bs-toggle="collapse" class="collapse" data-bs-target="#faq-list-1"><a href="/qna/getBoard?id=<%=data.id%>"><%=data.title%></a><i class="bx bx-chevron-down icon-show"></i></a>
             <div id="faq-list-1" class="collapse show" data-bs-parent=".faq-list">
               <p><b>
       글번호:</b>
                <%=data.id%>
-              </p>
-       <p><b>
-       아이디:</b>
-               <%=data.userId%>
               </p>
        <p><b>
        최종수정시간:</b>
@@ -38,19 +38,18 @@
               </p>
             </div>
           </li>
-
-  <%}%>   
+          <%}%>   
+          
         </ul>
-        <a href="/qna/writeBoard" id ="forsubmit">글쓰기</a>  
-        <form action="/qna/searchBoard" method="post" role="form" class="php-email-form">
-          <input type="text" name="searchTitle" class="form-control" placeholder ="제목을 검색하세요" required="">
-        </form>
+        <a href="/qna/writeBoard" id ="forsubmit">글쓰기</a>
       </div>
-     
     </div>
- 
-  </section>
-   </div>
+    
+  </section><!-- End Frequently Asked Questions Section -->
+      </main><!-- End #main -->
+
 </body>
+</div>
+</div>
 <%- include("../common/footer") %>
 </html>

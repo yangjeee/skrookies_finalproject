@@ -13,6 +13,10 @@
   flex: 1;
 }
 
+#marginup{
+  margin-top: 30px;
+}
+
 #goright {
   position: relative;
   text-align: right;

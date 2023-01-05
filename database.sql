@@ -28,12 +28,13 @@ create table beneficiaries
     approved                   boolean default false NOT NULL
 ) engine = innodb;
 
-create table boards
+create table notice
 (
     id        int not null auto_increment,
     userId    varchar(30),
     title     VARCHAR(255),
     content   VARCHAR(255),
+    filepath   VARCHAR(255),
     createdAt DATETIME,
     updatedAt DATETIME,
     PRIMARY KEY (id)
@@ -45,7 +46,6 @@ create table qna
     userId    varchar(30),
     title     VARCHAR(255),
     content   VARCHAR(255),
-    filepath   VARCHAR(255),
     createdAt DATETIME,
     updatedAt DATETIME,
     PRIMARY KEY (id)

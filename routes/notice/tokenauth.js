@@ -10,11 +10,10 @@ authresult = function (req, callback) {
     }
     axios({
         method: "get",
-        url: api_url + "/api/auth/check",
-        headers: {"authorization": "1 " + cookie},
-
+        url: api_url + "/api/Auth/check",
+        headers: {"authorization": cookie},
     }).then((data) => {
-        // console.log(data);
+        console.log(data);
         if (data.data.status.message == 'Success') {
             var result = true;
         } else {
@@ -33,11 +32,11 @@ admauthresult = function (req, callback) {
     }
     axios({
         method: "get",
-        url: api_url + "/api/auth/admcheck",
-        headers: {"authorization": "1 " + cookie},
+        url: api_url + "/api/Auth/admcheck",
+        headers: {"authorization": cookie},
 
     }).then((data) => {
-        if (data.data.status.message === 'Success') {
+        if (data.data.status.message == 'Success') {
             var result = true;
         } else {
             var result = false;
@@ -50,3 +49,4 @@ module.exports = {
     authresult,
     admauthresult
 }
+

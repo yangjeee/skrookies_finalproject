@@ -5,23 +5,35 @@ var router = express.Router();
 var tokenauth = require('./tokenauth');
 var {encryptResponse, decryptRequest, decryptEnc} = require("../../middlewares/crypt");
 const profile = require('../../middlewares/profile');
+const multer = require('multer')
 const checkCookie = require("../../middlewares/checkCookie")
+const path = require('path');
+const upload = multer({
+  storage: multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, req.body.fid);
+    },
+    filename: function (req, file, cb) {
+      cb(null, file.originalname);
+    }
+  }),
+});
 
-router.get('/', checkCookie, function (req, res, next) {
-    const cookie = req.cookies.Token;
+router.get('/', function (req, res, next) {
+    const cookie = decryptEnc(req.cookies.Token);
     profile(cookie).then((data) => {
         var cookieData = data.data;
         tokenauth.admauthresult(req, function (aResult) {
             if (aResult == true) {
                 db.query(`SELECT *
-                          FROM boards
+                          FROM notice
                           where id = ${req.query.id}`, function (error, results) {
                     if (error) {
                         throw error;
                     }
                     res.render('temp/notice/editBoard', {
-                        u_data: cookieData.username,
                         results: results,
+                        u_data: cookieData.username,
                         tempid: req.query.id
                     });
                 });
@@ -29,16 +41,26 @@ router.get('/', checkCookie, function (req, res, next) {
                 res.render('temp/notice/alert');
             }
         });
-    })
+    });
 });
 
-router.post('/edit', checkCookie, function (req, res, next) {
-    const {title, contents, pid} = req.body;
-    //will be extracted from token
+router.post('/edit', checkCookie, upload.single('imgimg'), function (req, res, next) {
 
-    db.query(`UPDATE boards
+    let filepath = "";
+    let destination = "";
+    if (req.file) {
+        destination = req.file.destination;
+        filepath = destination+ "/" + req.file.filename;
+    } else {
+        filepath = null;
+        destination = null;
+    }
+    const {title, contents, pid} = req.body;
+
+    db.query(`UPDATE notice
               SET title     = '${title}',
                   content   = '${contents}',
+                  filepath  = '${filepath}',
                   updatedAt = '${seoultime}'
               WHERE id = ${pid}`, function (error, results) {
         if (error) {

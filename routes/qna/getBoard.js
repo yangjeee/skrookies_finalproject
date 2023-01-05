@@ -6,19 +6,25 @@ var {encryptResponse, decryptRequest, decryptEnc} = require("../../middlewares/c
 const profile = require('../../middlewares/profile');
 const checkCookie = require("../../middlewares/checkCookie")
 
-router.get('/', checkCookie, function (req, res, next) {
-    const cookie = req.cookies.Token;
+router.get('/', function (req, res, next) {
+    var cookie = decryptEnc(req.cookies.Token);
     profile(cookie).then((data) => {
         var cookieData = data.data;
-        db.query(`SELECT *
-                  FROM qna
-                  WHERE id = '${req.query.id}'`, function (error, results) {
-            if (error) {
-                throw error;
+
+        tokenauth.authresult(req, function (aResult) {
+            if (aResult == true) {
+                db.query(`SELECT *
+                          FROM qna
+                          WHERE id = ${req.query.id}`, function (error, results) {
+                    if (error) {
+                        throw error;
+                    }
+
+                    res.render('temp/qna/getboard', {u_data: cookieData.username, results: results});
+                });
+            } else {
+                res.render('temp/qna/alert');
             }
-            var fpp =  results[0].filepath.replace('public', '');
-            
-            res.render('temp/qna/getboard', {results: results, fpp:fpp, u_data: cookieData.username});
         });
     });
 });

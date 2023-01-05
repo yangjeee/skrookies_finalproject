@@ -10,8 +10,8 @@ var {
 const profile = require("../../middlewares/profile");
 const checkCookie = require("../../middlewares/checkCookie");
 
-router.post("/", checkCookie, function (req, res, next) {
-  const cookie = req.cookies.Token;
+router.post("/", function (req, res, next) {
+  var cookie = decryptEnc(req.cookies.Token);
   profile(cookie).then((data) => {
     var cookieData = data.data;
     tokenauth.authresult(req, function (aResult) {
@@ -19,7 +19,7 @@ router.post("/", checkCookie, function (req, res, next) {
         var userid = cookieData.username;
         db.query(
           `SELECT *
-                          FROM qna Where userId = '${userid}' AND title LIKE '%${req.body.searchTitle}%'`,
+                          FROM qna Where title LIKE '%${req.body.searchTitle}%'`,
           function (error, results) {
             if (error) {
               throw error;

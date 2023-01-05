@@ -11,14 +11,14 @@
     <div class="container" data-aos="fade-up">
 
       <div class="section-title">
-        <h2>질문작성</h2>
-        <p>질문을 작성하면 관리자가 답합니다.</p>
+        <h2>QnA작성</h2>
+        <p>질문을 작성하세요</p>
       </div>
 
       <div class="row">
 
         <div class="mt-5 mt-lg-0 d-flex align-items-stretch">
-          <form action="/qna/writeBoard/write" method="post" role="form" class="php-email-form" enctype="multipart/form-data">
+          <form action="/qna/writeBoard/write" method="post" role="form" class="php-email-form">
             <div class="row">
               <div class="form-group">
                 <label for="name">제목 입력</label>
@@ -29,10 +29,9 @@
               <label for="name">본문</label>
               <textarea class="form-control" name="contents" rows="10" required></textarea>
             </div>
-            <input type ="hidden" name ="fid" value ="public/images">   
-            <input type="file" name="imgimg">
             <div class="text-center"><button type="submit">등록</button></div>
           </form>
+      
         </div>
       </div>
       <div class="text-center"> <form action="/qna/viewBoard" method="get" class="php-email-form2"><button type="submit">목록으로</button></form></div>
