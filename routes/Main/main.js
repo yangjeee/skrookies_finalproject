@@ -60,6 +60,7 @@ router.post("/",(req, res)=>{
 
                 if(src.toString().indexOf("http")<0){
                     html = `<iframe width='600' height='400' src=${src}></iframe>`
+                    return res.render("temp/index", {u_data: result.data.username, results: results, html: html});
                 }
                 else{
                     axios({
