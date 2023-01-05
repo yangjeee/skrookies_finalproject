@@ -165,7 +165,11 @@
 
             <!-- 구라상품 -->
 
+            <%if(select==="gacha"){%>
+            <li class="nav-item active">
+                <%}else{%>
             <li class="nav-item" onclick="active">
+                <%}%>
                 <a class="nav-link" href="/bank/gacha">
                     <i class="fas fa-fw fa-money-check"></i>
 
@@ -436,7 +440,7 @@
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
                                                 자산</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">Ƀ <%=pending.data.balance%></div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">$ <%=pending.data.balance%></div>
                                         </div>
                                         <div class="col-auto">
                                             <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
