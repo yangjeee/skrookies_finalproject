@@ -7,7 +7,7 @@ const checkCookie = require("../../middlewares/checkCookie")
 var db = require('../../middlewares/db');
 var tokenauth = require('../qna/tokenauth');
 
-router.get('/', checkCookie, function (req, res, next) {
+router.get('/', function (req, res, next) {
     const cookie = req.cookies.Token;
     profile(cookie).then((data) => {
         var cookieData = data.data;

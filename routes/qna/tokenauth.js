@@ -7,6 +7,7 @@ authresult = function (req, callback) {
     } catch (e) {
         return res.send("<script>alert('로그인을 해주세요'); location.href = \"/user/login\";</script>");
     }
+
     axios({
         method: "get",
         url: api_url + "/api/Auth/check",

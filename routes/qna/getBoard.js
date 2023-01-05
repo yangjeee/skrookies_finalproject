@@ -19,8 +19,7 @@ router.get('/', function (req, res, next) {
                     if (error) {
                         throw error;
                     }
-
-                    res.render('temp/qna/getboard', {u_data: cookieData.username, results: results});
+                    res.render('temp/qna/getboard', {results: results, u_data: cookieData.username});
                 });
             } else {
                 res.render('temp/qna/alert');
