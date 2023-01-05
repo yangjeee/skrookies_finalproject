@@ -25,9 +25,6 @@ router.get('/', function (req, res, next) {
             } else {
                 res.render('temp/qna/alert');
             }
-            var fpp =  results[0].filepath.replace('public', '');
-            const fileinfo = fpp.split("/").slice(1)
-            res.render('temp/qna/getboard', {results: results, fpp:fpp, u_data: cookieData.username, fileinfo: fileinfo});
         });
     });
 });
