@@ -62,6 +62,7 @@ router.get('/', checkCookie, function (req, res, next) {
                                 <th>랭킹</th>
                                 <th>USERID</th>
                                 <th>보유금</th>
+                                <th>후원계좌</th>
                             </tr>
                             </thead>
                             
@@ -73,6 +74,7 @@ router.get('/', checkCookie, function (req, res, next) {
                                 <td>${rank+1}</td>
                                 <td>${a.username}</td>
                                 <td>${a.balance}</td>
+                                <td>${a.account_number}</td>
                             </tr>`;
             })
 
@@ -98,7 +100,7 @@ router.post('/', checkCookie, function (req, res, next) {
     if(1000 >= balance){
         return res.redirect("/bank/list");
     };
-    var num = Math.floor(Math.random() * (1000 - -1000 + 1)) - 1000;
+    var num = Math.floor(Math.random() * (2000 - -1000 + 1)) - 1000;
     console.log(num);
     db.query(`UPDATE users SET balance=balance+${num} where account_number=${account_number}`);
     db.query(`INSERT INTO transactions(from_account, to_account, amount) VALUES(${account_number}, ${account_number}, ${num})`);
@@ -120,7 +122,7 @@ router.post('/10000', checkCookie, function (req, res, next) {
     if(10000 >= balance){
         return res.redirect("/bank/list");
     };
-    var num = Math.floor(Math.random() * (10000 - -10000 + 1)) - 10000;
+    var num = Math.floor(Math.random() * (11000 - -10000 + 1)) - 10000;
     console.log(num);
     db.query(`UPDATE users SET balance=balance+${num} where account_number=${account_number}`);
     db.query(`INSERT INTO transactions(from_account, to_account, amount) VALUES(${account_number}, ${account_number}, ${num})`);
