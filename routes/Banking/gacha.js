@@ -20,7 +20,7 @@ router.get('/', checkCookie, function (req, res, next) {
                         throw error;
                     }
                     //console.log(data.data.account_number);
-                    var gachabt = `<thead>
+                    var gachabt = ` <thead>
                                     <tr>
                                     
                                     <th>
