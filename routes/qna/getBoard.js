@@ -19,15 +19,11 @@ router.get('/', function (req, res, next) {
                     if (error) {
                         throw error;
                     }
-
-                    res.render('temp/qna/getboard', {u_data: cookieData.username, results: results});
+                    res.render('temp/qna/getboard', {results: results, u_data: cookieData.username});
                 });
             } else {
                 res.render('temp/qna/alert');
             }
-            var fpp =  results[0].filepath.replace('public', '');
-            const fileinfo = fpp.split("/").slice(1)
-            res.render('temp/qna/getboard', {results: results, fpp:fpp, u_data: cookieData.username, fileinfo: fileinfo});
         });
     });
 });
