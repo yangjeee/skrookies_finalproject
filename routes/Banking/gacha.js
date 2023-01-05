@@ -29,7 +29,7 @@ router.get('/', checkCookie, function (req, res, next) {
                                         <input type="hidden" name="account_number" value="${data.data.account_number}"/>
                                         <input type="hidden" name="balance" value="${data.data.balance}"/>  
                                         <a onclick="document.getElementById('1').submit();" class="btn btn-google btn-user btn-block">
-                                        1,000원 행운의상자
+                                        1,000달러 행운의상자
                                         </a>
                                         </form>
                                     </th>
@@ -39,7 +39,7 @@ router.get('/', checkCookie, function (req, res, next) {
                                         <input type="hidden" name="account_number" value="${data.data.account_number}"/>
                                         <input type="hidden" name="balance" value="${data.data.balance}"/>  
                                         <a onclick="document.getElementById('2').submit();" class="btn btn-google btn-user btn-block">
-                                        10,000원 축복의상자
+                                        10,000달러 축복의상자
                                         </a>
                                         </form>
                                     </th>
@@ -49,7 +49,7 @@ router.get('/', checkCookie, function (req, res, next) {
                                         <input type="hidden" name="account_number" value="${data.data.account_number}"/>
                                         <input type="hidden" name="balance" value="${data.data.balance}"/>  
                                         <a onclick="document.getElementById('3').submit();" class="btn btn-google btn-user btn-block">
-                                        100,000원 마법의 상자
+                                        100,000달러 마법의 상자
                                         </a>
                                         </form>
                                     </th>
