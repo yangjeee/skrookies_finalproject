@@ -16,22 +16,21 @@ router.post("/", function (req, res, next) {
     var cookieData = data.data;
     tokenauth.authresult(req, function (aResult) {
       if (aResult == true) {
-        var userid = cookieData.username;
         db.query(
           `SELECT *
-                          FROM qna Where title LIKE '%${req.body.searchTitle}%'`,
+                          FROM notice Where title LIKE '%${req.body.searchTitle}%'`,
           function (error, results) {
             if (error) {
               throw error;
             }
-            res.render("temp/qna/viewboard", {
+            res.render("temp/notice/viewboard", {
               results: results,
               u_data: cookieData.username,
             });
           }
         );
       } else {
-        res.render("temp/qna/alert");
+        res.render("temp/notice/alert");
       }
     });
   });

@@ -13,6 +13,11 @@
   flex: 1;
 }
 
+#buttongrid {
+  display: grid;
+  grid-template-columns: 95% 5%;
+}
+
 #marginup{
   margin-top: 30px;
 }
