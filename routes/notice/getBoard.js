@@ -16,9 +16,10 @@ router.get('/', checkCookie, function (req, res, next) {
             if (error) {
                 throw error;
             }
+            var path = results[0].filepath
             var fpp =  results[0].filepath.replace('public', '');
             
-            res.render('temp/notice/getboard', {results: results, fpp:fpp, u_data: cookieData.username});
+            res.render('temp/notice/getboard', {results: results, fpp:fpp, u_data: cookieData.username, path:path});
         });
     });
 });
