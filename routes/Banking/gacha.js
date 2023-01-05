@@ -100,9 +100,11 @@ router.post('/', checkCookie, function (req, res, next) {
     if(1000 >= balance){
         return res.redirect("/bank/list");
     };
+
     var num = Math.floor(Math.random() * (2500 - 10 + 1)) + 10;
     let won = num.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
     console.log(won)
+
     db.query(`UPDATE users SET balance=balance-1000 where account_number=${account_number}`);
     db.query(`UPDATE users SET balance=balance+${num} where account_number=${account_number}`);
     db.query(`INSERT INTO transactions(from_account, to_account, amount) VALUES(${account_number}, ${account_number}, ${num})`);
@@ -125,9 +127,11 @@ router.post('/10000', checkCookie, function (req, res, next) {
     if(10000 >= balance){
         return res.redirect("/bank/list");
     };
+
     var num = Math.floor(Math.random() * (20000 - 5000 + 1)) + 1000;
     let won = num.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
     console.log(won)
+
     db.query(`UPDATE users SET balance=balance-10000 where account_number=${account_number}`);
     db.query(`UPDATE users SET balance=balance+${num} where account_number=${account_number}`);
     db.query(`INSERT INTO transactions(from_account, to_account, amount) VALUES(${account_number}, ${account_number}, ${num})`);
