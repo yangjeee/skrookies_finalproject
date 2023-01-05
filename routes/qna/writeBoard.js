@@ -51,7 +51,7 @@ router.post('/write', checkCookie, upload.single('imgimg'), function (req, res, 
         filepath = null;
         destination = null;
     }
-   
+    console.log(filepath)
     const {title, contents} = req.body;
 
     const cookie = req.cookies.Token;

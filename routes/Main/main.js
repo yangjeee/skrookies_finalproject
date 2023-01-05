@@ -29,7 +29,7 @@ router.get('/', function (req, res, next) {
             }).then((data) => {
                 const result = decryptRequest(data.data);
 
-                return res.render("temp/index", {u_data: result.data.username, results: results});
+                return res.render("temp/index", {u_data: result.data.username, results: results,html: "<h1>get start를 눌러주세요</h1>"});
             });
         } else {
             res.render("temp/index", {results: results, html: "<h1>get start를 눌러주세요</h1>"});
