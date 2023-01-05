@@ -7,6 +7,7 @@ var tokenauth = require('./tokenauth');
 var {encryptResponse, decryptRequest, decryptEnc} = require("../../middlewares/crypt");
 const profile = require('../../middlewares/profile');
 const checkCookie = require("../../middlewares/checkCookie")
+const {json} = require("express");
 
 router.get('/', checkCookie, function (req, res, next) {
     const cookie = req.cookies.Token;
@@ -23,6 +24,7 @@ router.get('/', checkCookie, function (req, res, next) {
 });
 
 router.post('/write', checkCookie, function (req, res, next) {
+    console.log(req.get("title"))
     const cookie = req.cookies.Token;
     const {title, contents} = req.body;
     profile(cookie).then((data) => {

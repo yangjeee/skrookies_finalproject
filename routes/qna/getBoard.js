@@ -17,8 +17,8 @@ router.get('/', checkCookie, function (req, res, next) {
                 throw error;
             }
             var fpp =  results[0].filepath.replace('public', '');
-            
-            res.render('temp/qna/getboard', {results: results, fpp:fpp, u_data: cookieData.username});
+            const fileinfo = fpp.split("/").slice(1)
+            res.render('temp/qna/getboard', {results: results, fpp:fpp, u_data: cookieData.username, fileinfo: fileinfo});
         });
     });
 });
