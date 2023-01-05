@@ -9,7 +9,7 @@ var tokenauth = require('../qna/tokenauth');
 
 router.get('/', function (req, res, next) {
     const cookie = req.cookies.Token;
-    profile(cookie).then((data) => {
+    profile(decryptEnc(cookie)).then((data) => {
         var cookieData = data.data;
         tokenauth.authresult(req, function (aResult) {
 

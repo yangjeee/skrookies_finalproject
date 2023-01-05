@@ -15,7 +15,7 @@ const upload = multer({
     },
     filename: function (req, file, cb) {
       cb(null, file.originalname);
-    }
+    },
   }),
 });
 
@@ -44,13 +44,16 @@ router.get('/', function (req, res, next) {
     });
 });
 
-router.post('/edit', checkCookie, upload.single('imgimg'), function (req, res, next) {
-
+router.post('/edit', checkCookie, upload.single("imgimg"), function (req, res, next) {
     let filepath = "";
     let destination = "";
     if (req.file) {
         destination = req.file.destination;
-        filepath = destination+ "/" + req.file.filename;
+        if (destination) {
+            filepath = destination + "/" + req.file.filename;
+        } else {
+            filepath = req.file.filename;
+        }
     } else {
         filepath = null;
         destination = null;
