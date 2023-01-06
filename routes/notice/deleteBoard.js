@@ -5,11 +5,12 @@ var tokenauth = require('./tokenauth');
 var {encryptResponse, decryptRequest, decryptEnc} = require("../../middlewares/crypt");
 const profile = require('../../middlewares/profile');
 const fs = require('fs');
+const checkCookie = require("../../middlewares/checkCookie")    
 
 router.get('/', function (req, res, next) {
+    if(req.cookies.Token){
     tokenauth.admauthresult(req, function (aResult) {
         if (aResult == true) {
-
             db.query(`SELECT filepath
             FROM notice
             WHERE id = ${req.query.id}`, function (error, results) {
@@ -29,11 +30,11 @@ router.get('/', function (req, res, next) {
                 res.redirect('viewBoard');
             });
         });
-
         } else {
             res.render('temp/notice/alert');
         }
     });
+}else{ res.render('temp/notice/alert');}
 });
 
 module.exports = router;
