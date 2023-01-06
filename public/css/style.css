@@ -8,7 +8,6 @@
 /*--------------------------------------------------------------
 # General
 --------------------------------------------------------------*/
-
 .Site-content {
   flex: 1;
 }
@@ -169,6 +168,7 @@ h6 {
   z-index: 997;
   padding: 15px 0;
   background-color: #37517e;
+  border-bottom: #b6effb 2px solid;
 }
 
 #header.header-scrolled,
@@ -436,7 +436,7 @@ h6 {
 --------------------------------------------------------------*/
 #hero {
   width: 100%;
-  height: 80vh;
+  height: 50vh;
   background: #37517e;
 }
 
@@ -568,7 +568,7 @@ h6 {
 section {
   padding-top: 260px 0;
   padding-bottom: 260px 0;
-  padding: 200px 0;
+  padding: 40px 0;
 }
 
 .section-bg {
@@ -1821,7 +1821,7 @@ section {
 }
 
 #footer .footer-top {
-  padding: 60px 0 30px 0;
+  padding: 20px 0 10px 0;
   background: #fff;
 }
 
