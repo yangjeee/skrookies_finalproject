@@ -20,8 +20,8 @@ const upload = multer({
   }),
 });
 
-router.get('/', function (req, res, next) {
-    const cookie = decryptEnc(req.cookies.Token);
+router.get('/', checkCookie, function (req, res, next) {
+    const cookie = req.cookies.Token;
     profile(cookie).then((data) => {
         var cookieData = data.data;
         tokenauth.admauthresult(req, function (aResult) {
