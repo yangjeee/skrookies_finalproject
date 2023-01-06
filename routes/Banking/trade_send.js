@@ -4,12 +4,23 @@ const axios = require("axios");
 const profile = require("../../middlewares/profile")
 const {decryptRequest, encryptResponse, decryptEnc} = require("../../middlewares/crypt")
 const checkCookie = require("../../middlewares/checkCookie")
+const db = require("../../middlewares/db")
 
 router.get("/", checkCookie, async (req, res) => {
     const cookie = req.cookies.Token;
     profile(cookie).then(data => {
+        db.query(`select * from beneficiaries where account_number = ${data.data.account_number}`, function (error, results) {
+            if (error) {
+                throw error;
+            }
+    var html_data = `<input type="text" class="form-control form-control-user" id="drop" name="to_account" placeholder="대상 계좌번호" list="dropdown"> <datalist id="dropdown">`
 
-        res.render("Banking/trade_send", {pending: data, select: "send"});
+            results.forEach(function (a) {
+                html_data += `<option value= ${a.beneficiary_account_number}></option>`;
+            })
+            html_data += `</datalist>`
+        res.render("Banking/trade_send", {pending: data, html: html_data, select: "send"});
+        })
     })
 })
 

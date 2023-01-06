@@ -15,7 +15,7 @@ router.get("/", function (req, res, next) {
                 profile(cookie).then((data) => {
                     var cookieData = data.data;
                     db.query(`SELECT *
-                          FROM notice`, function (error, results) {
+                          FROM notice ORDER BY id DESC`, function (error, results) {
                         if (error) {
                             throw error;
                         }
