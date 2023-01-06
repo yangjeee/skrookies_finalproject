@@ -8,6 +8,20 @@
 /*--------------------------------------------------------------
 # General
 --------------------------------------------------------------*/
+#bgbg{
+  display: block;
+  margin: 0;
+  padding: 10px 0;
+  z-index: 99;
+  background: #fff;
+  box-shadow: 0px 0px 30px rgba(127, 137, 161, 0.25);
+  border-radius: 4px;
+}
+
+.pad{
+  padding : 20px;
+}
+
 
 .Site-content {
   flex: 1;
@@ -16,6 +30,14 @@
 #buttongrid {
   display: grid;
   grid-template-columns: 95% 5%;
+}
+
+#buttonflex {
+  display: flex;
+  flex-direction : row;
+  width: 100vw;
+	height: 5vh;
+  gap : 10px;
 }
 
 #marginup{
@@ -1412,7 +1434,7 @@ section {
 }
 
 /*--------------------------------------------------------------
-# Frequently Asked Questions
+# Fcequently Asked Questions
 --------------------------------------------------------------*/
 .faq .faq-list {
   padding: 0 100px;
