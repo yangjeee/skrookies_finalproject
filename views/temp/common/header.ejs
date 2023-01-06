@@ -48,20 +48,19 @@
 
             <ul>
                 <li><a class="nav-link scrollto active" href="/">Home</a></li>
-                <li><a class="nav-link scrollto" href="/notice/viewBoard">공지사항</a></li>
+                <li><a class="nav-link scrollto" href="/notice/viewBoard">Notice</a></li>
                 <li><a class="nav-link scrollto" href="/qna/viewBoard">QnA</a></li>
                 
                 <!-- <li><a class="nav-link scrollto" href="#team">Team</a></li> -->
 
                 <% if(locals.u_data){ %>
-                    <li><a class="nav-link   scrollto" href="/bank/list">은행기능</a></li>
+                    <li><a class="nav-link   scrollto" href="/bank/list">Banking</a></li>
                     <li class="dropdown"><a href="#"><span><%= u_data %></span> <i class="bi bi-chevron-down"></i></a>
                         <ul>
-                            <li><a href="#">송금 가능 회원 조회</a></li>
-                            <li><a href="#">송금 이력 조회</a></li>
+
                             <li><a href="./user/changePass">비밀번호 변경</a></li>
                             <div class="dropdown-divider"></div>
-                            <li><a href="/user/logout">로그 아웃</a></li>
+                            <li><a href="/user/logout">로그아웃</a></li>
                             <!-- <li><a href="#">Drop Down 4</a></li> -->
                         </ul>
                     </li>
