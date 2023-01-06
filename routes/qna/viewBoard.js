@@ -25,6 +25,7 @@ router.get("/", function (req, res, next) {
 
                         var cookieData = data.data;
                         res.render("temp/qna/viewboard", {
+                            select:"qna",
                             u_data: cookieData.username,
                             results: results,
                         });
@@ -40,6 +41,7 @@ router.get("/", function (req, res, next) {
                         }
                         var cookieData = data.data;
                         res.render("temp/qna/viewboard", {
+                            select:"qna",
                             u_data: cookieData.username,
                             results: results,
                         });

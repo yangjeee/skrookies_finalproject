@@ -23,6 +23,7 @@ router.post("/", function (req, res, next) {
                     throw error;
                 }
                 res.render("temp/notice/viewboard", {
+                    select:"notice",
                     results: results,
                     u_data: cookieData.username
                 });
@@ -37,7 +38,7 @@ router.post("/", function (req, res, next) {
             if (error) {
                 throw error;
             }
-            res.render("temp/notice/viewboard", {results: results});
+            res.render("temp/notice/viewboard", {select:"notice",results: results});
         });
 
     }

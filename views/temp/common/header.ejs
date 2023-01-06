@@ -47,10 +47,28 @@
         <nav id="navbar" class="navbar">
 
             <ul>
-                <li><a class="nav-link scrollto active" href="/">Home</a></li>
-                <li><a class="nav-link scrollto" href="/notice/viewBoard">Notice</a></li>
-                <li><a class="nav-link scrollto" href="/qna/viewBoard">QnA</a></li>
-                
+                <li>
+                <%if(select==="home"){%>
+                    <a class="nav-link scrollto active" href="/">Home</a>
+                <%}else{%>
+                    <a class="nav-link scrollto" onclick="active" href="/">Home</a>
+                <%}%>
+                </li>
+                <li>
+                <%if(select==="notice"){%>
+                        <a class="nav-link scrollto active" href="/notice/viewBoard">Notice</a>
+                <%}else{%>
+                        <a class="nav-link scrollto" onclick="active" href="/notice/viewBoard">Notice</a>
+                <%}%>
+                </li>
+                <li>
+                <%if(select==="qna"){%>
+                        <a class="nav-link scrollto active" href="/qna/viewBoard">QnA</a>
+                <%}else{%>
+                        <a class="nav-link scrollto" onclick="active" href="/qna/viewBoard">QnA</a>
+                <%}%>
+                </li>
+
                 <!-- <li><a class="nav-link scrollto" href="#team">Team</a></li> -->
 
                 <% if(locals.u_data){ %>
@@ -65,7 +83,15 @@
                         </ul>
                     </li>
                 <% } else { %>
-                    <li><a class="getstarted scrollto" href="/user/login">Login</a></li>
+                <li>
+                    <%if(select==="login"){%>
+                        <a class="getstarted scrollto" style="color: #fff;!important;
+  background: #31a9e1;!important;" href="/user/login">Login</a>
+                    <%}else{%>
+                        <a class="getstarted scrollto" href="/user/login">Login</a>
+                    <%}%>
+                </li>
+
                 <% } %>
             </ul>
             <i class="bi bi-list mobile-nav-toggle"></i>

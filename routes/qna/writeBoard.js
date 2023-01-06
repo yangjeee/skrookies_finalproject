@@ -14,7 +14,7 @@ router.get('/', function (req, res, next) {
         var cookieData = data.data;
         tokenauth.authresult(req, function (aResult) {
             if (aResult == true) {
-                res.render('temp/qna/writeBoard', {u_data: cookieData.username});
+                res.render('temp/qna/writeBoard', {select:"qna",u_data: cookieData.username});
             } else {
                 res.render('temp/qna/alert');
             }

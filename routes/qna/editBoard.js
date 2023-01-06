@@ -20,6 +20,7 @@ router.get('/', function (req, res, next) {
                         throw error;
                     }
                     res.render('temp/qna/editBoard', {
+                        select:"qna",
                         u_data: cookieData.username,
                         results: results,
                         tempid: req.query.id

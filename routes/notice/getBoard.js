@@ -20,7 +20,7 @@ router.get('/', function (req, res, next) {
             var path = results[0].filepath
             var fpp =  results[0].filepath.replace('public', '');
             
-            res.render('temp/notice/getboard', {results: results, fpp:fpp, u_data: cookieData.username, path:path});
+            res.render('temp/notice/getboard', {select:"notice",results: results, fpp:fpp, u_data: cookieData.username, path:path});
         });
     });
 }else{
@@ -33,7 +33,7 @@ router.get('/', function (req, res, next) {
             var path = results[0].filepath
             var fpp =  results[0].filepath.replace('public', '');
             
-            res.render('temp/notice/getboard', {results: results, fpp:fpp, path:path});
+            res.render('temp/notice/getboard', {select:"notice",results: results, fpp:fpp, path:path});
         });
 }
 });

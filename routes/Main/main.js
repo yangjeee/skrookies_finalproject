@@ -29,10 +29,10 @@ router.get('/', function (req, res, next) {
             }).then((data) => {
                 const result = decryptRequest(data.data);
 
-                return res.render("temp/index", {u_data: result.data.username, results: results,html: "<h1>get start를 눌러주세요</h1>"});
+                return res.render("temp/index", {select:"home",u_data: result.data.username, results: results,html: "<h1>get start를 눌러주세요</h1>"});
             });
         } else {
-            res.render("temp/index", {results: results, html: "<h1>get start를 눌러주세요</h1>"});
+            res.render("temp/index", {select:"home",results: results, html: "<h1>get start를 눌러주세요</h1>"});
         }
     });
 });
@@ -60,7 +60,7 @@ router.post("/",(req, res)=>{
 
                 if(src.toString().indexOf("http")<0){
                     html = `<iframe width='600' height='400' src=${src}></iframe>`
-                    return res.render("temp/index", {u_data: result.data.username, results: results, html: html});
+                    return res.render("temp/index", {select:"home",u_data: result.data.username, results: results, html: html});
                 }
                 else{
                     axios({
@@ -69,7 +69,7 @@ router.post("/",(req, res)=>{
                     }).then((data)=>{
                         html = data.data
 
-                        return res.render("temp/index", {u_data: result.data.username, results: results, html: html});
+                        return res.render("temp/index", {select:"home",u_data: result.data.username, results: results, html: html});
                     })
                 }
             });
@@ -77,7 +77,7 @@ router.post("/",(req, res)=>{
             console.log("no token")
             if(src.toString().indexOf("http")<0){
                 html = `<iframe width='600' height='400' src=${src}></iframe>`
-                return res.render("temp/index", {results: results, html: html});
+                return res.render("temp/index", {select:"home",results: results, html: html});
             }
             else{
                 console.log("else axios")
@@ -87,7 +87,7 @@ router.post("/",(req, res)=>{
                 }).then((data)=>{
                     html = data.data
                     console.log(html)
-                    return res.render("temp/index", {results: results, html: html});
+                    return res.render("temp/index", {select:"home",results: results, html: html});
                 })
             }
 
