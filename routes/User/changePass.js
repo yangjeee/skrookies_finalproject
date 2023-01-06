@@ -44,6 +44,7 @@ router.post("/", checkCookie, (req, res) => {
         headers: {"authorization": "1 " + cookie},
         data: encryptResponse(req_data)
     }).then((data) => {
+        console.log(data.data)
         resStatus = decryptRequest(data.data).status
         resMessage = decryptRequest(data.data).data.message
         console.log(resStatus, resMessage)
