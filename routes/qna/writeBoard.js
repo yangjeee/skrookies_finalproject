@@ -28,8 +28,7 @@ router.post('/write', function (req, res, next) {
     profile(cookie).then((data) => {
         var userId = data.data.username;
         db.query(`INSERT INTO qna
-                  VALUES (NULL, '${userId}', '${title}', '${contents}', '${seoultime}', '${seoultime}
-                          ')`, function (error, results) {
+                  VALUES (NULL, '${userId}', '${title}', '${contents}', '${seoultime}', '${seoultime}', NULL)`, function (error, results) {
             if (error) {
                 throw error;
             }

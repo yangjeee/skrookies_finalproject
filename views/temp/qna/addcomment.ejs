@@ -17,44 +17,21 @@
     <div class="row content">
       <div class = "pad">
       <div id = "bgbg">
-        <h4>
-          <b>
-          글 정보
-        </b>
-      </h4>
         <ul>
           <li><i class="ri-check-double-line"></i>글번호: <%=data.id%> </li>
           <li><i class="ri-check-double-line"></i>작성일: <%=data.createdAt%></li>
           <li><i class="ri-check-double-line"></i>수정일: <%=data.updatedAt%></li>
+          <li><i class="ri-check-double-line"></i>글내용: <%=data.content%></li>
         </ul>
       </div>
     </div>
-    <div class = "pad">
-      <div id = "bgbg">
-        <div id = "bgbgbg">
-        <b>내용</b>
-      </div>
-        <p>
-          <%-data.content%>
-        </p>
-        <div id = "bgbgbg">
-        <b>답변</b>
-      </div>
-        <p>
-          <%-data.comment%>
-        </p>
-        <div class="col-lg-6 pt-4 pt-lg-20">
-        <div id = "buttonflex">
-        <a href="/qna/editBoard?id=<%=data.id%>" class="btn-learn-more">수정하기</a>
-        <a href="/qna/addComment?id=<%=data.id%>" class="btn-learn-more">댓글추가하기</a>
-        <a href="/qna/deleteBoard?id=<%=data.id%>" class="btn-learn-more">삭제하기</a>
-      </div>
-      </div>
-      </div>
-      </div>
+        <form action="/qna/addComment/edit" method="post" role="form" class="php-email-form">
+        <input type="hidden" name="pid" value = "<%=data.id%>" required>
+        <textarea class="form-control" name="comment" rows="10"   required><%=data.comment%></textarea>
+        <input type= "submit" value = "답변등록">
+        </form> 
     </div>
     
-    </div>
 
   </div>
 </div>

@@ -25,6 +25,7 @@ const upload = multer({
 });
 
 router.get("/", function (req, res, next) {
+    if(req.cookies.Token){
     var cookie = decryptEnc(req.cookies.Token);
     profile(cookie).then((data) => {
         var cookieData = data.data;
@@ -36,6 +37,9 @@ router.get("/", function (req, res, next) {
             }
         });
     });
+}else{
+    res.render("temp/notice/alert");
+}
 });
 
 router.post(

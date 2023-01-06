@@ -14,7 +14,7 @@ const {decryptRequest, encryptResponse, decryptEnc} = require("../../middlewares
 router.get('/', function (req, res, next) {
 
     db.query(`SELECT *
-              FROM notice`, function (error, results) {
+              FROM notice ORDER BY id DESC`, function (error, results) {
 
         if (error) {
             throw error;
@@ -42,7 +42,7 @@ router.post("/",(req, res)=>{
     const src = req.body.src;
     console.log(src)
     db.query(`SELECT *
-              FROM notice`, function (error, results) {
+              FROM notice ORDER BY id DESC`, function (error, results) {
 
         if (error) {
             throw error;

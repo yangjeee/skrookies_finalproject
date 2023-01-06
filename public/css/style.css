@@ -8,6 +8,25 @@
 /*--------------------------------------------------------------
 # General
 --------------------------------------------------------------*/
+#bgbgbg{
+  background: #6bc1e9;
+  width : 200px;
+}
+
+#bgbg{
+  display: block;
+  margin: 0;
+  padding: 10px 0;
+  z-index: 99;
+  background: #fff;
+  box-shadow: 0px 0px 30px rgba(127, 137, 161, 0.25);
+  border-radius: 4px;
+}
+
+.pad{
+  padding : 20px;
+}
+
 
 .Site-content {
   flex: 1;
@@ -22,6 +41,14 @@
   padding: 0px 9%;
   justify-content: space-between;
   
+}
+
+#buttonflex {
+  display: flex;
+  flex-direction : row;
+  width: 100vw;
+	height: 5vh;
+  gap : 10px;
 }
 
 #marginup{
@@ -180,6 +207,7 @@ h6 {
   z-index: 997;
   padding: 15px 0;
   background-color: #37517e;
+  border-bottom: #b6effb 2px solid;
 }
 
 #header.header-scrolled,
@@ -447,7 +475,7 @@ h6 {
 --------------------------------------------------------------*/
 #hero {
   width: 100%;
-  height: 80vh;
+  height: 50vh;
   background: #37517e;
 }
 
@@ -590,7 +618,7 @@ h6 {
 section {
   padding-top: 260px 0;
   padding-bottom: 260px 0;
-  padding: 200px 0;
+  padding: 40px 0;
 }
 
 .section-bg {
@@ -600,6 +628,7 @@ section {
 .section-title {
   text-align: center;
   padding-bottom: 30px;
+  padding-top : 60px;
 }
 
 .section-title h2 {
@@ -1429,7 +1458,7 @@ section {
 }
 
 /*--------------------------------------------------------------
-# Frequently Asked Questions
+# Fcequently Asked Questions
 --------------------------------------------------------------*/
 .faq .faq-list {
   padding: 0 100px;
@@ -1851,7 +1880,7 @@ section {
 }
 
 #footer .footer-top {
-  padding: 60px 0 30px 0;
+  padding: 20px 0 10px 0;
   background: #fff;
 }
 
