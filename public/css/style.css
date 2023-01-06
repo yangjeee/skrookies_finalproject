@@ -38,8 +38,9 @@
   grid-template-rows : 50px;
   column-gap: 20px; */
   height: 50px;
-  padding: 0px 10%;
-  justify-content: space-around;
+  padding: 0px 9%;
+  justify-content: space-between;
+  
 }
 
 #buttonflex {
