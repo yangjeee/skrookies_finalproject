@@ -9,7 +9,7 @@ const sha256 = require("js-sha256")
 /* GET users listing. */
 router.get('/', function (req, res, next) {
     // res.render("temp/login");
-    res.render("temp/login");
+    res.render("temp/login",{select:"login"});
 });
 
 

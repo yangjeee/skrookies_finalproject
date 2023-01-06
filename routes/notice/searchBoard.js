@@ -24,6 +24,7 @@ router.post("/", function (req, res, next) {
               throw error;
             }
             res.render("temp/notice/viewboard", {
+              select:"notice",
               results: results,
               u_data: cookieData.username,
             });

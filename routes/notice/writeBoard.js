@@ -31,7 +31,7 @@ router.get("/", function (req, res, next) {
         var cookieData = data.data;
         tokenauth.admauthresult(req, function (aResult) {
             if (aResult == true) {
-                res.render("temp/notice/writeBoard", {u_data: cookieData.username});
+                res.render("temp/notice/writeBoard", {select:"notice",u_data: cookieData.username});
             } else {
                 res.render("temp/notice/alert");
             }

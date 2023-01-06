@@ -42,6 +42,7 @@ router.get('/', function (req, res, next) {
                             throw error;
                         }
                         res.render('temp/notice/editBoard', {
+                            select:"notice",
                             results: results,
                             u_data: cookieData.username,
                             tempid: req.query.id

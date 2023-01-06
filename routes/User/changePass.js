@@ -24,7 +24,7 @@ router.get("/", (req, res) => {
             r.status = resStatus
             r.data = resData
 
-            res.render("temp/changePass", {u_data: r.data.username});
+            res.render("temp/changePass", {select:"login",u_data: r.data.username});
         });
     }
 })
@@ -52,7 +52,7 @@ router.post("/", checkCookie, (req, res) => {
             return res.send("<script>alert('비밀번호가 변경되었습니다.');location.href = \"/user/login\";</script>");
         } else {
             console.log(resMessage)
-            res.render("temp/changePass", {message: resMessage})
+            res.render("temp/changePass", {select:"login",message: resMessage})
         }
     });
 })
