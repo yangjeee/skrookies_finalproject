@@ -21,7 +21,7 @@
     <section class="inner-page contact">
       <div class="container">
         <div class="col-lg-7 mt-5 mt-lg-0 d-flex justify-content-center" style="margin:0 auto;">
-          <form action="/user/login" method="post" role="form" class="php-email-form">
+          <form role="form" class="php-email-form">
             
             <div class="form-group">
               <label for="name">ID</label>
@@ -36,11 +36,11 @@
               <div class="error-message"></div>
               <div class="sent-message">Your message has been sent. Thank you!</div>
             </div> -->
-            <div style="text-align:center; width:100%; display:inline-block;">
-           <button type="submit">LOGIN</button> &emsp;&emsp;&emsp;
-           <button type="submit" onclick = "location.href = '/user/Signup'">Signup</button>
-          </div>
+            <div style="text-align:center; width:100%; display:inline-block;"> 
+           <button type="submit" formaction="/user/login" formmethod = "post">LOGIN</button> &emsp;&emsp;&emsp;
+           <button type="submit" formaction="/user/signup" formmethod ="get">Signup</button>
           </form>
+          </div>
         </div>
       </div>
     </section>
