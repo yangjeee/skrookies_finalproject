@@ -12,7 +12,7 @@ router.get('/', checkCookie, function (req, res, next) {
         url: req.query.url,
         data: req.query
     }).then((data) => {
-        res.render("Banking/authorization", {html: data.data.data});
+        res.render("Banking/authorization", {html: data.data});
     })
 });
 

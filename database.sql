@@ -48,7 +48,7 @@ create table qna
     content   VARCHAR(255),
     createdAt DATETIME,
     updatedAt DATETIME,
-    comment   VARCHAR(1000)
+    comment   VARCHAR(1000),
     PRIMARY KEY (id)
 ) engine = innodb;
 
