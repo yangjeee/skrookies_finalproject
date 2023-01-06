@@ -20,8 +20,9 @@ const upload = multer({
   }),
 });
 
-router.get('/', checkCookie, function (req, res, next) {
-    const cookie = req.cookies.Token;
+router.get('/', function (req, res, next) {
+    if(req.cookies.Token){
+    var cookie = decryptEnc(req.cookies.Token);
     profile(cookie).then((data) => {
         var cookieData = data.data;
         tokenauth.admauthresult(req, function (aResult) {
@@ -43,6 +44,9 @@ router.get('/', checkCookie, function (req, res, next) {
             }
         });
     });
+}else{
+        res.render('temp/notice/alert');
+    }
 });
 
 router.post('/edit', checkCookie, upload.single("imgimg"), function (req, res, next) {

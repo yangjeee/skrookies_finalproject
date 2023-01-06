@@ -7,7 +7,8 @@ const profile = require('../../middlewares/profile');
 const fs = require('fs');
 const checkCookie = require("../../middlewares/checkCookie")    
 
-router.get('/', checkCookie, function (req, res, next) {
+router.get('/', function (req, res, next) {
+    if(req.cookies.Token){
     tokenauth.admauthresult(req, function (aResult) {
         if (aResult == true) {
             db.query(`SELECT filepath
@@ -33,6 +34,7 @@ router.get('/', checkCookie, function (req, res, next) {
             res.render('temp/notice/alert');
         }
     });
+}else{ res.render('temp/notice/alert');}
 });
 
 module.exports = router;
