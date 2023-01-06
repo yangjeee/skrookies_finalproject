@@ -33,7 +33,7 @@ router.post("/", checkCookie, (req, res) => {
     const {password, new_password} = req.body
     const sha256Pass = sha256(password)
     const sha256Newpass = sha256(new_password)
-    const req_data = `{"password" : ${sha256Pass},"new_password" : ${sha256Newpass}}`
+    const req_data = `{"password" : "${sha256Pass}","new_password" : "${sha256Newpass}"}`
     const cookie = req.cookies.Token;
     let resStatus = ""
     let resMessage = ""
@@ -44,6 +44,7 @@ router.post("/", checkCookie, (req, res) => {
         headers: {"authorization": "1 " + cookie},
         data: encryptResponse(req_data)
     }).then((data) => {
+        console.log(data.data)
         resStatus = decryptRequest(data.data).status
         resMessage = decryptRequest(data.data).data.message
         console.log(resStatus, resMessage)
