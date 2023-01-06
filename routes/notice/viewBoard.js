@@ -10,6 +10,7 @@ var {
 const profile = require("../../middlewares/profile");
 
 router.get("/", function (req, res, next) {
+    if(!req.cookies.Token) return res.render("temp/notice/alert");
     tokenauth.authresult(req, function (aResult) {
         if (aResult == true) {
             const cookie = decryptEnc(req.cookies.Token);
