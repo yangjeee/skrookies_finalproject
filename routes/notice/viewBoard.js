@@ -10,12 +10,9 @@ var {
 const profile = require("../../middlewares/profile");
 
 router.get("/", function (req, res, next) {
-    if(!req.cookies.Token) return res.render("temp/notice/alert");
-    tokenauth.authresult(req, function (aResult) {
-        if (aResult == true) {
+    if(req.cookies.Token){
             const cookie = decryptEnc(req.cookies.Token);
                 profile(cookie).then((data) => {
-                    console.log(data.data.is_admin);
                     var cookieData = data.data;
                     db.query(`SELECT *
                           FROM notice`, function (error, results) {
@@ -28,10 +25,17 @@ router.get("/", function (req, res, next) {
                         });
                     });
                   });
-                } else {
-                    res.render("temp/notice/alert");
-                }}
-        );
+                }else{
+                    db.query(`SELECT *
+                    FROM notice`, function (error, results) {
+                  if (error) {
+                      throw error;
+                  }
+                  res.render("temp/notice/viewboard", {
+                      results: results
+                  });
+              });
+                }
     });
 
 module.exports = router;

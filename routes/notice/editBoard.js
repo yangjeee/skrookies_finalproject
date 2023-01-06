@@ -8,6 +8,7 @@ const profile = require('../../middlewares/profile');
 const multer = require('multer')
 const checkCookie = require("../../middlewares/checkCookie")
 const path = require('path');
+const fs = require('fs');
 const upload = multer({
   storage: multer.diskStorage({
     destination: function (req, file, cb) {
@@ -54,16 +55,32 @@ router.post('/edit', checkCookie, upload.single("imgimg"), function (req, res, n
         } else {
             filepath = req.file.filename;
         }
+        const {title, contents, pid, deletepath} = req.body;
+
+        db.query(`UPDATE notice
+                  SET title     = '${title}',
+                      content   = '${contents}',
+                      filepath  = '${filepath}',
+                      updatedAt = '${seoultime}'
+                  WHERE id = ${pid}`, function (error, results) {
+            if (error) {
+                throw error;
+            }
+            fs.unlink(deletepath, err => {
+                console.log("err : ", err);
+            })
+            res.redirect('../viewBoard');
+        });
+
     } else {
         filepath = null;
         destination = null;
-    }
-    const {title, contents, pid} = req.body;
+
+        const {title, contents, pid, deletepath} = req.body;
 
     db.query(`UPDATE notice
               SET title     = '${title}',
                   content   = '${contents}',
-                  filepath  = '${filepath}',
                   updatedAt = '${seoultime}'
               WHERE id = ${pid}`, function (error, results) {
         if (error) {
@@ -71,7 +88,7 @@ router.post('/edit', checkCookie, upload.single("imgimg"), function (req, res, n
         }
         res.redirect('../viewBoard');
     });
-
+    }
 });
 
 module.exports = router;
