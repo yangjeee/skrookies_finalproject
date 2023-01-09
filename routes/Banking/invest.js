@@ -6,19 +6,47 @@ const profile = require('../../middlewares/profile');
 const checkCookie = require("../../middlewares/checkCookie")
 var db = require('../../middlewares/db');
 var tokenauth = require('../qna/tokenauth');
+const request = require('request');
+
+var vari = "";
+async function api(code){
+    await axios({
+        method:"get",
+        url : `https://api.finance.naver.com/service/itemSummary.nhn?itemcode=${code}`
+    }).then((data) => {
+        console.log("데이타데이타",data.data);
+        vari = data.data;
+        return data;
+    })
+}
+
+// var code1 = api("034730");
+// api("034730");
+// console.log("되나?",vari);
+
 
 router.get('/', function (req, res, next) {
     const cookie = req.cookies.Token;
+    var code1 = api("034730").then(data => {
+        console.log("김도균",data.data);
+    });
+api("034730");
+console.log("되나?",code1);
+
     profile(decryptEnc(cookie)).then((data) => {
         var cookieData = data.data;
         tokenauth.authresult(req, function (aResult) {
 
             if (aResult == true) {
+
+                               //여기까지
+
                 db.query(`SELECT *
                           FROM users ORDER BY balance DESC LIMIT 10`, function (error, results) {
                     if (error) {
                         throw error;
                     }
+                    
                     //console.log(data.data.account_number);
                     var gachabt = ` <thead>
                                     <tr>
@@ -88,89 +116,5 @@ router.get('/', function (req, res, next) {
         });
     });
 });
-
-
-router.post('/', checkCookie, function (req, res, next) {
-    var gacha = req.body.gacha;
-    var account_number = req.body.account_number;
-    var balance = req.body.balance;
-    console.log(req.body.gacha);
-    console.log(req.body.account_number);
-    console.log(req.body.balance);
-    if(1000 >= balance){
-        return res.redirect("/bank/list");
-    };
-
-    var num = Math.floor(Math.random() * (2500 - 10 + 1)) + 10;
-    let won = num.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
-    console.log(won)
-
-    db.query(`UPDATE users SET balance=balance-1000 where account_number=${account_number}`);
-    db.query(`UPDATE users SET balance=balance+${num} where account_number=${account_number}`);
-    db.query(`INSERT INTO transactions(from_account, to_account, amount) VALUES(${account_number}, "1,000원 상자", -1000)`);
-    db.query(`INSERT INTO transactions(from_account, to_account, amount) VALUES(${account_number}, "1,000원 상자 결과", ${num})`);
-
-    res.writeHead(200, {'Content-Type': 'text/html;charset=UTF-8'});
-    res.write(`<script>alert(${num}+" 달러를 획득하였습니다.")</script>`);
-    res.write("<script>window.location=\"/bank/gacha\"</script>");
-    
-    //    return res.redirect("/bank/gacha");
-    
-});
-
-router.post('/10000', checkCookie, function (req, res, next) {
-    var gacha = req.body.gacha;
-    var account_number = req.body.account_number;
-    var balance = req.body.balance;
-    console.log(req.body.gacha);
-    console.log(req.body.account_number);
-    console.log(req.body.balance);
-    if(10000 >= balance){
-        return res.redirect("/bank/list");
-    };
-
-    var num = Math.floor(Math.random() * (20000 - 5000 + 1)) + 1000;
-    let won = num.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
-    console.log(won)
-
-    db.query(`UPDATE users SET balance=balance-10000 where account_number=${account_number}`);
-    db.query(`UPDATE users SET balance=balance+${num} where account_number=${account_number}`);
-    db.query(`INSERT INTO transactions(from_account, to_account, amount) VALUES(${account_number}, "10,000원 상자", -1000)`);
-    db.query(`INSERT INTO transactions(from_account, to_account, amount) VALUES(${account_number}, "10,000원 상자 결과", ${num})`);
-
-    res.writeHead(200, {'Content-Type': 'text/html;charset=UTF-8'});
-    res.write(`<script>alert(${num}+" 달러를 획득하였습니다.")</script>`);
-    res.write("<script>window.location=\"/bank/gacha\"</script>");
-    
-    //    return res.redirect("/bank/gacha");
-    
-});
-
-router.post('/100000', checkCookie, function (req, res, next) {
-    var gacha = req.body.gacha;
-    var account_number = req.body.account_number;
-    var balance = req.body.balance;
-    console.log(req.body.gacha);
-    console.log(req.body.account_number);
-    console.log(req.body.balance);
-    if(100000 >= balance){
-        return res.redirect("/bank/list");
-    };
-    var num = Math.floor(Math.random() * (450000 - 0 + 1)) + 0;
-    let won = num.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
-    console.log(won)
-    db.query(`UPDATE users SET balance=balance-100000 where account_number=${account_number}`);
-    db.query(`UPDATE users SET balance=balance+${num} where account_number=${account_number}`);
-    db.query(`INSERT INTO transactions(from_account, to_account, amount) VALUES(${account_number}, "100,000원 상자", -1000)`);
-    db.query(`INSERT INTO transactions(from_account, to_account, amount) VALUES(${account_number}, "100,000원 상자 결과", ${num})`);
-    res.writeHead(200, {'Content-Type': 'text/html;charset=UTF-8'});
-    res.write(`<script>alert(${num}+" 달러를 획득하였습니다.")</script>`);
-    res.write("<script>window.location=\"/bank/gacha\"</script>");
-    
-    //    return res.redirect("/bank/gacha");
-    
-});
-
-
 
 module.exports = router;
