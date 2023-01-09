@@ -8,6 +8,7 @@ var user_register = require("./user_register");
 var admin = require("./admin")
 var gacha = require("./gacha")
 var authorization = require("./authorization")
+var invest = require("./invest")
 
 router.use(express.static('public'));
 router.use("/admin", admin)
@@ -17,6 +18,6 @@ router.use("/list", list);
 router.use("/send", send);
 router.use("/gacha", gacha);
 router.use("/authorization", authorization);
-
+router.use("/invest", invest);
 
 module.exports = router;
