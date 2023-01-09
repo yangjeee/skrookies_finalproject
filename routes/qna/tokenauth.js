@@ -14,7 +14,6 @@ authresult = function (req, callback) {
         headers: {"authorization": cookie},
 
     }).then((data) => {
-        console.log(data);
         if (data.data.status.message == 'Success') {
             var result = true;
         } else {

@@ -6,49 +6,35 @@ const profile = require('../../middlewares/profile');
 const checkCookie = require("../../middlewares/checkCookie")
 var db = require('../../middlewares/db');
 var tokenauth = require('../qna/tokenauth');
-const request = require('request');
 
 var vari = "";
-async function api(code){
-    await axios({
-        method:"get",
-        url : `https://api.finance.naver.com/service/itemSummary.nhn?itemcode=${code}`
-    }).then((data) => {
-        console.log("데이타데이타",data.data);
-        vari = data.data;
-        return data;
-    })
-}
 
-// var code1 = api("034730");
-// api("034730");
-// console.log("되나?",vari);
+async function api(code) {
+    let vari = ""
+    await axios({
+        method: "get",
+        url: `https://api.finance.naver.com/service/itemSummary.nhn?itemcode=${code}`
+    }).then((data) => {
+        vari = data.data;
+    })
+    return vari
+}
 
 
 router.get('/', function (req, res, next) {
     const cookie = req.cookies.Token;
-    var code1 = api("034730").then(data => {
-        console.log("김도균",data.data);
-    });
-api("034730");
-console.log("되나?",code1);
+    const investList = ["034730", "105560", "005930"].map(code => {
+        return {id : code,value : api(code)};
+    })
+    //now = 현재가격
+
 
     profile(decryptEnc(cookie)).then((data) => {
         var cookieData = data.data;
         tokenauth.authresult(req, function (aResult) {
 
             if (aResult == true) {
-
-                               //여기까지
-
-                db.query(`SELECT *
-                          FROM users ORDER BY balance DESC LIMIT 10`, function (error, results) {
-                    if (error) {
-                        throw error;
-                    }
-                    
-                    //console.log(data.data.account_number);
-                    var gachabt = ` <thead>
+                var gachabt = ` <thead>
                                     <tr>
                                     
                                     <th>
@@ -85,31 +71,60 @@ console.log("되나?",code1);
                                     </tr>
                                     </thead>  `
 
-                    var html_data = `<thead>
+                var html_data = `<thead>
                                 <tr>
-                                <th>랭킹</th>
-                                <th>USERID</th>
-                                <th>보유금</th>
-                                <th>후원계좌</th>
+                                <th>종목</th>
+                                <th>현재가격</th>
+                                <th>구매개수</th>
+                                <th>구매</th>
                             </tr>
                             </thead>
                             
                             <tbody>
                             `;
-
-            results.forEach(function (a,rank) {
-                html_data += `<tr>
-                                <td>${rank+1}</td>
-                                <td>${a.username}</td>
-                                <td>${a.balance}</td>
-                                <td>${a.account_number}</td>
+                investList.forEach((x, index)=>{
+                    let name = ""
+                    switch (x.id.toString()) {
+                        case "034730" : name="SK"
+                            break
+                        case "105560" : name = "EggMoney"
+                            break
+                        case "005930" : name = "SamSung"
+                            break
+                    }
+                    x.value.then(value => {
+                        // 034730 sk 105560 kb 005930 삼성
+                        html_data += `<tr>
+                                <td>${name}</td>
+                                <td>${value.now}</td>
+                                <form method="post" action="/bank/invest/invest">
+                                <td>
+                                <input type="number" min="1" value="1" id="Buycount"/>
+                                </td>
+                                <td>
+                                <input type="hidden" id="userId" value="${data.data.username}"/>
+                                <input type="hidden" id="investId" value="${x.id}"/>
+                                <input type="hidden" id="curPrice" value="${value.now}"/>
+                                <button type="submit">구매</button>
+                                </form>
+                                </td>
                             </tr>`;
-            })
+                        if(index === investList.length-1){
+                            html_data += `</tbody>`;
+                            setTimeout(function () {
+                                res.render('Banking/gacha', {
+                                    // results: results,
+                                    u_data: cookieData.username,
+                                    pending: data,
+                                    select: "gacha",
+                                    html: html_data,
+                                    gachabt: gachabt
+                                });
 
-            html_data += `</tbody>`;
-
-                    res.render('Banking/gacha', {results: results, u_data: cookieData.username, pending: data, select: "gacha", html: html_data, gachabt: gachabt});
-                });
+                            }, 20)
+                        }
+                    })
+                })
             } else {
                 res.render('temp/qna/alert');
             }
