@@ -107,7 +107,8 @@ router.post('/', checkCookie, function (req, res, next) {
 
     db.query(`UPDATE users SET balance=balance-1000 where account_number=${account_number}`);
     db.query(`UPDATE users SET balance=balance+${num} where account_number=${account_number}`);
-    db.query(`INSERT INTO transactions(from_account, to_account, amount) VALUES(${account_number}, ${account_number}, ${num})`);
+    db.query(`INSERT INTO transactions(from_account, to_account, amount) VALUES(${account_number}, "1,000원 상자", -1000)`);
+    db.query(`INSERT INTO transactions(from_account, to_account, amount) VALUES(${account_number}, "1,000원 상자 결과", ${num})`);
 
     res.writeHead(200, {'Content-Type': 'text/html;charset=UTF-8'});
     res.write(`<script>alert(${num}+" 달러를 획득하였습니다.")</script>`);
@@ -134,7 +135,8 @@ router.post('/10000', checkCookie, function (req, res, next) {
 
     db.query(`UPDATE users SET balance=balance-10000 where account_number=${account_number}`);
     db.query(`UPDATE users SET balance=balance+${num} where account_number=${account_number}`);
-    db.query(`INSERT INTO transactions(from_account, to_account, amount) VALUES(${account_number}, ${account_number}, ${num})`);
+    db.query(`INSERT INTO transactions(from_account, to_account, amount) VALUES(${account_number}, "10,000원 상자", -1000)`);
+    db.query(`INSERT INTO transactions(from_account, to_account, amount) VALUES(${account_number}, "10,000원 상자 결과", ${num})`);
 
     res.writeHead(200, {'Content-Type': 'text/html;charset=UTF-8'});
     res.write(`<script>alert(${num}+" 달러를 획득하였습니다.")</script>`);
@@ -159,8 +161,8 @@ router.post('/100000', checkCookie, function (req, res, next) {
     console.log(won)
     db.query(`UPDATE users SET balance=balance-100000 where account_number=${account_number}`);
     db.query(`UPDATE users SET balance=balance+${num} where account_number=${account_number}`);
-    db.query(`INSERT INTO transactions(from_account, to_account, amount) VALUES(${account_number}, ${account_number}, ${num})`);
-
+    db.query(`INSERT INTO transactions(from_account, to_account, amount) VALUES(${account_number}, "100,000원 상자", -1000)`);
+    db.query(`INSERT INTO transactions(from_account, to_account, amount) VALUES(${account_number}, "100,000원 상자 결과", ${num})`);
     res.writeHead(200, {'Content-Type': 'text/html;charset=UTF-8'});
     res.write(`<script>alert(${num}+" 달러를 획득하였습니다.")</script>`);
     res.write("<script>window.location=\"/bank/gacha\"</script>");
