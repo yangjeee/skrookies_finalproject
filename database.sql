@@ -54,11 +54,12 @@ create table qna
 
 create table invest
 (
+    id       int not null auto_increment,
     userId   varchar(30),
     investId varchar(30),
     curPrice int(10),
-    buyCount BIGINT
-
+    buyCount BIGINT,
+    PRIMARY KEY (id)
 ) engine = innodb;
 
 INSERT INTO `users`
