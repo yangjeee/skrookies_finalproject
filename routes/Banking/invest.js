@@ -100,6 +100,8 @@ router.get('/', function (req, res, next) {
                                 <tr>
                                 <th>종목</th>
                                 <th>산가격</th>
+                                <th>현재가격</th>
+                                <th>변동률(김동률)</th>
                                 <th>보유개수</th>
                                 <th>판매</th>
                             </tr>
@@ -116,6 +118,8 @@ router.get('/', function (req, res, next) {
                                             html_data2 += `<tr>
                                     <td>${naming(list.investId)}</td>
                                     <td>${list.curPrice}</td>
+                                    <td>${priceList[list.investId]}</td>
+                                    <td>${priceList[list.investId]/list.curPrice*100-100}%</td>
                                     <td>${list.buyCount}</td>
                                     <td>
                                     <form method="post" action="/bank/invest/sell">
