@@ -62,5 +62,11 @@ create table invest
     PRIMARY KEY (id)
 ) engine = innodb;
 
+create table margin
+(
+    userId   varchar(30),
+    margin   BIGINT default 0
+) engine = innodb;
+
 INSERT INTO `users`
 values (default, "admin", "8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918", 999999, default, true);
