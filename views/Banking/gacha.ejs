@@ -1,44 +1,71 @@
 <%- include("common/header") %>
+<script src="http://code.jquery.com/jquery-latest.js">
+  $('#getResult').click( function() {
+                 $('#result').html('');
+                 $.ajax({
+                     url:`https://api.finance.naver.com/service/itemSummary.nhn?itemcode=${code}`,
+                     dataType:'json',
+                     type:'POST',
+                     data:{'msg':$('#msg').val()},
+                     success:function(result){
+                         if(result['result']==true){
+                           $('#result').html(result['msg']);
+                         }
+                     }
+                 });
+             })
+</script>
+<div class="card shadow mb-4">
+  <div class="card-header py-3">
+    <h6 class="m-0 font-weight-bold text-primary">가챠</h6>
+  </div>
+  <div class="card-body">
+    <div class="table-responsive">
+      <table
+        class="table table-bordered"
+        id="dataTable"
+        width="100%"
+        cellspacing="0"
+      >
+        <%- gachabt %>
+      </table>
+    </div>
+  </div>
+</div>
 
 <div class="card shadow mb-4">
-    <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary">가챠</h6>
+  <div class="card-header py-3">
+    <h6 class="m-0 font-weight-bold text-primary">자본랭킹</h6>
+  </div>
+  <div class="card-body">
+    <div class="table-responsive">
+      <table
+        class="table table-bordered"
+        id="dataTable"
+        width="100%"
+        cellspacing="0"
+      >
+        <%- html %>
+      </table>
     </div>
-    <div class="card-body">
-        <div class="table-responsive">
-            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                <%- gachabt %>
-            </table>
-        </div>
-    </div>
-</div>
-
-<div class="card shadow mb-4">
-                        <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">자본랭킹</h6>
-                        </div>
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                    
-                                    <%- html %>
-</table>
-</div>
-</div>
+  </div>
 </div>
 <%if(locals.html2){%>
 <div class="card shadow mb-4">
-    <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary">구매내역</h6>
+  <div class="card-header py-3">
+    <h6 class="m-0 font-weight-bold text-primary">구매내역</h6>
+  </div>
+  <div class="card-body">
+    <div class="table-responsive">
+      <table
+        class="table table-bordered"
+        id="dataTable"
+        width="100%"
+        cellspacing="0"
+      >
+        <%- html2 %>
+      </table>
     </div>
-    <div class="card-body">
-        <div class="table-responsive">
-            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-
-                <%- html2 %>
-            </table>
-        </div>
-    </div>
+  </div>
 </div>
-<%}%>
-<%- include("common/footer") %>
+<%}%> <%- include("common/footer") %>

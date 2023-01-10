@@ -1,17 +1,18 @@
-var express = require('express');
+var express = require("express");
 var router = express.Router();
 //
 var list = require("./trade_list");
 var send = require("./trade_send");
 var friend_list = require("./friend_list");
 var user_register = require("./user_register");
-var admin = require("./admin")
-var gacha = require("./gacha")
-var authorization = require("./authorization")
-var invest = require("./invest")
+var admin = require("./admin");
+var gacha = require("./gacha");
+var authorization = require("./authorization");
+var invest = require("./invest");
+var bitcoin = require("./bitcoin");
 
-router.use(express.static('public'));
-router.use("/admin", admin)
+router.use(express.static("public"));
+router.use("/admin", admin);
 router.use("/user_register", user_register);
 router.use("/friend_list", friend_list);
 router.use("/list", list);
@@ -19,5 +20,6 @@ router.use("/send", send);
 router.use("/gacha", gacha);
 router.use("/authorization", authorization);
 router.use("/invest", invest);
+router.use("/bitcoin", bitcoin);
 
 module.exports = router;

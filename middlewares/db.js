@@ -1,4 +1,4 @@
-var mysql = require('mysql2');
+var mysql = require("mysql2");
 // var db = mysql.createConnection({
 //   host:'mysql.c0vdjgovqm2u.ap-northeast-2.rds.amazonaws.com',
 //   user:'eggmoney',
@@ -7,10 +7,10 @@ var mysql = require('mysql2');
 //   dateStrings: "date",
 // });
 var db = mysql.createConnection({
-  host : "127.0.0.1",
-  user:'root',
-  password:'1234',
-  database:'dvba',
+  host: "127.0.0.1",
+  user: "root",
+  password: "1111",
+  database: "dvba",
   dateStrings: "date",
 });
 module.exports = db;
