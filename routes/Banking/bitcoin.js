@@ -149,7 +149,7 @@ router.get("/", async function (req, res, next) {
                                     <td>${priceList[list.investId]/list.curPrice*100-100}%</td>
                                     <td>${list.buyCount}</td>
                                     <td>
-                                    <form method="post" action="/bank/invest/sell">
+                                    <form method="post" action="/bank/bitcoin/sell">
                                     <input type="hidden" value="${
                                       list.buyCount
                                     }" name="Sellcount"/>
@@ -223,7 +223,7 @@ router.post("/sell", checkCookie, function (req, res, next) {
   ); //주식가격만큼 돈 상승
   res.writeHead(200, { "Content-Type": "text/html;charset=UTF-8" });
   res.write("<script>alert('주식 판매 완료')</script>");
-  res.write("<script>window.location='/bank/invest'</script>");
+  res.write("<script>window.location='/bank/bitcoin'</script>");
 });
 
 module.exports = router;
