@@ -603,9 +603,10 @@ h6 {
   padding-left: 20px;
   padding-top: 40px;
   color: #b6effb;
-  height: 200px;
-  width: 200px;
-  word-break: break-all;
+  height: 150px;
+  width: 350px;
+  word-break: keep-all;
+  font-size: 35px;
 }
 
 @media (max-width: 768px) {
@@ -619,7 +620,7 @@ h6 {
     margin-bottom: 30px;
   }
   #hero .hero-img img {
-    width: 70%;
+    width: 60%;
   }
 }
 
