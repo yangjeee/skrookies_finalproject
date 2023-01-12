@@ -10,7 +10,7 @@ create table users
     account_number integer UNIQUE,
     balance        integer default 10000 NOT NULL,
     is_admin       boolean default false,
-    email          varchar(255)  
+    email          varchar(255)          NOT NULL
 ) engine = innodb;
 
 create table transactions
@@ -71,4 +71,6 @@ create table margin
 ) engine = innodb;
 
 INSERT INTO `users`
-values (default, "admin", "8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918", 999999, default, true, "admin@admin.com");
+
+values (default, "admin", "8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918", 999999, default, true, 'admin@admin');
+
