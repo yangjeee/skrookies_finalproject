@@ -13,6 +13,7 @@
     "express": "~4.16.1",
     "fs": "^0.0.1-security",
     "http-errors": "~1.6.3",
+    "image-to-base64": "^2.2.0",
     "js-sha256": "^0.9.0",
     "moment": "^2.29.4",
     "moment-timezone": "^0.5.40",
