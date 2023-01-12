@@ -28,8 +28,7 @@ router.get('/', checkCookie, function (req, res, next) {
             html_data += "</table>";
             return res.render("Banking/friend", {html: html_data, pending: pending});
         }).catch(function (error) {
-            var html_data = "<tr>아싸시군요</tr>";
-            return res.render("Banking/friend", {html: html_data});
+            return res.render("Banking/friend");
         });
 
     })

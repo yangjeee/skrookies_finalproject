@@ -6,5 +6,6 @@ moment.tz.setDefault("Asia/Seoul");
 // console.log(moment().format('YYYY-MM-DD HH:mm:ss');
 
 var seoultime = moment(Date.now()).format('YYYY-MM-DD HH:mm:ss');
+var simpletime = moment(Date.now()).format('YYYY-MM-DD');
 
-module.exports = seoultime;
+module.exports = {seoultime, simpletime};

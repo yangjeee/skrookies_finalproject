@@ -382,6 +382,9 @@ h6 {
   .mobile-nav-toggle {
     display: block;
   }
+  .myUl{
+    display: flex!important;
+  }
   .navbar ul {
     display: none;
   }
@@ -475,12 +478,16 @@ h6 {
 --------------------------------------------------------------*/
 #hero {
   width: 100%;
-  height: 50vh;
+  height: 70%;
   background: #37517e;
 }
 
 #hero .container {
   padding-top: 72px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  flex : 1 1 50%;
 }
 
 #hero h1 {
@@ -495,6 +502,10 @@ h6 {
   color: rgba(255, 255, 255, 0.6);
   margin-bottom: 50px;
   font-size: 24px;
+}
+
+#hero nav{
+
 }
 
 #hero .btn-get-started {
@@ -554,19 +565,48 @@ h6 {
 
 @media (max-width: 991px) {
   #hero {
-    height: 100vh;
-    text-align: center;
+    height: 70%;
+    text-align: justify;
+    justify-content: space-evenly;
   }
   #hero .animated {
     -webkit-animation: none;
     animation: none;
   }
   #hero .hero-img {
-    text-align: center;
+    text-align: left;
   }
   #hero .hero-img img {
-    width: 50%;
+    width: 450px !important;
   }
+  #hero .container{
+    margin-right: 10px;
+    margin-left: 10px;
+    display: flex;
+    justify-content: space-around;
+  }
+}
+
+#hero .hero-img img {
+  width: 631px;
+  height: 279px;
+}
+
+.row{
+  width: 70%;
+}
+
+.text{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-left: 20px;
+  padding-top: 40px;
+  color: #b6effb;
+  height: 150px;
+  width: 350px;
+  word-break: keep-all;
+  font-size: 35px;
 }
 
 @media (max-width: 768px) {
@@ -580,7 +620,7 @@ h6 {
     margin-bottom: 30px;
   }
   #hero .hero-img img {
-    width: 70%;
+    width: 60%;
   }
 }
 
@@ -2007,4 +2047,14 @@ section {
   #footer .credits {
     padding-top: 4px;
   }
+}
+
+.d-flex{
+  justify-content: space-around;
+}
+
+.column{
+  display: grid;
+  grid-auto-columns: auto;
+
 }

@@ -1,5 +1,5 @@
 var db = require("../../middlewares/db");
-var seoultime = require("../../middlewares/seoultime");
+var {seoultime} = require("../../middlewares/seoultime");
 var express = require("express");
 var router = express.Router();
 var tokenauth = require("./tokenauth");

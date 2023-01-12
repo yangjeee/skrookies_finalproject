@@ -10,6 +10,7 @@ var gacha = require("./gacha");
 var authorization = require("./authorization");
 var invest = require("./invest");
 var bitcoin = require("./bitcoin");
+var search = require("./search");
 
 router.use(express.static("public"));
 router.use("/admin", admin);
@@ -21,5 +22,5 @@ router.use("/gacha", gacha);
 router.use("/authorization", authorization);
 router.use("/invest", invest);
 router.use("/bitcoin", bitcoin);
-
+router.use("/search", search);
 module.exports = router;
