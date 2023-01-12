@@ -3,6 +3,7 @@ var router = express.Router();
 var axios = require("axios");
 var {encryptResponse, decryptRequest, decryptEnc} = require("../../middlewares/crypt");
 const checkCookie = require("../../middlewares/checkCookie")
+var seoultime = require("../../middlewares/seoultime");
 /* GET users listing. */
 router.get('/', checkCookie, function (req, res, next) {
     res.render("Balance/transfer");

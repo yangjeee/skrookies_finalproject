@@ -5,7 +5,7 @@ const profile = require("../../middlewares/profile")
 const {decryptRequest, encryptResponse, decryptEnc} = require("../../middlewares/crypt")
 const checkCookie = require("../../middlewares/checkCookie")
 const db = require("../../middlewares/db")
-var seoultime = require("../../middlewares/seoultime");
+var {seoultime, simpletime} = require('../../middlewares/seoultime');
 
 router.get("/", checkCookie, async (req, res) => {
     const cookie = req.cookies.Token;
@@ -33,8 +33,8 @@ router.post('/', checkCookie, function (req, res, next) {
     json_data['to_account'] = parseInt(req.body.to_account);   //데이터가 숫자로 들어가야 동작함
     json_data['amount'] = parseInt(req.body.amount);
 
-    json_data['time'] =parseInt(seoultime);
-    
+    json_data['sendtime'] = seoultime;
+
     const en_data = encryptResponse(JSON.stringify(json_data));// 객체를 문자열로 반환 후 암호화
     console.log(en_data)
     // console.log("endata : ",enData)
