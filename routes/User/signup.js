@@ -11,9 +11,9 @@ router.get('/', function (req, res, next) {
 });
 
 router.post('/', function (req, res, next) {
-    const {username, password} = req.body;
+    const {username, password, email} = req.body;
     const sha256Pass = sha256(password)
-    baseData = `{"username": "${username}", "password": "${sha256Pass}"}`
+    baseData = `{"username": "${username}", "password": "${sha256Pass}", "email": "${email}"}`
     console.log("basedata : ", baseData)
     const enData = encryptResponse(baseData);
 
