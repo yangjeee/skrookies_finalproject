@@ -99,7 +99,7 @@ router.post('/', checkCookie, function (req, res, next) {
     console.log(req.body.balance);
     if(1000 >= balance){
         return res.redirect("/bank/list");
-    };
+    }
 
     var num = Math.floor(Math.random() * (2500 - 10 + 1)) + 10;
     let won = num.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
@@ -127,7 +127,7 @@ router.post('/10000', checkCookie, function (req, res, next) {
     console.log(req.body.balance);
     if(10000 >= balance){
         return res.redirect("/bank/list");
-    };
+    }
 
     var num = Math.floor(Math.random() * (20000 - 5000 + 1)) + 1000;
     let won = num.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
@@ -155,7 +155,7 @@ router.post('/100000', checkCookie, function (req, res, next) {
     console.log(req.body.balance);
     if(100000 >= balance){
         return res.redirect("/bank/list");
-    };
+    }
     var num = Math.floor(Math.random() * (450000 - 0 + 1)) + 0;
     let won = num.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
     console.log(won)

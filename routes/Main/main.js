@@ -5,6 +5,8 @@ var db = require('../../middlewares/db');
 const axios = require("axios");
 const Response = require("../../middlewares/Response");
 const {decryptRequest, encryptResponse, decryptEnc} = require("../../middlewares/crypt");
+const imageToBase64 = require("image-to-base64");
+const profile = require("../../middlewares/profile")
 
 /* GET users listing. */
 // router.get('/', function(req, res, next) {
@@ -28,11 +30,24 @@ router.get('/', function (req, res, next) {
                 headers: {"authorization": "1 " + cookie}
             }).then((data) => {
                 const result = decryptRequest(data.data);
-
-                return res.render("temp/index", {select:"home",u_data: result.data.username, results: results,html: "<h1>get start를 눌러주세요</h1>"});
+                imageToBase64("http://127.0.0.1:3001/img/info.png").then(response =>{
+                    html = `<img src="data:image/png;base64,${response}"/>`
+                    return res.render("temp/index", {select:"home", select2:"info", u_data: result.data.username, results: results, html: html})
+                }).catch(error =>{
+                    html = `<div>${error}</div>`
+                    return res.render("temp/index", {select:"home", select2:"info", u_data: result.data.username, results: results, html: html})
+                })
+                // return res.render("temp/index", {select:"home", select2:"info", u_data: result.data.username, results: results,html: "<h1></h1>"});
             });
         } else {
-            res.render("temp/index", {select:"home",results: results, html: "<h1>get start를 눌러주세요</h1>"});
+            imageToBase64("http://127.0.0.1:3001/img/info.png").then(response =>{
+                html = `<img src="data:image/png;base64,${response}"/>`
+                return res.render("temp/index", {select:"home", select2:"info", results: results, html: html})
+            }).catch(error =>{
+                html = `<div>${error}</div>`
+                return res.render("temp/index", {select:"home", select2:"info", results: results, html: html})
+            })
+            // res.render("temp/index", {select:"home", select2:"info", results: results, html: "<h1>get start를 눌러주세요</h1>"});
         }
     });
 });
@@ -40,7 +55,9 @@ router.get('/', function (req, res, next) {
 router.post("/",(req, res)=>{
     let html = ""
     const src = req.body.src;
-    console.log(src)
+    const select2 = req.body.select2
+    console.log("2 : ",select2)
+
     db.query(`SELECT *
               FROM notice ORDER BY id DESC`, function (error, results) {
 
@@ -51,46 +68,26 @@ router.post("/",(req, res)=>{
         if (req.cookies.Token) {
             console.log("token")
             const cookie = decryptEnc(req.cookies.Token);
-            axios({
-                method: "post",
-                url: api_url + "/api/User/profile",
-                headers: {"authorization": "1 " + cookie}
-            }).then((data) => {
-                const result = decryptRequest(data.data);
+            profile(cookie).then((data)=>{
+                const u_data = data.data.username
 
-                if(src.toString().indexOf("http")<0){
-                    html = `<iframe width='600' height='400' src=${src}></iframe>`
-                    return res.render("temp/index", {select:"home",u_data: result.data.username, results: results, html: html});
-                }
-                else{
-                    axios({
-                        method: "get",
-                        url: src
-                    }).then((data)=>{
-                        html = data.data
-
-                        return res.render("temp/index", {select:"home",u_data: result.data.username, results: results, html: html});
-                    })
-                }
-            });
+                imageToBase64(src).then(response =>{
+                    html = `<img src="data:image/png;base64,${response}"/>`
+                    return res.render("temp/index", {select:"home", select2:`${select2}`, u_data: u_data, results: results, html: html})
+                }).catch(error =>{
+                    html = `<div>${error}</div>`
+                    return res.render("temp/index", {select:"home", select2:`${select2}`, u_data: u_data, results: results, html: html})
+                })
+            })
         } else {
             console.log("no token")
-            if(src.toString().indexOf("http")<0){
-                html = `<iframe width='600' height='400' src=${src}></iframe>`
-                return res.render("temp/index", {select:"home",results: results, html: html});
-            }
-            else{
-                console.log("else axios")
-                axios({
-                    method: "get",
-                    url: src
-                }).then((data)=>{
-                    html = data.data
-                    console.log(html)
-                    return res.render("temp/index", {select:"home",results: results, html: html});
-                })
-            }
-
+            imageToBase64(src).then(response =>{
+                html = `<img src="data:image/png;base64,${response}"/>`
+                return res.render("temp/index", {select:"home", select2:`${select2}`, results: results, html: html})
+            }).catch(error =>{
+                html = `<div>${error}</div>`
+                return res.render("temp/index", {select:"home", select2:`${select2}`, results: results, html: html})
+            })
         }
     });
 })
