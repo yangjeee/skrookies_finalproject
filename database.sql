@@ -9,7 +9,8 @@ create table users
     password       varchar(1024)         NOT NULL,
     account_number integer UNIQUE,
     balance        integer default 10000 NOT NULL,
-    is_admin       boolean default false
+    is_admin       boolean default false,
+    email          varchar(255)  
 ) engine = innodb;
 
 create table transactions
@@ -17,7 +18,8 @@ create table transactions
     id           integer PRIMARY KEY auto_increment,
     from_account int(11) NOT NULL,
     to_account   VARCHAR(50) NOT NULL,
-    amount       int     NOT NULL
+    amount       int     NOT NULL,
+    sendtime     DATETIME
 ) engine = innodb;
 
 create table beneficiaries

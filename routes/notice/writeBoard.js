@@ -16,6 +16,7 @@ const path = require("path");
 const upload = multer({
     storage: multer.diskStorage({
         destination: function (req, file, cb) {
+            console.log(req.body.fid);
             cb(null, req.body.fid);
         },
         filename: function (req, file, cb) {

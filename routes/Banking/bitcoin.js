@@ -100,7 +100,7 @@ router.get("/", async function (req, res, next) {
           let name = "";
           name = naming(x.id);
           x.value.then((value) => {
-            console.log(value[0].trade_price);
+            console.log(value[0]);
             // 034730 sk 105560 kb 005930 삼성
             priceList[x.id] = value[0].trade_price;
 
