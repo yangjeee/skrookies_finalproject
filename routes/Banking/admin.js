@@ -57,7 +57,7 @@ router.get('/', [checkCookie,IpCheck], function (req, res, next) {
     })
 });
 
-router.post('/approve', checkCookie, function (req, res, next) {
+router.post('/approve', [checkCookie,IpCheck], function (req, res, next) {
     const cookie = req.cookies.Token
 
     const id = req.body.id;
