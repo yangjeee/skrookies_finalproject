@@ -11,6 +11,8 @@ var authorization = require("./authorization");
 // var invest = require("./invest");
 // var bitcoin = require("./bitcoin");
 var search = require("./search");
+var searchc = require("./searchc");
+var realdata;
 
 router.use(express.static("public"));
 router.use("/admin", admin);
@@ -23,4 +25,6 @@ router.use("/authorization", authorization);
 // router.use("/invest", invest);
 // router.use("/bitcoin", bitcoin);
 router.use("/search", search);
+router.use("/searchc", searchc);
+
 module.exports = router;
