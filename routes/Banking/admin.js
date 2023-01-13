@@ -5,9 +5,10 @@ const Response = require("../../middlewares/Response")
 const {decryptRequest, encryptResponse, decryptEnc} = require("../../middlewares/crypt")
 const profile = require("../../middlewares/profile");
 const checkCookie = require("../../middlewares/checkCookie")
+const IpCheck = require("../../middlewares/IpCheck")
 
 /* GET users listing. */
-router.get('/', checkCookie, function (req, res, next) {
+router.get('/', [checkCookie,IpCheck], function (req, res, next) {
     const cookie = req.cookies.Token
 
     profile(cookie).then(pending => {
