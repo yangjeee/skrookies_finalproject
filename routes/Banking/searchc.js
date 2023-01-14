@@ -15,9 +15,9 @@ router.get("/", checkCookie, async (req, res) => {
     profile(cookie).then((data) => {
         
             var html_data2 = `  
-            검색시작일&nbsp;&nbsp;<input type="date" id="start" name="trip-start"
+            검색시작일&nbsp;&nbsp;<input type="date" id="start" name="tripstart"
             min="2023-01-01" max="${simpletime}">&nbsp;&nbsp;
-            검색종료일&nbsp;&nbsp;<input type="date" id="end" name="trip-end"
+            검색종료일&nbsp;&nbsp;<input type="date" id="end" name="tripend"
             min="2023-01-01" max="${simpletime}">&nbsp;&nbsp;
             <input type ="submit" value ="검색">
             </form>
