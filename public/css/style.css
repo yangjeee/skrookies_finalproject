@@ -483,6 +483,7 @@ h6 {
 }
 
 #hero .container {
+  /* 여기도 영향없음 */
   padding-top: 72px;
   display: flex;
   flex-direction: row;
@@ -574,6 +575,7 @@ h6 {
     animation: none;
   }
   #hero .hero-img {
+    /*여기의미없음*/
     text-align: left;
   }
   #hero .hero-img img {
@@ -592,7 +594,7 @@ h6 {
   height: 279px;
 }
 
-.row{
+#hero .row{
   width: 70%;
 }
 

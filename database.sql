@@ -78,7 +78,3 @@ create table qna
     PRIMARY KEY (id)
 ) engine = innodb;
 
-create user "api"@"%" identified by 'eggmoneyapi';
-create user "web"@"%" identified by 'eggwebmoney';
-GRANT ALL privileges ON dvba.* TO api@"%" IDENTIFIED BY 'eggmoneyapi';
-GRANT ALL privileges ON board.* TO web@"%" IDENTIFIED BY 'eggwebmoney';
