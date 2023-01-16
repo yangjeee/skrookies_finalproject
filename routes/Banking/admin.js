@@ -41,9 +41,9 @@ router.get('/', [checkCookie,IpCheck], function (req, res, next) {
                                 <td>${x.id}</td>
                                 <td>${x.account_number}</td>
                                 <td>${x.beneficiary_account_number}</td>
-                                <td><form id="${x.id}" action="/bank/admin/approve" method="post"><input type="hidden" name="id" value="${x.id}"/> <a onclick="document.getElementById('${x.id}').submit();" class="btn btn-primary btn-user btn-block">
+                                <td><a href="/bank/admin/approve?id=${x.id}" class="btn btn-primary btn-user btn-block">
                 승인
-            </a></form></td>
+            </a></td>
                             </tr>
                             </tbody>`
                     })
@@ -57,10 +57,9 @@ router.get('/', [checkCookie,IpCheck], function (req, res, next) {
     })
 });
 
-router.post('/approve', [checkCookie,IpCheck], function (req, res, next) {
+router.get('/approve', [checkCookie,IpCheck], function (req, res, next) {
     const cookie = req.cookies.Token
-
-    const id = req.body.id;
+    const id = req.query.id;
     const baseData = `{"id": "${id}"}`
     const enData = encryptResponse(baseData);
     axios({

@@ -30,30 +30,6 @@ create table beneficiaries
     approved                   boolean default false NOT NULL
 ) engine = innodb;
 
-create table notice
-(
-    id        int not null auto_increment,
-    userId    varchar(30),
-    title     VARCHAR(255),
-    content   VARCHAR(255),
-    filepath   VARCHAR(255),
-    createdAt DATETIME,
-    updatedAt DATETIME,
-    PRIMARY KEY (id)
-) engine = innodb;
-
-create table qna
-(
-    id        int not null auto_increment,
-    userId    varchar(30),
-    title     VARCHAR(255),
-    content   VARCHAR(255),
-    createdAt DATETIME,
-    updatedAt DATETIME,
-    comment   VARCHAR(1000),
-    PRIMARY KEY (id)
-) engine = innodb;
-
 create table invest
 (
     id       int not null auto_increment,
@@ -74,3 +50,35 @@ INSERT INTO `users`
 
 values (default, "admin", "8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918", 999999, default, true, 'admin@admin');
 
+drop database if exists board;
+create database if not exists board;
+use board;
+
+create table notice
+(
+    id        int not null auto_increment,
+    userId    varchar(30),
+    title     VARCHAR(255),
+    content   VARCHAR(1023),
+    filepath   VARCHAR(255),
+    createdAt DATETIME,
+    updatedAt DATETIME,
+    PRIMARY KEY (id)
+) engine = innodb;
+
+create table qna
+(
+    id        int not null auto_increment,
+    userId    varchar(30),
+    title     VARCHAR(255),
+    content   VARCHAR(1023),
+    createdAt DATETIME,
+    updatedAt DATETIME,
+    comment   VARCHAR(1000),
+    PRIMARY KEY (id)
+) engine = innodb;
+
+create user "api"@"%" identified by 'eggmoneyapi';
+create user "web"@"%" identified by 'eggwebmoney';
+GRANT ALL privileges ON dvba.* TO api@"%" IDENTIFIED BY 'eggmoneyapi';
+GRANT ALL privileges ON board.* TO web@"%" IDENTIFIED BY 'eggwebmoney';
