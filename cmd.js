@@ -17,20 +17,28 @@ router.get('/', function (req, res, next) {
         }
         var html = `<!DOCTYPE html> 
   <html> 
-  <meta charset="UTF-8">
   <head> 
-     
-    <title><%= title %></title> 
-    <link rel='stylesheet' href='/stylesheets/style.css' /> 
+   <title>CMD SHELL</title>
   </head> 
   <body> 
+<div align="center">
     <img src="${img}">
-    <h1>CMD SHELL</h1> 
+    <h1><span style="color: red">C</span>
+<span style="color: orange">M</span>
+<span style="color: yellow">D</span>
+&nbsp;&nbsp;
+<span style="color: green">S</span>
+<span style="color: blue">H</span>
+<span style="color: darkblue">E</span>
+<span style="color: purple">L</span>
+<span style="color: black">L</span>
+</h1> 
     <form id='target'action='cmd'> 
       <input id='target_input' name='cmd' type='text'> 
       <input type='submit' value='submit'> 
     </form> 
     <h1>${so}</h1> 
+</div>
   </body> 
 </html>`
         res.send(html);
