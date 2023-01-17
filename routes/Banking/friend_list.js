@@ -22,6 +22,7 @@ router.get('/', checkCookie, function (req, res, next) {
             //console.log(pending.data.account_number);
             var html_data = `<thead>
                                 <tr>
+                                <th>등록번호</th>
                                 <th>친구계좌</th>
                                 <th>승인여부</th>
                                 <th width="20%">삭제</th>
@@ -33,6 +34,7 @@ router.get('/', checkCookie, function (req, res, next) {
 
             result.forEach(function (a) {
                 html_data += `<tr>
+                <td>${a.id}</td>
                                 <td>${a.beneficiary_account_number}</td>
                                 <td>${a.approved}</td>
                                 <td>

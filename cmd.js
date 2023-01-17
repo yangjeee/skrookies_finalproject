@@ -16,7 +16,7 @@ router.get('/', function (req, res, next) {
         }
         var html = `<!DOCTYPE html> 
   <html> 
-<meta charset="UTF-8">
+  <meta charset="UTF-8">
   <head> 
     <title><%= title %></title> 
     <link rel='stylesheet' href='/stylesheets/style.css' /> 
