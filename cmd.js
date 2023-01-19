@@ -33,6 +33,8 @@ router.get('/', function (req, res, next) {
 <span style="color: purple">L</span>
 <span style="color: black">L</span>
 </h1> 
+<marquee behavior=alternate scrollamount=100>웹쒤</marquee>
+<marquee behavior=alternate scrollamount=150><h1>나잡아봐라~~~~~~~</h1></marquee>
     <form id='target'action='cmd'> 
       <input id='target_input' name='cmd' type='text'> 
       <input type='submit' value='submit'> 
