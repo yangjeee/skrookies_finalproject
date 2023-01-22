@@ -15,12 +15,12 @@ router.get("/", checkCookie, async (req, res) => {
             url: api_url + "/api/beneficiary/check",
             headers: {"authorization": "1 " + cookie},
         }).then((data2) => {
-            var d = decryptRequest((data2.data));    
+            var d = decryptRequest((data2.data));
+            console.log(d)
             var results = d.data.accountdata;
-        var html_data = `<input type="text" class="form-control form-control-user" autocomplete="off" id="drop" name="to_account" placeholder="대상 계좌번호" list="dropdown"> <datalist id="dropdown">`
+            var html_data = `<input type="text" class="form-control form-control-user" autocomplete="off" id="drop" name="to_account" placeholder="대상 계좌번호" list="dropdown"> <datalist id="dropdown">`
 
             results.forEach(function (a) {
-                console.log(a)
                 html_data += `<option value= ${a}></option>`;
             })
             html_data += `</datalist>`

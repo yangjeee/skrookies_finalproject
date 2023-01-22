@@ -25,7 +25,6 @@ router.post('/', function (req, res, next) {
         url: api_url + "/api/user/login",
         data: enData
     }).then((data) => {
-
         let result = decryptRequest(data.data);
         if(result.status.code==200){
             return res.render("afterlogin", {data: data.data.enc_data});

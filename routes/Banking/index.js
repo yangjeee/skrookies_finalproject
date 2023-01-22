@@ -6,6 +6,7 @@ var send = require("./trade_send");
 var friend_list = require("./friend_list");
 var user_register = require("./user_register");
 var admin = require("./admin");
+var coinShop = require("./coinShop");
 // var gacha = require("./gacha");
 var authorization = require("./authorization");
 // var invest = require("./invest");
@@ -26,5 +27,6 @@ router.use("/authorization", authorization);
 // router.use("/bitcoin", bitcoin);
 router.use("/search", search);
 router.use("/searchc", searchc);
+router.use("/coinShop", coinShop);
 
 module.exports = router;
