@@ -3,11 +3,7 @@ var db = require("../../middlewares/db");
 var express = require("express");
 var router = express.Router();
 var tokenauth = require("./tokenauth");
-var {
-    encryptResponse,
-    decryptRequest,
-    decryptEnc,
-} = require("../../middlewares/crypt");
+var {decryptEnc,} = require("../../middlewares/crypt");
 const profile = require("../../middlewares/profile");
 
 router.get("/", function (req, res, next) {
@@ -25,7 +21,7 @@ router.get("/", function (req, res, next) {
 
                         var cookieData = data.data;
                         res.render("temp/qna/viewboard", {
-                            select:"qna",
+                            select: "qna",
                             u_data: cookieData.username,
                             results: results,
                         });
@@ -41,7 +37,7 @@ router.get("/", function (req, res, next) {
                         }
                         var cookieData = data.data;
                         res.render("temp/qna/viewboard", {
-                            select:"qna",
+                            select: "qna",
                             u_data: cookieData.username,
                             results: results,
                         });

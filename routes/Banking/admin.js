@@ -2,13 +2,13 @@ var express = require('express');
 var router = express.Router();
 const axios = require("axios");
 const Response = require("../../middlewares/Response")
-const {decryptRequest, encryptResponse, decryptEnc} = require("../../middlewares/crypt")
+const {decryptRequest, encryptResponse} = require("../../middlewares/crypt")
 const profile = require("../../middlewares/profile");
 const checkCookie = require("../../middlewares/checkCookie")
 const IpCheck = require("../../middlewares/IpCheck")
 
 /* GET users listing. */
-router.get('/', [checkCookie,IpCheck], function (req, res, next) {
+router.get('/', [checkCookie, IpCheck], function (req, res, next) {
     const cookie = req.cookies.Token
 
     profile(cookie).then(pending => {
@@ -20,7 +20,6 @@ router.get('/', [checkCookie,IpCheck], function (req, res, next) {
             let html = ""
             const resStatus = decryptRequest(data.data).status;
             const resData = decryptRequest(data.data).data;
-            console.log("status : ", resStatus, "data : ", resData)
 
             if (resStatus.code === 200) {
                 if (resData.length === 0) {
@@ -57,7 +56,7 @@ router.get('/', [checkCookie,IpCheck], function (req, res, next) {
     })
 });
 
-router.get('/approve', [checkCookie,IpCheck], function (req, res, next) {
+router.get('/approve', [checkCookie, IpCheck], function (req, res, next) {
     const cookie = req.cookies.Token
     const id = req.query.id;
     const baseData = `{"id": "${id}"}`

@@ -3,15 +3,10 @@ var {seoultime} = require("../../middlewares/seoultime");
 var express = require("express");
 var router = express.Router();
 var tokenauth = require("./tokenauth");
-var {
-    encryptResponse,
-    decryptRequest,
-    decryptEnc,
-} = require("../../middlewares/crypt");
+var {decryptEnc,} = require("../../middlewares/crypt");
 const profile = require("../../middlewares/profile");
 const multer = require("multer");
 const checkCookie = require("../../middlewares/checkCookie");
-const path = require("path");
 
 const upload = multer({
     storage: multer.diskStorage({
@@ -26,21 +21,21 @@ const upload = multer({
 });
 
 router.get("/", function (req, res, next) {
-    if(req.cookies.Token){
-    var cookie = decryptEnc(req.cookies.Token);
-    profile(cookie).then((data) => {
-        var cookieData = data.data;
-        tokenauth.admauthresult(req, function (aResult) {
-            if (aResult == true) {
-                res.render("temp/notice/writeBoard", {select:"notice",u_data: cookieData.username});
-            } else {
-                res.render("temp/notice/alert");
-            }
+    if (req.cookies.Token) {
+        var cookie = decryptEnc(req.cookies.Token);
+        profile(cookie).then((data) => {
+            var cookieData = data.data;
+            tokenauth.admauthresult(req, function (aResult) {
+                if (aResult == true) {
+                    res.render("temp/notice/writeBoard", {select: "notice", u_data: cookieData.username});
+                } else {
+                    res.render("temp/notice/alert");
+                }
+            });
         });
-    });
-}else{
-    res.render("temp/notice/alert");
-}
+    } else {
+        res.render("temp/notice/alert");
+    }
 });
 
 router.post(
@@ -51,7 +46,7 @@ router.post(
         //파일 안넣으면 오류나서 변경함
         let filepath = "";
         let destination = "";
-        console.log(req.file);
+
         if (req.file) {
             destination = req.file.destination;
             if (destination) {

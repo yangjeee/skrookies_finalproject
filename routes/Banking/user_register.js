@@ -1,11 +1,8 @@
 var express = require('express');
 var router = express.Router();
 var axios = require("axios");
-
 const profile = require("../../middlewares/profile")
-const {decryptEnc} = require("../../middlewares/crypt");
 const {encryptResponse} = require("../../middlewares/crypt");
-const {decryptRequest} = require("../../middlewares/crypt");
 const checkCookie = require("../../middlewares/checkCookie")
 
 router.get("/", checkCookie, async (req, res) => {
@@ -27,9 +24,8 @@ router.post('/', checkCookie, function (req, res, next) {
         headers: {"authorization": "1 " + cookie},
         data: enData
         // 데이터 안씀
-    }).then((data) => {
-        console.log(decryptRequest(data.data));
-    });
+    })
+
     return res.redirect("/bank/friend_list");
 })
 

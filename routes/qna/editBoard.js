@@ -3,9 +3,8 @@ var {seoultime} = require("../../middlewares/seoultime");
 var express = require('express');
 var router = express.Router();
 var tokenauth = require('./tokenauth');
-var {encryptResponse, decryptRequest, decryptEnc} = require("../../middlewares/crypt");
+var {decryptEnc} = require("../../middlewares/crypt");
 const profile = require('../../middlewares/profile');
-const checkCookie = require("../../middlewares/checkCookie")
 
 router.get('/', function (req, res, next) {
     var cookie = decryptEnc(req.cookies.Token);
@@ -20,7 +19,7 @@ router.get('/', function (req, res, next) {
                         throw error;
                     }
                     res.render('temp/qna/editBoard', {
-                        select:"qna",
+                        select: "qna",
                         u_data: cookieData.username,
                         results: results,
                         tempid: req.query.id

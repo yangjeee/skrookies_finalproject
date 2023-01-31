@@ -4,9 +4,8 @@ var {seoultime} = require("../../middlewares/seoultime");
 var express = require('express');
 var router = express.Router();
 var tokenauth = require('./tokenauth');
-var {encryptResponse, decryptRequest, decryptEnc} = require("../../middlewares/crypt");
+var {decryptEnc} = require("../../middlewares/crypt");
 const profile = require('../../middlewares/profile');
-const checkCookie = require("../../middlewares/checkCookie")
 
 router.get('/', function (req, res, next) {
     var cookie = decryptEnc(req.cookies.Token);
