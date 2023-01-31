@@ -3,15 +3,10 @@ var {seoultime} = require("../../middlewares/seoultime");
 var express = require('express');
 var router = express.Router();
 var tokenauth = require('./tokenauth');
-var {
-    encryptResponse,
-    decryptRequest,
-    decryptEnc
-} = require("../../middlewares/crypt");
+var {decryptEnc} = require("../../middlewares/crypt");
 const profile = require('../../middlewares/profile');
 const multer = require('multer')
 const checkCookie = require("../../middlewares/checkCookie")
-const path = require('path');
 const fs = require('fs');
 const upload = multer({
     storage: multer.diskStorage(
@@ -34,15 +29,15 @@ router.get('/', function (req, res, next) {
             tokenauth.admauthresult(req, function (aResult) {
                 if (aResult == true) {
                     db.query(`SELECT *
-                          FROM notice
-                          where id = ${
-                        req.query.id
-                    }`, function (error, results) {
+                              FROM notice
+                              where id = ${
+                                      req.query.id
+                              }`, function (error, results) {
                         if (error) {
                             throw error;
                         }
                         res.render('temp/notice/editBoard', {
-                            select:"notice",
+                            select: "notice",
                             results: results,
                             u_data: cookieData.username,
                             tempid: req.query.id
@@ -80,7 +75,6 @@ router.post('/edit', checkCookie, upload.single("imgimg"), function (req, res, n
                 throw error;
             }
             fs.unlink(deletepath, err => {
-                console.log("err : ", err);
             })
             res.redirect('../viewBoard');
         });
@@ -89,13 +83,13 @@ router.post('/edit', checkCookie, upload.single("imgimg"), function (req, res, n
         filepath = null;
         destination = null;
 
-        const {title, contents, pid, deletepath} = req.body;
+        const {title, contents, pid} = req.body;
 
         db.query(`UPDATE notice
-              SET title     = '${title}',
-                  content   = '${contents}',
-                  updatedAt = '${seoultime}'
-              WHERE id = ${pid}`, function (error, results) {
+                  SET title     = '${title}',
+                      content   = '${contents}',
+                      updatedAt = '${seoultime}'
+                  WHERE id = ${pid}`, function (error, results) {
             if (error) {
                 throw error;
             }

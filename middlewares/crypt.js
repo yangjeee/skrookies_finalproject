@@ -1,4 +1,3 @@
-// const Model = require("../models/index");
 const Response = require('./Response');
 const statusCodes = require("./statusCodes");
 

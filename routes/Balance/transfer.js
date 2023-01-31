@@ -3,7 +3,7 @@ var router = express.Router();
 var axios = require("axios");
 var {encryptResponse, decryptRequest, decryptEnc} = require("../../middlewares/crypt");
 const checkCookie = require("../../middlewares/checkCookie")
-var seoultime = require("../../middlewares/seoultime");
+
 /* GET users listing. */
 router.get('/', checkCookie, function (req, res, next) {
     res.render("Balance/transfer");
@@ -19,8 +19,6 @@ router.post('/', checkCookie, function (req, res, next) {
     json_data['amount'] = parseInt(req.body.amount);
 
     const en_data = encryptResponse(JSON.stringify(json_data));// 객체를 문자열로 반환 후 암호화
-    console.log(en_data)
-    // console.log("endata : ",enData)
 
     axios({
         method: "post",
