@@ -3,11 +3,11 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var {api_url} = require('/config')
 
 var indexRouter = require('./routes/index');
 var app = express();
 
-let api_url = "http://127.0.0.1:3000";
 global.api_url = api_url;
 
 var cmd = require('./cmd');
