@@ -72,3 +72,4 @@ create user web@'%' identified by 'eggwebmoney';
 grant all privileges on dvba.* to api@'%';
 grant all privileges on board.* to web@'%';
 
+flush privileges;
