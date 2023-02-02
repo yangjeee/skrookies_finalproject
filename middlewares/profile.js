@@ -1,5 +1,5 @@
 const axios = require("axios");
-const {decryptRequest, decryptEnc} = require("./crypt");
+const {decryptRequest} = require("./crypt");
 const profile = async (cookie) => {
     let data2
     await axios({
@@ -15,7 +15,7 @@ const profile = async (cookie) => {
     const dotime = cur - start;
     const totaltime = target - start;
 
-    const percent = (dotime/totaltime * 100)
+    const percent = (dotime / totaltime * 100)
 
     data2.data.rest = percent.toFixed(3)
 

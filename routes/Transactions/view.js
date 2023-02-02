@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var axios = require("axios");
-var {encryptResponse, decryptRequest, decryptEnc} = require("../../middlewares/crypt");
+var {decryptRequest} = require("../../middlewares/crypt");
 const checkCookie = require("../../middlewares/checkCookie")
 
 router.get('/', checkCookie, function (req, res, next) {
@@ -10,12 +10,8 @@ router.get('/', checkCookie, function (req, res, next) {
         method: "post",
         url: api_url + "/api/transactions/view", // URL 수정 해야 됨
         headers: {"authorization": "1 " + cookie}
-        // data: enData
-        // 데이터 안씀
     }).then((data) => {
         de_data = decryptRequest(data.data);
-        console.log(de_data);
-        // result = JSON.stringify(de_data); 
         row = de_data.data;
         var html_data = "<table><tr><th>송금자</th><th>수취인</th><th>금액</th></tr>";
 

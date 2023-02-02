@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var axios = require("axios");
-var {encryptResponse, decryptRequest, decryptEnc} = require("../../middlewares/crypt");
+var {encryptResponse, decryptRequest} = require("../../middlewares/crypt");
 const profile = require('../../middlewares/profile');
 const checkCookie = require("../../middlewares/checkCookie")
 
@@ -14,12 +14,8 @@ router.get('/', checkCookie, function (req, res, next) {
             method: "post",
             url: api_url + "/api/beneficiary/view",
             headers: {"authorization": "1 " + cookie}
-            // data: enData
-            // 데이터 안씀
         }).then((data) => {
             let result = decryptRequest(data.data).data;
-            //console.log(result);
-            //console.log(pending.data.account_number);
             var html_data = `<thead>
                                 <tr>
                                 <th>등록번호</th>
@@ -54,12 +50,10 @@ router.get('/', checkCookie, function (req, res, next) {
             return res.render("Banking/friend", {html: html_data, pending: pending, select: "friend_list"});
         }).catch(function (error) {
             var html_data = "<tr>아싸시군요</tr>";
+
             return res.render("Banking/friend", {html: html_data, pending: pending, select: "friend_list"});
         });
-
     })
-
-
 })
 
 

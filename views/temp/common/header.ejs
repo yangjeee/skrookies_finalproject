@@ -48,25 +48,25 @@
 
             <ul>
                 <li>
-                <%if(select==="home"){%>
-                    <a class="nav-link scrollto active" href="/">Home</a>
-                <%}else{%>
-                    <a class="nav-link scrollto" onclick="active" href="/">Home</a>
-                <%}%>
+                    <% if(select === "home"){ %>
+                        <a class="nav-link scrollto active" href="/">Home</a>
+                    <% }else{ %>
+                        <a class="nav-link scrollto" onclick="active" href="/">Home</a>
+                    <% } %>
                 </li>
                 <li>
-                <%if(select==="notice"){%>
+                    <% if(select === "notice"){ %>
                         <a class="nav-link scrollto active" href="/notice/viewBoard">Notice</a>
-                <%}else{%>
+                    <% }else{ %>
                         <a class="nav-link scrollto" onclick="active" href="/notice/viewBoard">Notice</a>
-                <%}%>
+                    <% } %>
                 </li>
                 <li>
-                <%if(select==="qna"){%>
+                    <% if(select === "qna"){ %>
                         <a class="nav-link scrollto active" href="/qna/viewBoard">QnA</a>
-                <%}else{%>
+                    <% }else{ %>
                         <a class="nav-link scrollto" onclick="active" href="/qna/viewBoard">QnA</a>
-                <%}%>
+                    <% } %>
                 </li>
 
                 <!-- <li><a class="nav-link scrollto" href="#team">Team</a></li> -->
@@ -84,12 +84,12 @@
                     </li>
                 <% } else { %>
                 <li>
-                    <%if(select==="login"){%>
+                    <% if(select === "login"){ %>
                         <a class="getstarted scrollto" style="color: #fff;!important;
   background: #31a9e1;!important;" href="/user/login">Login</a>
-                    <%}else{%>
+                    <% }else{ %>
                         <a class="getstarted scrollto" href="/user/login">Login</a>
-                    <%}%>
+                    <% } %>
                 </li>
 
                 <% } %>

@@ -6,6 +6,7 @@ var signup = require("./signup");
 var friend = require("./friend");
 var changePass = require("./changePass")
 var logout = require("./logout");
+
 router.use(express.static('public'));
 
 router.use('/login', login);

@@ -1,7 +1,6 @@
 var express = require('express');
 var router = express.Router();
 
-//js파일 할당
 var view = require("./view");
 var transfer = require("./transfer");
 

@@ -1,5 +1,4 @@
 const axios = require("axios");
-var {decryptEnc} = require("../../middlewares/crypt");
 
 authresult = function (req, callback) {
     let cookie = "";
@@ -13,7 +12,6 @@ authresult = function (req, callback) {
         url: api_url + "/api/Auth/check",
         headers: {"authorization": cookie},
     }).then((data) => {
-        console.log(data);
         if (data.data.status.message == 'Success') {
             var result = true;
         } else {

@@ -16,7 +16,6 @@ router.get("/", (req, res) => {
             url: api_url + "/api/User/profile",
             headers: {"authorization": "1 " + cookie}
         }).then((data) => {
-            // console.log(data.data);
             const r = new Response();
             const resStatus = decryptRequest(data.data).status;
             const resData = decryptRequest(data.data).data;
@@ -24,7 +23,7 @@ router.get("/", (req, res) => {
             r.status = resStatus
             r.data = resData
 
-            res.render("temp/changePass", {select:"login",u_data: r.data.username});
+            res.render("temp/changePass", {select: "login", u_data: r.data.username});
         });
     }
 })
@@ -37,22 +36,19 @@ router.post("/", checkCookie, (req, res) => {
     const cookie = req.cookies.Token;
     let resStatus = ""
     let resMessage = ""
-    console.log(req.body)
+
     axios({
         method: "post",
         url: api_url + "/api/User/change-password",
         headers: {"authorization": "1 " + cookie},
         data: encryptResponse(req_data)
     }).then((data) => {
-        console.log(data.data)
         resStatus = decryptRequest(data.data).status
         resMessage = decryptRequest(data.data).data.message
-        console.log(resStatus, resMessage)
         if (resStatus.code === 200) {
             return res.send("<script>alert('비밀번호가 변경되었습니다.');location.href = \"/user/login\";</script>");
         } else {
-            console.log(resMessage)
-            res.render("temp/changePass", {select:"login",message: resMessage})
+            res.render("temp/changePass", {select: "login", message: resMessage})
         }
     });
 })

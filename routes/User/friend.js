@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var axios = require("axios");
-var {encryptResponse, decryptRequest, decryptEnc} = require("../../middlewares/crypt");
+var {encryptResponse, decryptRequest} = require("../../middlewares/crypt");
 const profile = require('../../middlewares/profile');
 const checkCookie = require("../../middlewares/checkCookie")
 
@@ -14,11 +14,9 @@ router.get('/', checkCookie, function (req, res, next) {
             method: "post",
             url: api_url + "/api/beneficiary/view", // URL 수정 해야 됨
             headers: {"authorization": "1 " + cookie}
-            // data: enData
-            // 데이터 안씀
         }).then((data) => {
             let result = decryptRequest(data.data).data;
-            console.log(result);
+
             var html_data = "<table><tr><th>친구계좌</th><th>승인여부";
 
             result.forEach(function (a) {
@@ -48,9 +46,7 @@ router.post('/', checkCookie, function (req, res, next) {
         url: api_url + "/api/Beneficiary/add", // URL 수정 해야 됨
         headers: {"authorization": "1 " + cookie},
         data: enData
-        // 데이터 안씀
     }).then((data) => {
-        console.log(decryptRequest(data.data));
     });
     return res.redirect("friend");
 })
