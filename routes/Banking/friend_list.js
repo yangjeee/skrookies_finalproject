@@ -6,7 +6,6 @@ const profile = require('../../middlewares/profile');
 const checkCookie = require("../../middlewares/checkCookie")
 
 router.get('/', checkCookie, function (req, res, next) {
-    global.realdata = null;
     const cookie = req.cookies.Token;
 
     profile(cookie).then(pending => {

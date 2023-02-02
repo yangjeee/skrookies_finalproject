@@ -7,7 +7,6 @@ const checkCookie = require("../../middlewares/checkCookie")
 var {seoultime} = require('../../middlewares/seoultime');
 
 router.get("/", checkCookie, async (req, res) => {
-    global.realdata = null;
     const cookie = req.cookies.Token;
    
     profile(cookie).then((data) => {

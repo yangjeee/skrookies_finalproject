@@ -12,7 +12,6 @@ const profile = require("../../middlewares/profile")
 //     res.render("main");
 // });
 router.get('/', function (req, res, next) {
-    global.realdata = null;
     db.query(`SELECT *
               FROM notice
               ORDER BY id DESC`, function (error, results) {
