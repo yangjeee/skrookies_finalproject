@@ -4,7 +4,6 @@ const {seoultime} = require("../../middlewares/seoultime")
 const {encryptResponse, decryptRequest} = require('../../middlewares/crypt')
 const axios = require("axios")
 const sha256 = require("js-sha256")
-var {seoultime, simpletime} = require('../../middlewares/seoultime');
 /* GET users listing. */
 router.get('/', function (req, res, next) {
     res.render("temp/signup", {select: "login"});
