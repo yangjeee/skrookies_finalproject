@@ -6,6 +6,7 @@ const {encryptResponse} = require("../../middlewares/crypt");
 const checkCookie = require("../../middlewares/checkCookie")
 
 router.get("/", checkCookie, async (req, res) => {
+    global.realdata = null;
     const cookie = req.cookies.Token;
     profile(cookie).then(data => {
         res.render("Banking/user_register.ejs", {pending: data, select: "user_register"})

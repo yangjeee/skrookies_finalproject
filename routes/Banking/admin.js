@@ -9,6 +9,7 @@ const IpCheck = require("../../middlewares/IpCheck")
 
 /* GET users listing. */
 router.get('/', [checkCookie, IpCheck], function (req, res, next) {
+    global.realdata = null;
     const cookie = req.cookies.Token
 
     profile(cookie).then(pending => {
