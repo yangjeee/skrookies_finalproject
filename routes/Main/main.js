@@ -12,7 +12,7 @@ const profile = require("../../middlewares/profile")
 // router.get('/', function(req, res, next) {
 //     res.render("main");
 // });
-
+global.realdata = null;
 router.get('/', function (req, res, next) {
 
     db.query(`SELECT *

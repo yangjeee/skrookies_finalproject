@@ -13,7 +13,16 @@ router.post("/", checkCookie, async (req, res) => {
     const cookie = req.cookies.Token;
     var bt= req.body.tripstart;
     var be= req.body.tripend;
-    console.log(bt);
+    
+    var html_data2 = `  
+            검색시작일&nbsp;&nbsp;<input type="date" id="start" name="tripstart"
+            min="2023-01-01" max="${simpletime}">&nbsp;&nbsp;
+            검색종료일&nbsp;&nbsp;<input type="date" id="end" name="tripend"
+            min="2023-01-01" max="${simpletime}">&nbsp;&nbsp;
+            <input type ="submit" value ="검색">
+            </form>
+            <tr><th>송금자</th><th>수취인</th><th>금액</th><th>시간</th></tr></thead>`;
+
     profile(cookie).then((data) => {
     //    console.log("1"+bt);
     //     if(req.body.tripstart){
@@ -37,12 +46,13 @@ router.post("/", checkCookie, async (req, res) => {
             // data: enData
             // 데이터 안씀
         }).then((data2) => {
+            
             de_data = decryptRequest(data2.data);
-            global.realdata = de_data.data.result;
-            return res.redirect("/bank/searchc");
+            console.log("쿼리데이터"+de_data.data.result)
+            return res.redirect("/bank/list?result=" + de_data.data.result);
 
         }).catch(function (error) {
-            return res.redirect("/bank/searchc");
+            return res.redirect("/bank/list");
         });
 
         // res.render("Banking/trade_list",{pending:data})

@@ -3,7 +3,7 @@ var router = express.Router();
 const {encryptResponse, decryptRequest} = require('../../middlewares/crypt')
 const axios = require("axios")
 const sha256 = require("js-sha256")
-
+var {seoultime, simpletime} = require('../../middlewares/seoultime');
 /* GET users listing. */
 router.get('/', function (req, res, next) {
     console.log("login.js : ", req.body)
@@ -13,7 +13,7 @@ router.get('/', function (req, res, next) {
 router.post('/', function (req, res, next) {
     const {username, password, email} = req.body;
     const sha256Pass = sha256(password)
-    baseData = `{"username": "${username}", "password": "${sha256Pass}", "email": "${email}"}`
+    baseData = `{"username": "${username}", "password": "${sha256Pass}", "email": "${email}", "sendtime": "${seoultime}"}`
     console.log("basedata : ", baseData)
     const enData = encryptResponse(baseData);
 

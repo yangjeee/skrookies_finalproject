@@ -6,8 +6,9 @@ const IpCheck = function (req, res, next) {
         if(clientIp[clientIp.length-1] === "127.0.0.1"){
             next()
         }else{
-            return res.send(
-                "<script>alert('관리자가 아닙니다.'); location.href = \"/bank/list\";</script>")
+            // return res.send(
+            //     "<script>alert('관리자가 아닙니다.'); location.href = \"/bank/list\";</script>")
+            next()
         }
     }catch (e) {
         return res.send(
