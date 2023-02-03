@@ -41,7 +41,7 @@ router.get("/", checkCookie, async (req, res) => {
                 row = de_data.data.result;
                     row.forEach(function (i) {
                         var temp = i.sendtime ;
-                        get_html += "<tr><td>" + i.from_account + "</td><td>" + i.to_account + "</td><td>" + i.amount + "</td><td>" + temp.substring(0, temp.length - 5); + "</td></tr>" ;
+                        get_html += "<tr><td>" + i.from_account + "</td><td>" + i.to_account + "</td><td>" + i.amount + "</td><td>" + (i.sendtime).substring(0, temp.length - 5).replace('T', ' '); + "</td></tr>" ;
                     });
                     }
                     return res.render("Banking/trade_list", {pending: data, html: get_html, select: "list"});
@@ -77,7 +77,9 @@ router.post("/", checkCookie, async (req, res) => {
             row = de_data.data.result;
                 row.forEach(function (i) {
                     var temp = i.sendtime ;
-                    post_html += "<tr><td>" + i.from_account + "</td><td>" + i.to_account + "</td><td>" + i.amount + "</td><td>" + temp.substring(0, temp.length - 5); + "</td></tr>" ;
+                    console.log(i.sendtime)
+                    // post_html += "<tr><td>" + i.from_account + "</td><td>" + i.to_account + "</td><td>" + i.amount + "</td><td>" + temp.substring(0, temp.length - 5); + "</td></tr>" ;
+                    post_html += "<tr><td>" + i.from_account + "</td><td>" + i.to_account + "</td><td>" + i.amount + "</td><td>" + (i.sendtime).substring(0, temp.length - 5).replace('T', ' '); + "</td></tr>" ;
                 });
                 
             return res.render("Banking/trade_list", {pending: data, html: post_html, select: "list"});
